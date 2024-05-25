@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-
+import { Link } from "react-router-dom";
 export function Carousel({ slides }) {
     const [current, setCurrent] = useState(0);
 
@@ -23,10 +23,9 @@ export function Carousel({ slides }) {
                 <div className="w-full">
                     <div className="carousel-item bg-white bg-opacity-50 rounded-lg shadow-md p-4">
                         <div className="carousel-content">
-                        <h1 className="text-2xl font-bold">{slides[current].content}</h1>
-                            <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                                {slides[current].btn}
-                            </button>
+                        <h1 className="text-2xl font-bold" style={{margin: "20px 0px"}}>{slides[current].content}</h1>
+                        <Link className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" to={`/search?searchTerm=${slides[current].btn}`}>{slides[current].btn}</Link>
+                            
                         </div>
                     </div>
                 </div>

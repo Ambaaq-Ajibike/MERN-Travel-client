@@ -54,7 +54,7 @@ const Home = () => {
  },
   {
   content: "Guaranteed approval with our top-rated services.",
-  btn: "Resident"
+  btn: "Residence"
  },
   {
   content: "Reliable and trustworthy visa assistance at your fingertips.",
