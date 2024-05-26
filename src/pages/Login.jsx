@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import {
   loginStart,
   loginSuccess,
   loginFailure,
 } from "../redux/user/userSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../firebase.js";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -16,7 +18,6 @@ const Login = () => {
     password: "",
   });
   // console.log(formData);
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -28,21 +29,15 @@ const Login = () => {
     e.preventDefault();
     try {
       dispatch(loginStart());
-      const res = await fetch(`/api/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data?.success) {
-        dispatch(loginSuccess(data?.user));
-        alert(data?.message);
+      const res = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      console.log(res, "response");
+      if (res?.user?.auth) {
+        dispatch(loginSuccess(res?.user));
+        alert("Successfully Logged In");
         navigate("/");
       } else {
-        dispatch(loginFailure(data?.message));
-        alert(data?.message);
+        dispatch(loginFailure("Invalid credetials"));
+        alert("Invalid credentials");
       }
     } catch (error) {
       dispatch(loginFailure(error.message));

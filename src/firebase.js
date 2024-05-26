@@ -1,18 +1,15 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-//temporary souls firebase
+import {getAuth} from "firebase/auth"
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "mern-travel-tourism.firebaseapp.com",
-  projectId: "mern-travel-tourism",
-  storageBucket: "mern-travel-tourism.appspot.com",
-  messagingSenderId: "304378877141",
-  appId: "1:304378877141:web:3bddab2778ca23186f7e5c",
+  apiKey: "AIzaSyARbLxNwQA4rwDJUSJS11Im5_fWk21LCvc",
+  authDomain: "gooutfilter.firebaseapp.com",
+  projectId: "gooutfilter",
+  storageBucket: "gooutfilter.appspot.com",
+  messagingSenderId: "476106025222",
+  appId: "1:476106025222:web:2921c3edd50f2e34d45687",
+  measurementId: "G-KDJVZWDS27"
 };
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);

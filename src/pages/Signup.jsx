@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -23,14 +24,15 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`/api/auth/signup`, formData);
-      if (res?.data?.success) {
-        alert(res?.data?.message);
+     const res = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      if (res?.user?.auth) {
+        alert("Registration successful");
         navigate("/login");
       } else {
-        alert(res?.data?.message);
+        alert("An error occured try again");
       }
     } catch (error) {
+      alert(error.message)
       console.log(error);
     }
   };

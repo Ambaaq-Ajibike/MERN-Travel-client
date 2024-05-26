@@ -137,7 +137,7 @@ const Home = () => {
           {/* offer */}
           {!loading && citizenship.length > 0 && (
             <>
-              <div className="offers_img"></div>
+              {/* <div className="offers_img"></div> */}
               <h1 className="text-2xl font-semibold">CITIZENSHIP </h1>
               <div className="grid grid-cols-4 gap-4">
                 {citizenship.map((packageData, i) => {
