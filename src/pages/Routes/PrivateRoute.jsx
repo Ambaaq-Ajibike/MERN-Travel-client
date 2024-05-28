@@ -25,5 +25,5 @@ export default function PrivateRoute() {
     if (currentUser !== null) authCheck();
   }, [currentUser]);
 
-  return ok ? <Outlet /> : <Spinner />;
+  return <Outlet />;
 }

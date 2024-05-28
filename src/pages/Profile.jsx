@@ -23,11 +23,15 @@ import MyBookings from "./user/MyBookings";
 import UpdateProfile from "./user/UpdateProfile";
 import MyHistory from "./user/MyHistory";
 
+import { auth, db } from "../firebase";
+import { getDocs, collection, } from "firebase/firestore";
+
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const fileRef = useRef(null);
-  const { currentUser, loading, error } = useSelector((state) => state.user);
+  // let { currentUser, loading, error } = useSelector((state) => state.user);
+  const [currentUser, setCurrentUser] = useState({})
   const [profilePhoto, setProfilePhoto] = useState(undefined);
   const [photoPercentage, setPhotoPercentage] = useState(0);
   const [activePanelId, setActivePanelId] = useState(1);
@@ -38,8 +42,24 @@ const Profile = () => {
     phone: "",
     avatar: "",
   });
-
+  const usersCollectionRef = collection(db, "appUsers");
+  const getUser = async () => {
+    try {
+      const data = await getDocs(usersCollectionRef);
+      const filteredData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      console.log(filteredData, "data");
+      const user = filteredData.find(x => x.userId == auth?.currentUser?.uid);
+      setCurrentUser(user);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   useEffect(() => {
+    getUser();
+
     if (currentUser !== null) {
       setFormData({
         username: currentUser.username,
@@ -49,7 +69,7 @@ const Profile = () => {
         avatar: currentUser.avatar,
       });
     }
-  }, [currentUser]);
+  }, []);
 
   const handleProfilePhoto = (photo) => {
     try {
@@ -147,110 +167,46 @@ const Profile = () => {
     <div className="flex w-full flex-wrap max-sm:flex-col p-2">
       {currentUser ? (
         <>
-          <div className="w-[40%] p-3 max-sm:w-full">
-            <div className="flex flex-col items-center gap-4 p-3">
-              <div className="w-full flex flex-col items-center relative">
-                <img
-                  src={
-                    (profilePhoto && URL.createObjectURL(profilePhoto)) ||
-                    formData.avatar
-                  }
-                  alt="Profile photo"
-                  className="w-64 min-h-52 max-h-64 rounded-lg"
-                  onClick={() => fileRef.current.click()}
-                  onMouseOver={() => {
-                    document
-                      .getElementById("photoLabel")
-                      .classList.add("block");
-                  }}
-                  onMouseOut={() => {
-                    document
-                      .getElementById("photoLabel")
-                      .classList.remove("block");
-                  }}
-                />
-                <input
-                  type="file"
-                  name="photo"
-                  id="photo"
-                  hidden
-                  ref={fileRef}
-                  accept="image/*"
-                  onChange={(e) => setProfilePhoto(e.target.files[0])}
-                />
-                <label
-                  htmlFor="photo"
-                  id="photoLabel"
-                  className="w-64 bg-slate-300 absolute bottom-0 p-2 text-center text-lg text-white font-semibold rounded-b-lg"
-                  hidden
-                >
-                  Choose Photo
-                </label>
-              </div>
-              {profilePhoto && (
-                <div className="flex w-full justify-between gap-1">
-                  <button
-                    onClick={() => handleProfilePhoto(profilePhoto)}
-                    className="bg-green-700 p-2 text-white mt-3 flex-1 hover:opacity-90"
-                  >
-                    {loading ? `Uploading...(${photoPercentage}%)` : "Upload"}
-                  </button>
+        <div className="mx-auto bg-white light:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
+            <div className="border-b px-4 pb-6">
+                <div className="text-center my-4">
+                    <img className="h-32 w-32 rounded-full border-4 border-white dark:border-gray-800 mx-auto my-4"
+                        src="https://randomuser.me/api/portraits/women/21.jpg" alt="" />
+                    <div className="py-2">
+                        <h3 className="font-bold text-2xl text-gray-800 dark:text-white mb-1">Cait Genevieve</h3>
+                        <div className="inline-flex text-gray-700 dark:text-gray-300 items-center">
+                            <svg className="h-5 w-5 text-gray-400 dark:text-gray-600 mr-1" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" >
+                                <path className=""
+                                    d="M5.64 16.36a9 9 0 1 1 12.72 0l-5.65 5.66a1 1 0 0 1-1.42 0l-5.65-5.66zm11.31-1.41a7 7 0 1 0-9.9 0L12 19.9l4.95-4.95zM12 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                            </svg>
+                            {currentUser.username}
+                        </div>
+                    </div>
                 </div>
-              )}
-              <p
-                style={{
-                  width: "100%",
-                  borderBottom: "1px solid black",
-                  lineHeight: "0.1em",
-                  margin: "10px",
-                }}
-              >
-                <span className="font-semibold" style={{ background: "#fff" }}>
-                  Details
-                </span>
-              </p>
-              {/* <button
-                onClick={handleLogout}
-                className="text-red-600 text-lg font-semibold self-start border border-red-600 p-1 rounded-lg hover:bg-red-600 hover:text-white"
-              >
-                Log-out
-              </button> */}
-              <div className="w-full flex justify-between px-1">
-                <button
-                  onClick={handleLogout}
-                  className="text-red-600 text-lg font-semibold self-start border border-red-600 p-1 rounded-lg hover:bg-red-600 hover:text-white"
-                >
-                  Log-out
-                </button>
-                <button
-                  onClick={() => setActivePanelId(3)}
-                  className="text-white text-lg self-end bg-gray-500 p-1 rounded-lg hover:bg-gray-700"
-                >
-                  Edit Profile
-                </button>
-              </div>
-              <div className="w-full shadow-2xl rounded-lg p-3 break-all">
-                <p className="text-3xl font-semibold m-1">
-                  Hi {currentUser.username} !
-                </p>
-                <p className="text-lg font-semibold">
-                  Email:{currentUser.email}
-                </p>
-                <p className="text-lg font-semibold">
-                  Phone:{currentUser.phone}
-                </p>
-                <p className="text-lg font-semibold">
-                  Address:{currentUser.address}
-                </p>
-              </div>
-              <button
-                onClick={handleDeleteAccount}
-                className="text-red-600 hover:underline"
-              >
-                Delete account
-              </button>
+                <div className="flex gap-2 px-2" style={{margin: "20px"}}>
+                    <button
+                        className="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
+                        {currentUser.email}
+                    </button>
+                    <button
+                        className="flex-1 rounded-full border-2 border-gray-400 dark:border-gray-700 font-semibold text-black dark:text-black px-4 py-2">
+                        {currentUser.address}
+                    </button>
+                </div>
+                <div className="flex gap-2 px-2" style={{margin: "20px"}}>
+                    <button
+                        className="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
+                        {currentUser.phone}
+                    </button>
+                    <button
+                        className="flex-1 rounded-full border-2 border-gray-400 dark:border-gray-700 font-semibold text-black dark:text-black px-4 py-2">
+                        {currentUser.address}
+                    </button>
+                </div>
             </div>
-          </div>
+         
+        </div>
           {/* ---------------------------------------------------------------------------------------- */}
           <div className="w-[60%] max-sm:w-full">
             <div>

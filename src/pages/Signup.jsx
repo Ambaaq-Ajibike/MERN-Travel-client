@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection, } from "firebase/firestore";
 const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const Signup = () => {
     password: "",
     address: "",
     phone: "",
+    userId: ""
   });
   // console.log(formData);
 
@@ -20,12 +22,17 @@ const Signup = () => {
       [e.target.id]: e.target.value,
     });
   };
-
+  const userCollectionRef = collection(db, "appUsers");
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
      const res = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+
       if (res?.user?.auth) {
+        formData.userId =  auth?.currentUser?.uid,
+        delete formData.password;
+        console.log(res, 'res');
+       await addDoc(userCollectionRef, formData);
         alert("Registration successful");
         navigate("/login");
       } else {
@@ -48,7 +55,8 @@ const Signup = () => {
       }}
     >
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col border border-black rounded-lg p-2 w-72 h-fit gap-2 sm:w-[320px] bg-white bg-opacity-60">
+        <div className="flex flex-col border border-black rounded-lg p-2 w-72 h-fit gap-2 sm:w-[320px] bg-white bg-opacity-60" style={{ width: "467px",
+        padding: "39px"}}>
           <h1 className="text-3xl text-center font-semibold">Signup</h1>
           <div className="flex flex-col">
             <label htmlFor="username" className="font-semibold">
