@@ -6,39 +6,41 @@ import { Link } from "react-router-dom";
 const PackageCard = ({ packageData }) => {
   return (
     <Link to={`/package/${packageData.id}`} className="w-max">
-      <div className="bg-white border flex flex-col items-center p-3 rounded shadow-md overflow-hidden">
-        <img
-          className="w-[300px] h-[190px] rounded border hover:scale-110  transition-all duration-300"
-          src={packageData.packageImage}
-          alt="Package Image"
-        />
-        <div className="w-full flex flex-col my-2">
-          <p className="font-semibold text-lg capitalize w-[90%] xsm:w-[250px]">
-            {packageData.packageName}
-          </p>
-          <p className="text-green-700 text-lg capitalize">
-            {packageData.packageDescription}
-          </p>
-          
-          <div className="flex flex-wrap justify-between">
-            {packageData.packageTotalRatings > 0 && (
-              <p className="flex items-center text-lg">
-                <Rating
-                  value={packageData.packageRating}
-                  size="medium"
-                  readOnly
-                  precision={0.1}
-                />
-                ({packageData.packageTotalRatings})
-              </p>
-            )}
-            <p className="font-medium text-green-700">
-                ${packageData.packagePrice}
-              </p>
-          </div>
-          {/* price & rating */}
-        </div>
-      </div>
+     <div className="bg-white border flex flex-col rounded-lg shadow-md overflow-hidden">
+  <img
+  style={{width: "22pc"}}
+    className="w-full h-[190px] object-cover rounded-t-lg"
+    src={packageData.packageImage}
+    alt="Package Image"
+  />
+  <div className="w-full flex flex-col mt-4 px-2">
+    <p className="font-semibold text-xl capitalize">
+      {packageData.packageName}
+    </p>
+    <div className="flex items-center mt-1 text-sm text-gray-500">
+      {packageData.packageTotalRatings > 0 && (
+        <>
+          <span className="flex items-center text-yellow-500">
+            {/* Assuming Rating is a component that displays stars */}
+            <Rating
+              value={packageData.packageRating}
+              size="small"
+              readOnly
+              precision={0.1}
+            />
+          </span>
+          <span className="ml-2">
+            {packageData.packageTotalRatings} Reviews
+          </span>
+        </>
+      )}
+    </div>
+    <p className="font-medium text-green-700 text-lg mt-2">
+      ${packageData.packagePrice}
+    </p>
+  </div>
+</div>
+
     </Link>
   );
 };

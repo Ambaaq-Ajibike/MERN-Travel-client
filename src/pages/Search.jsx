@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PackageCard from "./PackageCard";
-import {visaList, citizenList, residenceList} from "./data";
+import {visaList, citizenList, ResidencyList} from "./data";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const Search = () => {
         const query = searchQuery.split('=')[1];
         let data = visaList.filter(x => x.category.toLowerCase() == query.toLowerCase());
         if(data.length < 1) data =  citizenList.filter(x => x.category.toLowerCase() == query.toLowerCase());
-        if(data.length < 1) data =  residenceList.filter(x => x.category.toLowerCase() == query.toLowerCase());
+        if(data.length < 1) data =  ResidencyList.filter(x => x.category.toLowerCase() == query.toLowerCase());
         setLoading(false);
         setAllPackages(data);
         if (data.length > 8) {

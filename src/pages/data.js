@@ -92,7 +92,7 @@ export const visaList = [
       packagePrice: 5000
     },
   ];
-  export const residenceList = [
+  export const ResidencyList = [
     {
       id: 6,
       packageImage: '/src/assets/images/skilled-work.jpg',
@@ -100,7 +100,7 @@ export const visaList = [
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
       packageRating: 4,
-      category: 'residence',
+      category: 'Residency',
       packagePrice: 5000
     },
     {
@@ -110,7 +110,7 @@ export const visaList = [
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
       packageRating: 5,
-      category: 'residence',
+      category: 'Residency',
       packagePrice: 5000
     },
     {
@@ -120,7 +120,7 @@ export const visaList = [
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
       packageRating: 5,
-      category: 'residence',
+      category: 'Residency',
       packagePrice: 5000
     },
     {
@@ -130,7 +130,7 @@ export const visaList = [
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
       packageRating: 5,
-      category: 'residence',
+      category: 'Residency',
       packagePrice: 5000
     },
     {
@@ -140,7 +140,7 @@ export const visaList = [
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
       packageRating: 5,
-      category: 'residence',
+      category: 'Residency',
       packagePrice: 5000
     },
   ];

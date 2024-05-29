@@ -7,11 +7,11 @@ const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   return (
     <>
-      <div className="bg-slate-400 p-4 flex justify-between items-center">
+      <div className="bg-white-400 p-4 flex justify-between items-center" >
 
 
 
-        <ul className="flex flex-wrap items-center  justify-between gap-10 text-white font-semibold list-none">
+        <ul className="flex flex-wrap items-center  justify-between gap-10 text-black font-semibold list-none">
         
       <h1
           className="h-min text-4xl font-bold relative"
@@ -36,7 +36,7 @@ const Header = () => {
             <Link to={`/search?searchTerm=${'visa'}`}>VISAS </Link>
           </li>
           <li className="hover:underline hover:scale-105 transition-all duration-150">
-            <Link to={`/search?searchTerm=${'residence'}`}>RESIDENCY </Link>
+            <Link to={`/search?searchTerm=${'Residency'}`}>RESIDENCY </Link>
           </li>
           <li className="hover:underline hover:scale-105 transition-all duration-150">
             <Link to={`/search?searchTerm=${'citizen'}`}>CITIZENSHIP </Link>
@@ -55,7 +55,7 @@ const Header = () => {
 
 
 
-        <ul className="flex flex-wrap items-center justify-between gap-10 text-white font-semibold list-none">
+        <ul className="flex flex-wrap items-center justify-between gap-10 text-black font-semibold list-none">
           <li className="hover:underline hover:scale-105 transition-all duration-150">
             <Link to={`/`}>Home</Link>
           </li>
