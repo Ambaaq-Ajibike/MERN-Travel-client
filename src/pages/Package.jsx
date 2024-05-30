@@ -39,38 +39,33 @@ const Package = () => {
     packageOffer: false,
     packageRating: 0,
     packageTotalRatings: 0,
-    packageImages: [],
+    packageImage: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [ratingsData, setRatingsData] = useState({
-    rating: 0,
-    review: "",
-    packageId: params?.id,
-    userRef: currentUser?._id,
-    username: currentUser?.username,
-    userProfileImg: currentUser?.avatar,
-  });
-  const [packageRatings, setPackageRatings] = useState([]);
+  // const [ratingsData, setRatingsData] = useState({
+  //   rating: 0,
+  //   review: "",
+  //   packageId: params?.id,
+  //   userRef: currentUser?._id,
+  //   username: currentUser?.username,
+  //   userProfileImg: currentUser?.avatar,
+  // });
+  // const [packageRatings, setPackageRatings] = useState([]);
   const [ratingGiven, setRatingGiven] = useState(false);
 
   const getPackageData = async () => {
     try {
       setLoading(true);
     //  const res = await fetch(`/api/package/get-package-data/${params?.id}`);
-    console.log(params?.id, 'params?.id');
-    console.log(visaList, 'visaList');
       let data = visaList.find(x => x.id == params?.id);
-      console.log(data, "data111");
       if(data === undefined || data === null) data =  citizenList.find(x => x.id == params?.id);
       if(data === undefined || data === null) data =  ResidencyList.find(x => x.id == params?.id);
-      console.log(data, "data");
       //const data = await res.json();
       if (data) {
         setPackageData({
           packageName: data?.packageName,
-          packageDescription: data?.packageDescription,
           packageDescription: data?.packageDescription,
           packageDays: data?.packageDays,
           packageNights: data?.packageNights,

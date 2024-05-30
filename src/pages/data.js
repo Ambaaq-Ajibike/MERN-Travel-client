@@ -7,7 +7,7 @@ export const citizenList = [
     packageTotalRatings: 5,
     packageRating: 4,
     category: 'citizen',
-    packagePrice: 5000
+    packagePrice: 3000
   },
   {
     id: 22,
@@ -17,7 +17,7 @@ export const citizenList = [
     packageTotalRatings: 5,
     packageRating: 5,
     category: 'citizen',
-    packagePrice: 5000
+    packagePrice: 45000
   },
   {
     id: 23,
@@ -27,7 +27,7 @@ export const citizenList = [
     packageTotalRatings: 5,
     packageRating: 5,
     category: 'citizen',
-    packagePrice: 5000
+    packagePrice: 17000
   },
   {
     id: 24,
@@ -37,7 +37,7 @@ export const citizenList = [
     packageTotalRatings: 5,
     packageRating: 5,
     category: 'citizen',
-    packagePrice: 5000
+    packagePrice: 23000
   },
   {
     id: 24,
@@ -47,7 +47,7 @@ export const citizenList = [
     packageTotalRatings: 5,
     packageRating: 5,
     category: 'citizen',
-    packagePrice: 5000
+    packagePrice: 90000
   },
 ];
 export const visaList = [
@@ -59,7 +59,7 @@ export const visaList = [
       packageTotalRatings: 5,
       packageRating: 4,
       category: 'visa',
-      packagePrice: 5000
+      packagePrice: 65000
     },
     {
       id: 2,
@@ -69,7 +69,7 @@ export const visaList = [
       packageTotalRatings: 5,
       packageRating: 5,
       category: 'visa',
-      packagePrice: 5000
+      packagePrice: 37000
     },
     {
       id: 3,
@@ -79,7 +79,7 @@ export const visaList = [
       packageTotalRatings: 5,
       packageRating: 5,
       category: 'visa',
-      packagePrice: 5000
+      packagePrice: 98000
     },
     {
       id: 4,
@@ -89,7 +89,7 @@ export const visaList = [
       packageTotalRatings: 5,
       packageRating: 5,
       category: 'visa',
-      packagePrice: 5000
+      packagePrice: 45000
     },
   ];
   export const ResidencyList = [
@@ -101,7 +101,7 @@ export const visaList = [
       packageTotalRatings: 5,
       packageRating: 4,
       category: 'Residency',
-      packagePrice: 5000
+      packagePrice: 89000
     },
     {
       id: 7,
@@ -111,7 +111,7 @@ export const visaList = [
       packageTotalRatings: 5,
       packageRating: 5,
       category: 'Residency',
-      packagePrice: 5000
+      packagePrice: 55000
     },
     {
       id: 9,
@@ -131,7 +131,7 @@ export const visaList = [
       packageTotalRatings: 5,
       packageRating: 5,
       category: 'Residency',
-      packagePrice: 5000
+      packagePrice: 235000
     },
     {
       id: 11,
@@ -141,6 +141,6 @@ export const visaList = [
       packageTotalRatings: 5,
       packageRating: 5,
       category: 'Residency',
-      packagePrice: 5000
+      packagePrice: 99000
     },
   ];
