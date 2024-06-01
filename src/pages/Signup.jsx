@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { addDoc, collection, } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
+import { auth, db } from "../firebase";
+
 const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -14,7 +14,6 @@ const Signup = () => {
     phone: "",
     userId: ""
   });
-  // console.log(formData);
 
   const handleChange = (e) => {
     setFormData({
@@ -22,107 +21,112 @@ const Signup = () => {
       [e.target.id]: e.target.value,
     });
   };
+
   const userCollectionRef = collection(db, "appUsers");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-     const res = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      const res = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
 
-      if (res?.user?.auth) {
-        formData.userId =  auth?.currentUser?.uid,
+      if (res?.user) {
+        formData.userId = auth?.currentUser?.uid;
         delete formData.password;
-        console.log(res, 'res');
-       await addDoc(userCollectionRef, formData);
-        // alert("Registration successful");
+        await addDoc(userCollectionRef, formData);
         navigate("/login");
       } else {
-        // alert("An error occured try again");
+        console.error("An error occurred, please try again");
       }
     } catch (error) {
-      // alert(error.message)
-      console.log(error);
+      console.error(error.message);
     }
   };
 
   return (
-    <div
-      className="flex justify-center items-center"
-      style={{
-        width: "100%",
-        height: "90vh",
-        background:
-          "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
-      }}
-    >
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col border border-black rounded-lg p-2 w-72 h-fit gap-2 sm:w-[320px] bg-white bg-opacity-60" style={{ width: "467px",
-        padding: "39px"}}>
-          <h1 className="text-3xl text-center font-semibold">Signup</h1>
-          <div className="flex flex-col">
-            <label htmlFor="username" className="font-semibold">
-              Username:
-            </label>
-            <input
-              type="text"
-              id="username"
-              className="p-1 rounded border border-black bg-white bg-opacity-80"
-              onChange={handleChange}
-            />
+    <section className="bg-cover bg-center bg-gray-50 dark:bg-gray-900" style={{ backgroundImage: "url('/images/tourist.jpg')" }}>
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+
+        <div className="w-full bg-white rounded-lg shadow-lg dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="flex justify-center mb-6">
+
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="email" className="font-semibold">
-              Email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="p-1 rounded border border-black bg-white bg-opacity-80"
-              onChange={handleChange}
-            />
+
+          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              Create an account
+            </h1>
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="name@company.com"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="••••••••"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                <textarea
+                  maxLength={200}
+                  name="address"
+                  id="address"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Sign up
+              </button>
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                Have an account? <Link to="/login" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Login</Link>
+              </p>
+            </form>
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="password" className="font-semibold">
-              Password:
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="p-1 rounded border border-black bg-white bg-opacity-80"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="address" className="font-semibold">
-              Address:
-            </label>
-            <textarea
-              maxLength={200}
-              type="text"
-              id="address"
-              className="p-1 rounded border border-black resize-none bg-white bg-opacity-80"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="phone" className="font-semibold">
-              Phone:
-            </label>
-            <input
-              type="text"
-              id="phone"
-              className="p-1 rounded border border-black bg-white bg-opacity-80"
-              onChange={handleChange}
-            />
-          </div>
-          <p className="text-blue-700 text-sm hover:underline">
-            <Link to={`/login`}>Have an account? Login</Link>
-          </p>
-          <button className="p-3 text-white bg-slate-700 rounded hover:opacity-95">
-            Signup
-          </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </section>
   );
 };
 

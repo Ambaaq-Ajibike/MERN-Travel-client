@@ -17,7 +17,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  // console.log(formData);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -30,69 +30,87 @@ const Login = () => {
     try {
       dispatch(loginStart());
       const res = await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      console.log(res, "response");
-      if (res?.user?.auth) {
+      if (res?.user) {
         dispatch(loginSuccess(res?.user));
-        // alert("Successfully Logged In");
         navigate("/");
       } else {
-        dispatch(loginFailure("Invalid credetials"));
-        // alert("Invalid credentials");
+        dispatch(loginFailure("Invalid credentials"));
       }
     } catch (error) {
       dispatch(loginFailure(error.message));
-      console.log(error);
     }
   };
 
   return (
-    <div
-      className="flex justify-center items-center"
-      style={{
-        width: "100%",
-        height: "90vh",
-        background:
-          "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
-      }}
-    >
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col border border-black rounded-lg p-4 w-72 h-fit gap-5 sm:w-[320px] bg-white bg-opacity-60">
-          <h1 className="text-3xl text-center font-semibold">Login</h1>
-          <div className="flex flex-col">
-            <label htmlFor="email" className="font-semibold">
-              Email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="p-3 rounded border border-black bg-white bg-opacity-80"
-              onChange={handleChange}
-            />
+    <section className="bg-cover bg-center bg-gray-50 dark:bg-gray-900" style={{ backgroundImage: "url('/images/tourist.jpg')" }}>
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        
+        <div className="w-full bg-white rounded-lg shadow-lg dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="flex justify-center mb-6">
+   
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="password" className="font-semibold">
-              Password:
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="p-3 rounded border border-black bg-white bg-opacity-80"
-              onChange={handleChange}
-            />
+
+          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              Sign in to your account
+            </h1>
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="name@company.com"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="••••••••"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-start">
+                  <div className="flex items-center h-5">
+                    <input
+                      id="remember"
+                      aria-describedby="remember"
+                      type="checkbox"
+                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
+                    <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
+                  </div>
+                </div>
+                <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Forgot password?</a>
+              </div>
+              <button
+                type="submit"
+                className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                disabled={loading}
+              >
+                {loading ? "Loading..." : "Sign in"}
+              </button>
+              {error && <p className="text-sm text-red-600">{error}</p>}
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                Don’t have an account yet? <Link to="/signup" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Sign up</Link>
+              </p>
+            </form>
           </div>
-          <p className="text-blue-700 text-sm hover:underline">
-            <Link to={`/signup`}>Dont have an account? Signup</Link>
-          </p>
-          <button
-            disabled={loading}
-            className="p-3 text-white bg-slate-700 rounded hover:opacity-95"
-          >
-            {loading ? "Loading..." : "Login"}
-          </button>
-          {error && <p className="text-sm text-red-600">{error}</p>}
         </div>
-      </form>
-    </div>
+      </div>
+    </section>
   );
 };
 
