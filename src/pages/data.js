@@ -49,6 +49,36 @@ export const citizenList = [
     category: 'citizen',
     packagePrice: 90000
   },
+  {
+    id: 25,
+    packageImage: '/src/assets/images/saint_lucia.jpg',
+    packageName: 'Saint Lucia',
+    packageDescription: 'For short-term leisure and sightseeing visits',
+    packageTotalRatings: 5,
+    packageRating: 5,
+    category: 'citizen',
+    packagePrice: 17000
+  },
+  {
+    id: 26,
+    packageImage: '/src/assets/images/us_citizenship.jpg',
+    packageName: 'US Citizenship',
+    packageDescription: 'For short-term leisure and sightseeing visits',
+    packageTotalRatings: 5,
+    packageRating: 5,
+    category: 'citizen',
+    packagePrice: 23000
+  },
+  {
+    id: 27,
+    packageImage: '/src/assets/images/canada-citizenship.jpg',
+    packageName: 'Canada citizenship ',
+    packageDescription: 'For short-term leisure and sightseeing visits',
+    packageTotalRatings: 5,
+    packageRating: 5,
+    category: 'citizen',
+    packagePrice: 90000
+  },
 ];
 export const visaList = [
     {
@@ -103,16 +133,16 @@ export const visaList = [
       category: 'Residency',
       packagePrice: 89000
     },
-    {
-      id: 7,
-      packageImage: '/src/assets/images/telnet.jpg',
-      packageName: 'UK global Telnet Visa',
-      packageDescription: 'For short-term leisure and sightseeing visits',
-      packageTotalRatings: 5,
-      packageRating: 5,
-      category: 'Residency',
-      packagePrice: 55000
-    },
+    // {
+    //   id: 7,
+    //   packageImage: '/src/assets/images/telnet.jpg',
+    //   packageName: 'UK global Telnet Visa',
+    //   packageDescription: 'For short-term leisure and sightseeing visits',
+    //   packageTotalRatings: 5,
+    //   packageRating: 5,
+    //   category: 'Residency',
+    //   packagePrice: 55000
+    // },
     {
       id: 9,
       packageImage: '/src/assets/images/study.jpg',

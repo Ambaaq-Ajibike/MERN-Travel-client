@@ -24,14 +24,15 @@ import UpdateProfile from "./user/UpdateProfile";
 import MyHistory from "./user/MyHistory";
 
 import { auth, db } from "../firebase";
-import { getDocs, collection, } from "firebase/firestore";
-
+import { getDocs, collection } from "firebase/firestore";
+import {
+  signOut,
+} from "firebase/auth";
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const fileRef = useRef(null);
-  // let { currentUser, loading, error } = useSelector((state) => state.user);
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState({});
   const [profilePhoto, setProfilePhoto] = useState(undefined);
   const [photoPercentage, setPhotoPercentage] = useState(0);
   const [activePanelId, setActivePanelId] = useState(1);
@@ -42,6 +43,7 @@ const Profile = () => {
     phone: "",
     avatar: "",
   });
+
   const usersCollectionRef = collection(db, "appUsers");
   const getUser = async () => {
     try {
@@ -50,13 +52,13 @@ const Profile = () => {
         ...doc.data(),
         id: doc.id,
       }));
-      console.log(filteredData, "data");
-      const user = filteredData.find(x => x.userId == auth?.currentUser?.uid);
+      const user = filteredData.find((x) => x.userId === auth?.currentUser?.uid);
       setCurrentUser(user);
     } catch (err) {
       console.error(err);
     }
   };
+
   useEffect(() => {
     getUser();
 
@@ -69,14 +71,14 @@ const Profile = () => {
         avatar: currentUser.avatar,
       });
     }
-  }, []);
+  }, [currentUser]);
 
   const handleProfilePhoto = (photo) => {
     try {
       dispatch(updateUserStart());
       const storage = getStorage(app);
       const photoname = new Date().getTime() + photo.name.replace(/\s/g, "");
-      const storageRef = ref(storage, `profile-photos/${photoname}`); //profile-photos - folder name in firebase
+      const storageRef = ref(storage, `profile-photos/${photoname}`);
       const uploadTask = uploadBytesResumable(storageRef, photo);
 
       uploadTask.on(
@@ -85,7 +87,6 @@ const Profile = () => {
           const progress = Math.floor(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
-          //   console.log(progress);
           setPhotoPercentage(progress);
         },
         (error) => {
@@ -125,16 +126,14 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      dispatch(logOutStart());
-      const res = await fetch("/api/auth/logout");
-      const data = await res.json();
-      if (data?.success !== true) {
-        dispatch(logOutFailure(data?.message));
+      const data = await  signOut(auth);
+      if (data) {
+        dispatch(logOutFailure("Logout successful"));
         return;
       }
       dispatch(logOutSuccess());
       navigate("/login");
-      alert(data?.message);
+      // alert(data?.message);
     } catch (error) {
       console.log(error);
     }
@@ -143,7 +142,7 @@ const Profile = () => {
   const handleDeleteAccount = async (e) => {
     e.preventDefault();
     const CONFIRM = confirm(
-      "Are you sure ? the account will be permenantly deleted!"
+      "Are you sure? The account will be permanently deleted!"
     );
     if (CONFIRM) {
       try {
@@ -159,78 +158,84 @@ const Profile = () => {
         }
         dispatch(deleteUserAccountSuccess());
         alert(data?.message);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   return (
-    <div className="flex w-full flex-wrap max-sm:flex-col p-2">
+    <div className="flex flex-col lg:flex-row w-full p-6 bg-gray-100">
       {currentUser ? (
         <>
-        <div className="mx-auto bg-white light:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
-            <div className="border-b px-4 pb-6">
-                <div className="text-center my-4">
-                    <img className="h-32 w-32 rounded-full border-4 border-white dark:border-gray-800 mx-auto my-4"
-                        src="/src/assets/images/profile.png" alt="" />
-                    <div className="py-2">
-                        <h3 className="font-bold text-2xl text-gray-800 dark:text-white mb-1">Cait Genevieve</h3>
-                        <div className="inline-flex text-blue-900 dark:text-blue-500 items-center" style={{fontSize: "30px"}}>
-                         
-                            {currentUser.username}
-                        </div>
-                    </div>
-                </div>
-                <div className="flex gap-2 px-2" style={{margin: "20px"}}>
-                    <button
-                        className="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-                        {currentUser.email}
-                    </button>
-                    <button
-                        className="flex-1 rounded-full border-2 border-gray-400 dark:border-gray-700 font-semibold text-black dark:text-black px-4 py-2">
-                        {currentUser.address}
-                    </button>
-                </div>
-                <div className="flex gap-2 px-2" style={{margin: "20px"}}>
-                    <button
-                        className="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-                        {currentUser.phone}
-                    </button>
-                    <button
-                        className="flex-1 rounded-full border-2 border-gray-400 dark:border-gray-700 font-semibold text-black dark:text-black px-4 py-2">
-                        {currentUser.address}
-                    </button>
-                </div>
+          <div className="w-full lg:w-1/3 bg-white rounded-lg shadow-md p-6">
+            <div className="flex flex-col items-center">
+              <img
+                className="h-32 w-32 rounded-full border-4 border-white"
+                src={formData.avatar || "/src/assets/images/profile.png"}
+                alt="Profile"
+              />
+              <h3 className="mt-4 text-xl font-bold">{currentUser.username}</h3>
+              <p className="text-gray-600">{currentUser.email}</p>
+              <p className="text-gray-600">{currentUser.address}</p>
+              <p className="text-gray-600">{currentUser.phone}</p>
+              <button
+                className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg"
+                onClick={handleLogout}
+              >
+                Log Out
+              </button>
+              <input
+                type="file"
+                ref={fileRef}
+                className="hidden"
+                onChange={(e) => handleProfilePhoto(e.target.files[0])}
+              />
+              <button
+                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg"
+                onClick={() => fileRef.current.click()}
+              >
+                Change Profile Photo
+              </button>
             </div>
-         
-        </div>
-          {/* ---------------------------------------------------------------------------------------- */}
-          <div className="w-[60%] max-sm:w-full">
+          </div>
+          <div className="w-full lg:w-2/3 mt-6 lg:mt-0 lg:ml-6 bg-white rounded-lg shadow-md p-6">
+            <nav className="mb-4">
+              <button
+                className={`mr-4 pb-2 ${activePanelId === 1 ? "border-b-4 border-blue-500" : ""
+                  }`}
+                onClick={() => setActivePanelId(1)}
+              >
+                My Bookings
+              </button>
+              <button
+                className={`mr-4 pb-2 ${activePanelId === 2 ? "border-b-4 border-blue-500" : ""
+                  }`}
+                onClick={() => setActivePanelId(2)}
+              >
+                Update Profile
+              </button>
+              <button
+                className={`pb-2 ${activePanelId === 3 ? "border-b-4 border-blue-500" : ""
+                  }`}
+                onClick={() => setActivePanelId(3)}
+              >
+                My History
+              </button>
+            </nav>
             <div>
-              <nav className="w-full border-blue-500 border-b-4">
-                <div className="w-full flex gap-2">
-                  <button
-                    className={
-                      activePanelId === 1
-                        ? "p-1 rounded-t transition-all duration-300 bg-blue-500 text-white"
-                        : "p-1 rounded-t transition-all duration-300"
-                    }
-                    id="bookings"
-                    onClick={() => setActivePanelId(1)}
-                  >
-                    Bookings
-                  </button>
-                </div>
-              </nav>
-              {/* bookings */}
-              <div className="main flex flex-wrap">
-                {activePanelId === 1 && <MyBookings />}
-              </div>
+              {activePanelId === 1 && <MyBookings />}
+              {activePanelId === 2 && <UpdateProfile />}
+              {activePanelId === 3 && <MyHistory />}
             </div>
           </div>
         </>
       ) : (
-        <div>
-          <p className="text-red-700">Login First</p>
+        <div className="text-center">
+          <p className="text-red-700">Please log in first</p>
+          <Link to="/login" className="text-blue-500 underline">
+            Go to Login
+          </Link>
         </div>
       )}
     </div>

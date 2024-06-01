@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import  { useEffect, useState } from "react";
+// import { useSelector } from "react-redux";
 import { db, auth } from "../../firebase";
 import { getDocs, collection} from "firebase/firestore";
 
 const MyBookings = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  // const { currentUser } = useSelector((state) => state.user);
   const [currentBookings, setCurrentBookings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -40,28 +39,28 @@ const MyBookings = () => {
     getAllBookings();
   }, [searchTerm]);
 
-  const handleCancel = async (id) => {
-    try {
-      setLoading(true);
-      const res = await fetch(
-        `/api/booking/cancel-booking/${id}/${currentUser._id}`,
-        {
-          method: "POST",
-        }
-      );
-      const data = await res.json();
-      if (data?.success) {
-        setLoading(false);
-        alert(data?.message);
-        getAllBookings();
-      } else {
-        setLoading(false);
-        alert(data?.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleCancel = async (id) => {
+  //   try {
+  //     setLoading(true);
+  //     const res = await fetch(
+  //       `/api/booking/cancel-booking/${id}/${currentUser._id}`,
+  //       {
+  //         method: "POST",
+  //       }
+  //     );
+  //     const data = await res.json();
+  //     if (data?.success) {
+  //       setLoading(false);
+  //       alert(data?.message);
+  //       getAllBookings();
+  //     } else {
+  //       setLoading(false);
+  //       alert(data?.message);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div className="w-full flex justify-center">
