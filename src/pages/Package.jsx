@@ -132,8 +132,8 @@ const Package = () => {
       )}
       {packageData && !loading && !error && (
         <>
-          <Swiper navigation>
-            <SwiperSlide>
+          <Swiper navigation style={{zIndex: 0}}>
+            <SwiperSlide style={{zIndex: 0}}>
               <img src={packageData?.packageImage} alt="Package" className="w-full h-64 object-cover rounded-t-lg" />
             </SwiperSlide>
           </Swiper>

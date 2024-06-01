@@ -9,9 +9,21 @@ const Header = () => {
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [subMenuOpen, setSubMenuOpen] = useState({
+    visas: false,
+    residency: false,
+    citizenship: false,
+  });
 
   const handlePackageClick = (id) => {
     navigate(`/package/${id}`);
+  };
+
+  const toggleSubMenu = (menu) => {
+    setSubMenuOpen((prevState) => ({
+      ...prevState,
+      [menu]: !prevState[menu],
+    }));
   };
 
   return (
@@ -51,41 +63,47 @@ const Header = () => {
               ✖
             </button>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
-              <li className="dropdown">
+              <li className="dropdown" onClick={() => toggleSubMenu('visas')}>
                 <Link to="#">VISAS</Link>
-                <div className="dropdown-content">
-                  {visaList.map(item => (
-                    <a key={item.id} onClick={() => handlePackageClick(item.id)}>
-                      {item.packageName}
-                    </a>
-                  ))}
-                </div>
+                {subMenuOpen.visas && (
+                  <div className="dropdown-content">
+                    {visaList.map(item => (
+                      <a key={item.id} onClick={() => handlePackageClick(item.id)}>
+                        {item.packageName}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </li>
-              <li className="dropdown">
+              <li className="dropdown" onClick={() => toggleSubMenu('residency')}>
                 <Link to="#">RESIDENCY</Link>
-                <div className="dropdown-content">
-                  {ResidencyList.map(item => (
-                    <a key={item.id} onClick={() => handlePackageClick(item.id)}>
-                      {item.packageName}
-                    </a>
-                  ))}
-                </div>
+                {subMenuOpen.residency && (
+                  <div className="dropdown-content">
+                    {ResidencyList.map(item => (
+                      <a key={item.id} onClick={() => handlePackageClick(item.id)}>
+                        {item.packageName}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </li>
-              <li className="dropdown">
+              <li className="dropdown" onClick={() => toggleSubMenu('citizenship')}>
                 <Link to="#">CITIZENSHIP</Link>
-                <div className="dropdown-content">
-                  {citizenList.map(item => (
-                    <a key={item.id} onClick={() => handlePackageClick(item.id)}>
-                      {item.packageName}
-                    </a>
-                  ))}
-                </div>
+                {subMenuOpen.citizenship && (
+                  <div className="dropdown-content">
+                    {citizenList.map(item => (
+                      <a key={item.id} onClick={() => handlePackageClick(item.id)}>
+                        {item.packageName}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </li>
               <li className="hover:underline hover:scale-105 transition-all duration-150">
-                <Link to={`/about`}>PROOF OF FUNDS</Link>
+                <Link to={`/#`}>PROOF OF FUNDS</Link>
               </li>
               <li className="hover:underline hover:scale-105 transition-all duration-150">
-                <Link to={`/about`}>OTHERS SERVICE</Link>
+                <Link to={`/#`}>OTHERS SERVICE</Link>
               </li>
             </ul>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
@@ -140,16 +158,16 @@ const Header = () => {
             </div>
           </li>
           <li className="hover:underline hover:scale-105 transition-all duration-150">
-            <Link to={`/about`}>PROOF OF FUNDS</Link>
+            <Link to={`/#`}>PROOF OF FUNDS</Link>
           </li>
           <li className="hover:underline hover:scale-105 transition-all duration-150">
-            <Link to={`/about`}>OTHERS SERVICE</Link>
+            <Link to={`/#`}>OTHERS SERVICE</Link>
           </li>
         </ul>
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none">
-        {currentUser ? (
-          <li className="bg-transparent  text-blue-700 font-semibold hover:text-white py-2 px-4  hover:border-transparent rounded">
-          <Link to={`/profile/${currentUser.user_role === 1 ? "admin" : "user"}`}>
+          {currentUser ? (
+            <li className="bg-transparent text-blue-700 font-semibold hover:text-white py-2 px-4 hover:border-transparent rounded">
+              <Link to={`/profile/${currentUser.user_role === 1 ? "admin" : "user"}`}>
                 <img
                   src={currentUser.avatar || defaultProfileImg}
                   alt={currentUser.username}
@@ -157,14 +175,11 @@ const Header = () => {
                 />
               </Link>
             </li>
-            
-            ) : (
-              <li className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          ) : (
+            <li className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
               <Link to={`/login`}>Sign In / Register</Link>
             </li>
-            
-            )}
-         
+          )}
         </ul>
       </nav>
     </header>

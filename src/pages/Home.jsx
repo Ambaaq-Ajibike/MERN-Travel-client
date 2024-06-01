@@ -128,7 +128,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="main-content p-4 sm:p-6 flex flex-col gap-5">
+      <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center">
   {loading && <h1 className="text-center text-xl sm:text-2xl">Loading...</h1>}
   {!loading && visa.length === 0 && Residency.length === 0 && citizenship.length === 0 && (
     <h1 className="text-center text-xl sm:text-2xl">No Packages Yet!</h1>

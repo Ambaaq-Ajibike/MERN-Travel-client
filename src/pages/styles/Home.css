@@ -27,6 +27,7 @@
   }
   
   @media (min-width: 550px) {
+
     .background_image {
       background-size: cover;
     }
@@ -34,8 +35,13 @@
       width: auto;
     }
   }
-  
+  @media screen and (max-width: 800px) {
+    .top-part, .background_image {
+      height: 80vh;
+    }
+  }
   @media (min-width: 800px) {
+
     .background_image {
       background-size: cover;
     }

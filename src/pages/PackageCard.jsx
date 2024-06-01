@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const PackageCard = ({ packageData }) => {
   return (
     <Link to={`/package/${packageData.id}`} className="w-max">
-     <div className="bg-white border flex flex-col rounded-lg shadow-md overflow-hidden">
+     <div className="bg-white border flex flex-col rounded-lg shadow-md overflow-hidden" style={{    width: "90%"}}>
   <img
   style={{width: "22pc"}}
     className="w-full h-[190px] object-cover rounded-t-lg"
