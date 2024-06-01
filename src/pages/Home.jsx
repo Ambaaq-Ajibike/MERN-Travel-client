@@ -53,9 +53,9 @@ const Home = () => {
   }, []);
   
   const slides = [
-    "/src/assets/images/hero-1.jpg",
-    "/src/assets/images/hero-2.png",
-    "/src/assets/images/hero-3.jpg"
+    "/images/hero-1.jpg",
+    "/images/hero-2.png",
+    "/images/hero-3.jpg"
   ];
   return (
     <>

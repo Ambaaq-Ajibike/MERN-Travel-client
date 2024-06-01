@@ -1,7 +1,7 @@
 export const citizenList = [
   {
     id: 21,
-    packageImage: '/src/assets/images/saint_kits_and_nevis.jpg',
+    packageImage: '/images/saint_kits_and_nevis.jpg',
     packageName: 'Saint Kits and Nevis',
     packageDescription: 'For short-term leisure and sightseeing visits',
     packageTotalRatings: 5,
@@ -11,7 +11,7 @@ export const citizenList = [
   },
   {
     id: 22,
-    packageImage: '/src/assets/images/antigua_and_barbuda.jpg',
+    packageImage: '/images/antigua_and_barbuda.jpg',
     packageName: 'Antigua and barbuda',
     packageDescription: 'For short-term leisure and sightseeing visits',
     packageTotalRatings: 5,
@@ -21,7 +21,7 @@ export const citizenList = [
   },
   {
     id: 23,
-    packageImage: '/src/assets/images/saint_lucia.jpg',
+    packageImage: '/images/saint_lucia.jpg',
     packageName: 'Saint Lucia',
     packageDescription: 'For short-term leisure and sightseeing visits',
     packageTotalRatings: 5,
@@ -31,7 +31,7 @@ export const citizenList = [
   },
   {
     id: 24,
-    packageImage: '/src/assets/images/us_citizenship.jpg',
+    packageImage: '/images/us_citizenship.jpg',
     packageName: 'US Citizenship',
     packageDescription: 'For short-term leisure and sightseeing visits',
     packageTotalRatings: 5,
@@ -41,7 +41,7 @@ export const citizenList = [
   },
   {
     id: 24,
-    packageImage: '/src/assets/images/canada-citizenship.jpg',
+    packageImage: '/images/canada-citizenship.jpg',
     packageName: 'Canada citizenship ',
     packageDescription: 'For short-term leisure and sightseeing visits',
     packageTotalRatings: 5,
@@ -51,7 +51,7 @@ export const citizenList = [
   },
   {
     id: 25,
-    packageImage: '/src/assets/images/saint_lucia.jpg',
+    packageImage: '/images/saint_lucia.jpg',
     packageName: 'Saint Lucia',
     packageDescription: 'For short-term leisure and sightseeing visits',
     packageTotalRatings: 5,
@@ -61,7 +61,7 @@ export const citizenList = [
   },
   {
     id: 26,
-    packageImage: '/src/assets/images/us_citizenship.jpg',
+    packageImage: '/images/us_citizenship.jpg',
     packageName: 'US Citizenship',
     packageDescription: 'For short-term leisure and sightseeing visits',
     packageTotalRatings: 5,
@@ -71,7 +71,7 @@ export const citizenList = [
   },
   {
     id: 27,
-    packageImage: '/src/assets/images/canada-citizenship.jpg',
+    packageImage: '/images/canada-citizenship.jpg',
     packageName: 'Canada citizenship ',
     packageDescription: 'For short-term leisure and sightseeing visits',
     packageTotalRatings: 5,
@@ -83,7 +83,7 @@ export const citizenList = [
 export const visaList = [
     {
       id: 1,
-      packageImage: '/src/assets/images/digital-nomad.jpg',
+      packageImage: '/images/digital-nomad.jpg',
       packageName: 'Digital Nomad',
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
@@ -93,7 +93,7 @@ export const visaList = [
     },
     {
       id: 2,
-      packageImage: '/src/assets/images/tourist.jpg',
+      packageImage: '/images/tourist.jpg',
       packageName: 'Tourist',
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
@@ -103,7 +103,7 @@ export const visaList = [
     },
     {
       id: 3,
-      packageImage: '/src/assets/images/study.jpg',
+      packageImage: '/images/study.jpg',
       packageName: 'Study',
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
@@ -113,7 +113,7 @@ export const visaList = [
     },
     {
       id: 4,
-      packageImage: '/src/assets/images/study.jpg',
+      packageImage: '/images/study.jpg',
       packageName: 'Study',
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
@@ -125,7 +125,7 @@ export const visaList = [
   export const ResidencyList = [
     {
       id: 6,
-      packageImage: '/src/assets/images/skilled-work.jpg',
+      packageImage: '/images/skilled-work.jpg',
       packageName: 'UK skilled work visa',
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
@@ -135,7 +135,7 @@ export const visaList = [
     },
     // {
     //   id: 7,
-    //   packageImage: '/src/assets/images/telnet.jpg',
+    //   packageImage: '/images/telnet.jpg',
     //   packageName: 'UK global Telnet Visa',
     //   packageDescription: 'For short-term leisure and sightseeing visits',
     //   packageTotalRatings: 5,
@@ -145,7 +145,7 @@ export const visaList = [
     // },
     {
       id: 9,
-      packageImage: '/src/assets/images/study.jpg',
+      packageImage: '/images/study.jpg',
       packageName: 'Canada skilled work visa',
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
@@ -155,7 +155,7 @@ export const visaList = [
     },
     {
       id: 10,
-      packageImage: '/src/assets/images/business.jpg',
+      packageImage: '/images/business.jpg',
       packageName: 'Canada business visa',
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,
@@ -165,7 +165,7 @@ export const visaList = [
     },
     {
       id: 11,
-      packageImage: '/src/assets/images/malta.jpg',
+      packageImage: '/images/malta.jpg',
       packageName: 'Malta skilled work Visa',
       packageDescription: 'For short-term leisure and sightseeing visits',
       packageTotalRatings: 5,

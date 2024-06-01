@@ -172,7 +172,7 @@ const Profile = () => {
             <div className="flex flex-col items-center">
               <img
                 className="h-32 w-32 rounded-full border-4 border-white"
-                src={formData.avatar || "/src/assets/images/profile.png"}
+                src={formData.avatar || "/images/profile.png"}
                 alt="Profile"
               />
               <h3 className="mt-4 text-xl font-bold">{currentUser.username}</h3>
