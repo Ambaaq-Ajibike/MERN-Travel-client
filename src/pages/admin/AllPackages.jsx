@@ -26,7 +26,7 @@ const AllPackages = () => {
         setLoading(false);
       } else {
         setLoading(false);
-        alert(data?.message || "Something went wrong!");
+        // alert(data?.message || "Something went wrong!");
       }
     } catch (error) {
       console.log(error);
@@ -44,7 +44,7 @@ const AllPackages = () => {
         method: "DELETE",
       });
       const data = await res.json();
-      alert(data?.message);
+      // alert(data?.message);
       getPackages();
       setLoading(false);
     } catch (error) {

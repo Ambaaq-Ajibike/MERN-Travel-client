@@ -33,11 +33,11 @@ const Login = () => {
       console.log(res, "response");
       if (res?.user?.auth) {
         dispatch(loginSuccess(res?.user));
-        alert("Successfully Logged In");
+        // alert("Successfully Logged In");
         navigate("/");
       } else {
         dispatch(loginFailure("Invalid credetials"));
-        alert("Invalid credentials");
+        // alert("Invalid credentials");
       }
     } catch (error) {
       dispatch(loginFailure(error.message));

@@ -91,7 +91,7 @@ const AdminDashboard = () => {
             );
             const data = await res.json();
             if (data?.success) {
-              alert(data?.message);
+              // alert(data?.message);
               setFormData({ ...formData, avatar: downloadUrl });
               dispatch(updateUserSuccess(data?.user));
               setProfilePhoto(null);
@@ -100,7 +100,7 @@ const AdminDashboard = () => {
               dispatch(updateUserFailure(data?.message));
             }
             dispatch(updateUserFailure(data?.message));
-            alert(data?.message);
+            // alert(data?.message);
           });
         }
       );
@@ -120,7 +120,7 @@ const AdminDashboard = () => {
       }
       dispatch(logOutSuccess());
       navigate("/login");
-      alert(data?.message);
+      // alert(data?.message);
     } catch (error) {
       console.log(error);
     }
@@ -140,11 +140,11 @@ const AdminDashboard = () => {
         const data = await res.json();
         if (data?.success === false) {
           dispatch(deleteUserAccountFailure(data?.message));
-          alert("Something went wrong!");
+          // alert("Something went wrong!");
           return;
         }
         dispatch(deleteUserAccountSuccess());
-        alert(data?.message);
+        // alert(data?.message);
       } catch (error) {}
     }
   };

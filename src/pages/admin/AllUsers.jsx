@@ -44,11 +44,11 @@ const AllUsers = () => {
         const data = await res.json();
         if (data?.success === false) {
           setLoading(false);
-          alert("Something went wrong!");
+          // alert("Something went wrong!");
           return;
         }
         setLoading(false);
-        alert(data?.message);
+        // alert(data?.message);
         getUsers();
       } catch (error) {}
     }

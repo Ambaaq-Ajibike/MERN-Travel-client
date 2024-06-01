@@ -103,7 +103,7 @@ const AddPackages = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.packageImages.length === 0) {
-      alert("You must upload atleast 1 image");
+      // alert("You must upload atleast 1 image");
       return;
     }
     if (
@@ -116,15 +116,15 @@ const AddPackages = () => {
       formData.packageActivities === "" ||
       formData.packagePrice === 0
     ) {
-      alert("All fields are required!");
+      // alert("All fields are required!");
       return;
     }
     if (formData.packagePrice < 0) {
-      alert("Price should be greater than 500!");
+      // alert("Price should be greater than 500!");
       return;
     }
     if (formData.packageDiscountPrice >= formData.packagePrice) {
-      alert("Regular Price should be greater than Discount Price!");
+      // alert("Regular Price should be greater than Discount Price!");
       return;
     }
     if (formData.packageOffer === false) {
@@ -149,7 +149,7 @@ const AddPackages = () => {
       }
       setLoading(false);
       setError(false);
-      alert(data?.message);
+      // alert(data?.message);
       setFormData({
         packageName: "",
         packageDescription: "",

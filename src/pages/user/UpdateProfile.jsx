@@ -60,7 +60,7 @@ const UpdateProfile = () => {
       currentUser.address === formData.address &&
       currentUser.phone === formData.phone
     ) {
-      alert("Change atleast 1 field to update details");
+      // alert("Change atleast 1 field to update details");
       return;
     }
     try {
@@ -76,16 +76,16 @@ const UpdateProfile = () => {
       if (data.success === false && res.status !== 201 && res.status !== 200) {
         dispatch(updateUserSuccess());
         dispatch(updateUserFailure(data?.messsage));
-        alert("Session Ended! Please login again");
+        // alert("Session Ended! Please login again");
         navigate("/login");
         return;
       }
       if (data.success && res.status === 201) {
-        alert(data?.message);
+        // alert(data?.message);
         dispatch(updateUserSuccess(data?.user));
         return;
       }
-      alert(data?.message);
+      // alert(data?.message);
       return;
     } catch (error) {
       console.log(error);
@@ -98,11 +98,11 @@ const UpdateProfile = () => {
       updatePassword.oldpassword === "" ||
       updatePassword.newpassword === ""
     ) {
-      alert("Enter a valid password");
+      // alert("Enter a valid password");
       return;
     }
     if (updatePassword.oldpassword === updatePassword.newpassword) {
-      alert("New password can't be same!");
+      // alert("New password can't be same!");
       return;
     }
     try {
@@ -118,12 +118,12 @@ const UpdateProfile = () => {
       if (data.success === false && res.status !== 201 && res.status !== 200) {
         dispatch(updateUserSuccess());
         dispatch(updatePassFailure(data?.message));
-        alert("Session Ended! Please login again");
+        // alert("Session Ended! Please login again");
         navigate("/login");
         return;
       }
       dispatch(updatePassSuccess());
-      alert(data?.message);
+      // alert(data?.message);
       setUpdatePassword({
         oldpassword: "",
         newpassword: "",

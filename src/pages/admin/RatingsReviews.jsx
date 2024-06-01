@@ -24,7 +24,7 @@ const RatingsReviews = () => {
         setLoading(false);
       } else {
         setLoading(false);
-        alert(data?.message || "Something went wrong!");
+        // alert(data?.message || "Something went wrong!");
       }
       if (data?.packages?.length > 8) {
         setShowMoreBtn(true);

@@ -45,11 +45,11 @@ const History = () => {
       const data = await res.json();
       if (data?.success) {
         setLoading(false);
-        alert(data?.message);
+        // alert(data?.message);
         getAllBookings();
       } else {
         setLoading(false);
-        alert(data?.message);
+        // alert(data?.message);
       }
     } catch (error) {
       console.log(error);

@@ -89,7 +89,7 @@ const Header = () => {
               </li>
             </ul>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
-              <li className="bg-transparent  text-blue-700 font-semibold hover:text-white py-2 px-4  hover:border-transparent rounded">
+              <li className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                 {currentUser ? (
                   <Link to={`/profile/${currentUser.user_role === 1 ? "admin" : "user"}`}>
                     <img
@@ -147,19 +147,24 @@ const Header = () => {
           </li>
         </ul>
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none">
+        {currentUser ? (
           <li className="bg-transparent  text-blue-700 font-semibold hover:text-white py-2 px-4  hover:border-transparent rounded">
-            {currentUser ? (
-              <Link to={`/profile/${currentUser.user_role === 1 ? "admin" : "user"}`}>
+          <Link to={`/profile/${currentUser.user_role === 1 ? "admin" : "user"}`}>
                 <img
                   src={currentUser.avatar || defaultProfileImg}
                   alt={currentUser.username}
                   className="border w-10 h-10 border-black rounded-full"
                 />
               </Link>
+            </li>
+            
             ) : (
+              <li className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
               <Link to={`/login`}>Sign In / Register</Link>
+            </li>
+            
             )}
-          </li>
+         
         </ul>
       </nav>
     </header>

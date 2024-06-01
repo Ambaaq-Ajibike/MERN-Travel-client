@@ -33,13 +33,13 @@ const Signup = () => {
         delete formData.password;
         console.log(res, 'res');
        await addDoc(userCollectionRef, formData);
-        alert("Registration successful");
+        // alert("Registration successful");
         navigate("/login");
       } else {
-        alert("An error occured try again");
+        // alert("An error occured try again");
       }
     } catch (error) {
-      alert(error.message)
+      // alert(error.message)
       console.log(error);
     }
   };

@@ -105,7 +105,7 @@ const Booking = () => {
       bookingData.persons <= 0 ||
       bookingData.date === "" || bookingData.date == null
     ) {
-      alert("All fields are required!");
+      // alert("All fields are required!");
       return;
     }
     try {
@@ -114,11 +114,11 @@ const Booking = () => {
    const data = await addDoc(bookingCollectionRef, bookingData);
       if (data) {
         setLoading(false);
-        alert("Booked successfully");
+        // alert("Booked successfully");
         navigate(`/profile/${currentUser?.user_role === 1 ? "admin" : "user"}`);
       } else {
         setLoading(false);
-        alert("Error while booking, Pls try again");
+        // alert("Error while booking, Pls try again");
       }
     } catch (error) {
       console.log(error);
