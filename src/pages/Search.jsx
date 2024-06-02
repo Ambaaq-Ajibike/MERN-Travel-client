@@ -39,9 +39,17 @@ const Search = () => {
         const searchQuery = urlParams.toString();
         
         const query = searchQuery.split('=')[1];
-        let data = visaList.filter(x => x.category.toLowerCase() == query.toLowerCase());
-        if(data.length < 1) data =  citizenList.filter(x => x.category.toLowerCase() == query.toLowerCase());
-        if(data.length < 1) data =  ResidencyList.filter(x => x.category.toLowerCase() == query.toLowerCase());
+        let data = [];
+        if(query.toLowerCase() === "citizenship"){
+          data =  citizenList;
+        }
+       else if(query.toLowerCase() === "visa"){
+          data =  visaList;
+        }
+       else if(query.toLowerCase() === "residency"){
+          data =  visaList;
+        }
+        console.log(data, "data")
         setLoading(false);
         setAllPackages(data);
         if (data.length > 8) {

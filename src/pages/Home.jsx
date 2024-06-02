@@ -85,7 +85,8 @@ const Home = () => {
         <div className="w-full flex flex-wrap justify-center items-center gap-4 mt-8 p-4 bg-opacity-40 bg-white rounded-lg">
           <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
             <select onChange={(e) => setSearch(e.target.value)} className="outline-none w-full bg-transparent select-styles">
-              <option>VISA</option>
+              <option>Select</option>
+              <option>Visa</option>
               <option>CITIZENSHIP</option>
               <option>RESIDENCY</option>
             </select>

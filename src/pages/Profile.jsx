@@ -1,50 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  updateUserStart,
-  updateUserSuccess,
-  updateUserFailure,
-  logOutStart,
-  logOutSuccess,
-  logOutFailure,
-  deleteUserAccountStart,
-  deleteUserAccountSuccess,
-  deleteUserAccountFailure,
-} from "../redux/user/userSlice";
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
-import { app } from "../firebase";
+import { useEffect, useState } from "react";
+import { auth, db, storage } from "../firebase";
+import { getDocs, collection, updateDoc, doc } from "firebase/firestore";
 import MyBookings from "./user/MyBookings";
-import UpdateProfile from "./user/UpdateProfile";
-import MyHistory from "./user/MyHistory";
-
-import { auth, db } from "../firebase";
-import { getDocs, collection } from "firebase/firestore";
+import defaultProfileImg from "../assets/images/profile.png";
+import { FaInbox, FaLocationArrow, FaPhone } from "react-icons/fa";
 import {
-  signOut,
-} from "firebase/auth";
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "firebase/storage";
+
+const usersCollectionRef = collection(db, "appUsers");
+
 const Profile = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const fileRef = useRef(null);
-  const [currentUser, setCurrentUser] = useState({});
-  const [profilePhoto, setProfilePhoto] = useState(undefined);
-  const [photoPercentage, setPhotoPercentage] = useState(0);
-  const [activePanelId, setActivePanelId] = useState(1);
+  const [currentUser, setCurrentUser] = useState(null);
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    address: "",
-    phone: "",
-    avatar: "",
+    username: '',
+    email: '',
+    address: '',
+    phone: '',
+    image: ''
   });
 
-  const usersCollectionRef = collection(db, "appUsers");
+  const [activeTab, setActiveTab] = useState('update');
+
   const getUser = async () => {
     try {
       const data = await getDocs(usersCollectionRef);
@@ -59,6 +38,11 @@ const Profile = () => {
     }
   };
 
+
+const [email, setEmail] = useState("");
+const [username, setUserName] = useState("");
+const [phone, setPhone] = useState("");
+const [address, setAddress] = useState("");
   useEffect(() => {
     getUser();
 
@@ -68,176 +52,180 @@ const Profile = () => {
         email: currentUser.email,
         address: currentUser.address,
         phone: currentUser.phone,
-        avatar: currentUser.avatar,
+        image: currentUser.image
       });
+      setUserName(currentUser.username)
+      setEmail(currentUser.email)
+      setPhone(currentUser.phone)
+      setAddress(currentUser.address)
     }
   }, [currentUser]);
 
-  const handleProfilePhoto = (photo) => {
-    try {
-      dispatch(updateUserStart());
-      const storage = getStorage(app);
-      const photoname = new Date().getTime() + photo.name.replace(/\s/g, "");
-      const storageRef = ref(storage, `profile-photos/${photoname}`);
-      const uploadTask = uploadBytesResumable(storageRef, photo);
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = Math.floor(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setPhotoPercentage(progress);
-        },
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadUrl) => {
-            const res = await fetch(
-              `/api/user/update-profile-photo/${currentUser._id}`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": " application/json",
-                },
-                body: JSON.stringify({ avatar: downloadUrl }),
-              }
-            );
-            const data = await res.json();
-            if (data?.success) {
-              // alert(data?.message);
-              setFormData({ ...formData, avatar: downloadUrl });
-              dispatch(updateUserSuccess(data?.user));
-              setProfilePhoto(null);
-              return;
-            } else {
-              dispatch(updateUserFailure(data?.message));
-            }
-            dispatch(updateUserFailure(data?.message));
-            // alert(data?.message);
-          });
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
+  const uploadFile = () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/${imageUpload.name + Math.random()}`);
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        
+        setImageUrl(url);
+      });
+    });
   };
-
-  const handleLogout = async () => {
-    try {
-      const data = await  signOut(auth);
-      if (data) {
-        dispatch(logOutFailure("Logout successful"));
-        return;
-      }
-      dispatch(logOutSuccess());
-      navigate("/login");
-      // // alert(data?.message);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDeleteAccount = async (e) => {
+  const updateProfile = async (e) => {
     e.preventDefault();
-    const CONFIRM = confirm(
-      "Are you sure? The account will be permanently deleted!"
-    );
-    if (CONFIRM) {
-      try {
-        dispatch(deleteUserAccountStart());
-        const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-          method: "DELETE",
-        });
-        const data = await res.json();
-        if (data?.success === false) {
-          dispatch(deleteUserAccountFailure(data?.message));
-          // alert("Something went wrong!");
-          return;
-        }
-        dispatch(deleteUserAccountSuccess());
-        // alert(data?.message);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    try {
+      const userDoc = doc(db, "appUsers", currentUser.id);
+      
+    await updateDoc(userDoc, {
+      username: username,
+      email: email,
+      phone: phone,
+      address: address,
+      image: imageUrl,
+    });
+  } catch (error) {
+      console.error('Error updating document:', error);
+  }  
+    uploadFile()
   };
-
   return (
-    <div className="flex flex-col lg:flex-row w-full p-6 bg-gray-100">
-      {currentUser ? (
-        <>
-          <div className="w-full lg:w-1/3 bg-white rounded-lg shadow-md p-6">
-            <div className="flex flex-col items-center">
-              <img
-                className="h-32 w-32 rounded-full border-4 border-white"
-                src={formData.avatar || "/images/profile.png"}
-                alt="Profile"
-              />
-              <h3 className="mt-4 text-xl font-bold">{currentUser.username}</h3>
-              <p className="text-gray-600">{currentUser.email}</p>
-              <p className="text-gray-600">{currentUser.address}</p>
-              <p className="text-gray-600">{currentUser.phone}</p>
-              <button
-                className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg"
-                onClick={handleLogout}
-              >
-                Log Out
-              </button>
-              <input
-                type="file"
-                ref={fileRef}
-                className="hidden"
-                onChange={(e) => handleProfilePhoto(e.target.files[0])}
-              />
-              <button
-                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg"
-                onClick={() => fileRef.current.click()}
-              >
-                Change Profile Photo
-              </button>
-            </div>
-          </div>
-          <div className="w-full lg:w-2/3 mt-6 lg:mt-0 lg:ml-6 bg-white rounded-lg shadow-md p-6">
-            <nav className="mb-4">
-              <button
-                className={`mr-4 pb-2 ${activePanelId === 1 ? "border-b-4 border-blue-500" : ""
-                  }`}
-                onClick={() => setActivePanelId(1)}
-              >
-                My Bookings
-              </button>
-              <button
-                className={`mr-4 pb-2 ${activePanelId === 2 ? "border-b-4 border-blue-500" : ""
-                  }`}
-                onClick={() => setActivePanelId(2)}
-              >
-                Update Profile
-              </button>
-              <button
-                className={`pb-2 ${activePanelId === 3 ? "border-b-4 border-blue-500" : ""
-                  }`}
-                onClick={() => setActivePanelId(3)}
-              >
-                My History
-              </button>
-            </nav>
-            <div>
-              {activePanelId === 1 && <MyBookings />}
-              {activePanelId === 2 && <UpdateProfile />}
-              {activePanelId === 3 && <MyHistory />}
-            </div>
-          </div>
-        </>
-      ) : (
+    <div className="flex flex-col lg:flex-row h-screen bg-gray-100">
+      {/* Sidebar */}
+      <div className="w-full lg:w-1/4 bg-white p-6 shadow-md">
         <div className="text-center">
-          <p className="text-red-700">Please log in first</p>
-          <Link to="/login" className="text-blue-500 underline">
-            Go to Login
-          </Link>
+          <img
+            src={formData.avatar || defaultProfileImg}
+            alt="avatar"
+            className="mx-auto rounded-full w-24 h-24 lg:w-32 lg:h-32"
+          />
+          <h2 className="mt-4 text-xl font-semibold">{formData.username}</h2>
+          <p className="text-blue-500">CUSTOMER</p>
+          <div className="mt-4">
+            <button 
+              className="px-4 py-2 bg-blue-500 text-white rounded"
+              onClick={() => setActiveTab('update')}
+            >
+              Profile
+            </button>
+            <button 
+              className="ml-2 px-4 py-2 bg-gray-300 text-gray-700 rounded"
+              onClick={() => setActiveTab('bookings')}
+            >
+              My Bookings
+            </button>
+          </div>
         </div>
-      )}
+        <div className="mt-8">
+          <ul>
+            <li 
+              className="py-2 px-4 hover:bg-gray-200 cursor-pointer flex items-center gap-4 text-lg"
+            >
+              <FaInbox />
+              {formData.email}
+            </li>
+            <li 
+              className="py-2 px-4 hover:bg-gray-200 cursor-pointer flex items-center gap-4 text-lg"
+            >
+              <FaPhone />
+              {formData.phone}
+            </li>
+            <li 
+              className="py-2 px-4 hover:bg-gray-200 cursor-pointer flex items-center gap-4 text-lg"
+            >
+              <FaLocationArrow />
+              {formData.address}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="w-full lg:w-3/4 p-6">
+        <div className="bg-white p-6 shadow-md rounded">
+          <h2 className="text-2xl font-semibold mb-4">Your Info</h2>
+          <div className="flex space-x-4 mb-4">
+            <button
+              onClick={() => setActiveTab('update')}
+              className={`px-4 py-2 rounded ${activeTab === 'update' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+            >
+              Update
+            </button>
+            <button
+              onClick={() => setActiveTab('bookings')}
+              className={`px-4 py-2 rounded ${activeTab === 'bookings' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+            >
+              Bookings
+            </button>
+          </div>
+          {activeTab === 'update' && (
+            <form>
+              <div className="mb-4">
+                <label className="block text-gray-700">Name</label>
+                <input 
+                onChange={(e) => setUserName(e.target.value)}
+                  type="text" 
+                  id="username"
+                  defaultValue={formData.username} 
+                  className="w-full px-4 py-2 border rounded" 
+                  placeholder="Name" 
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Email address</label>
+                <input 
+                 onChange={(e) => setEmail(e.target.value)}
+                  id="email"
+                  type="email" 
+                  defaultValue={formData.email} 
+                  className="w-full px-4 py-2 border rounded" 
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Phone number</label>
+                <input 
+                 onChange={(e) => setPhone(e.target.value)}
+                  type="text" 
+                  id="phone"
+                  defaultValue={formData.phone} 
+                  className="w-full px-4 py-2 border rounded" 
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Address</label>
+                <input 
+                onChange={(e) => setAddress(e.target.value)}
+                  id="address"
+                  type="text" 
+                  defaultValue={formData.address} 
+                  className="w-full px-4 py-2 border rounded" 
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Profile Image</label>
+                <input 
+                 accept=".png, .jpg, .jpeg, .gif, image/png, image/jpeg, image/gif"
+                 onChange={(event) => {
+          setImageUpload(event.target.files[0]);
+        }}
+                  type="file" 
+                  className="w-full px-4 py-2 border rounded" 
+                />
+              </div>
+              <button 
+              onClick={updateProfile}
+                type="submit" 
+                className="px-4 py-2 bg-blue-500 text-white rounded"
+              >
+                Submit
+              </button>
+            </form>
+          )}
+          {activeTab === 'bookings' && <MyBookings />}
+        </div>
+      </div>
     </div>
   );
 };
