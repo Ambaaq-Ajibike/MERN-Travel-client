@@ -4,16 +4,27 @@ import { getDocs, collection, updateDoc, doc } from "firebase/firestore";
 import MyBookings from "./user/MyBookings";
 import defaultProfileImg from "../assets/images/profile.png";
 import { FaInbox, FaLocationArrow, FaPhone } from "react-icons/fa";
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from "firebase/storage";
-
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router";
 const usersCollectionRef = collection(db, "appUsers");
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  logOutStart,
+  logOutSuccess,
+  logOutFailure
+} from "../redux/user/userSlice";
 const Profile = () => {
+  const dispatch = useDispatch();
+  
   const [currentUser, setCurrentUser] = useState(null);
+  const [displayData, setDisplayData] = useState({
+    username: '',
+    email: '',
+    address: '',
+    phone: '',
+    image: ''
+  });
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -23,6 +34,8 @@ const Profile = () => {
   });
 
   const [activeTab, setActiveTab] = useState('update');
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
   const getUser = async () => {
     try {
@@ -38,15 +51,19 @@ const Profile = () => {
     }
   };
 
-
-const [email, setEmail] = useState("");
-const [username, setUserName] = useState("");
-const [phone, setPhone] = useState("");
-const [address, setAddress] = useState("");
   useEffect(() => {
     getUser();
+  }, []);
 
+  useEffect(() => {
     if (currentUser !== null) {
+      setDisplayData({
+        username: currentUser.username,
+        email: currentUser.email,
+        address: currentUser.address,
+        phone: currentUser.phone,
+        image: currentUser.image
+      });
       setFormData({
         username: currentUser.username,
         email: currentUser.email,
@@ -54,63 +71,73 @@ const [address, setAddress] = useState("");
         phone: currentUser.phone,
         image: currentUser.image
       });
-      setUserName(currentUser.username)
-      setEmail(currentUser.email)
-      setPhone(currentUser.phone)
-      setAddress(currentUser.address)
     }
   }, [currentUser]);
-
-  const [imageUpload, setImageUpload] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
 
   const uploadFile = () => {
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/${imageUpload.name + Math.random()}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        
         setImageUrl(url);
       });
     });
   };
+
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
       const userDoc = doc(db, "appUsers", currentUser.id);
-      
-    await updateDoc(userDoc, {
-      username: username,
-      email: email,
-      phone: phone,
-      address: address,
-      image: imageUrl,
-    });
-  } catch (error) {
+      uploadFile();
+      console.log(imageUrl);
+      await updateDoc(userDoc, {
+        username: formData.username,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        image: imageUrl || formData.image,
+      });
+      setDisplayData(formData);
+      if (imageUrl) {
+        setDisplayData({ ...formData, image: imageUrl });
+      }
+    } catch (error) {
       console.error('Error updating document:', error);
-  }  
-    uploadFile()
+    }
+   
   };
+const navigate = useNavigate();
+  const logout = async () => {
+    try {
+      dispatch(logOutStart());
+ await signOut(auth);
+      dispatch(logOutSuccess());
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="flex flex-col lg:flex-row h-screen bg-gray-100">
       {/* Sidebar */}
       <div className="w-full lg:w-1/4 bg-white p-6 shadow-md">
         <div className="text-center">
           <img
-            src={formData.avatar || defaultProfileImg}
+            src={displayData.image || defaultProfileImg}
             alt="avatar"
             className="mx-auto rounded-full w-24 h-24 lg:w-32 lg:h-32"
           />
-          <h2 className="mt-4 text-xl font-semibold">{formData.username}</h2>
+          <h2 className="mt-4 text-xl font-semibold">{displayData.username}</h2>
           <p className="text-blue-500">CUSTOMER</p>
           <div className="mt-4">
-            <button 
+            <button
               className="px-4 py-2 bg-blue-500 text-white rounded"
-              onClick={() => setActiveTab('update')}
+              onClick={() => logout()}
             >
-              Profile
+              Sign Out
             </button>
-            <button 
+            <button
               className="ml-2 px-4 py-2 bg-gray-300 text-gray-700 rounded"
               onClick={() => setActiveTab('bookings')}
             >
@@ -120,23 +147,23 @@ const [address, setAddress] = useState("");
         </div>
         <div className="mt-8">
           <ul>
-            <li 
+            <li
               className="py-2 px-4 hover:bg-gray-200 cursor-pointer flex items-center gap-4 text-lg"
             >
               <FaInbox />
-              {formData.email}
+              {displayData.email}
             </li>
-            <li 
+            <li
               className="py-2 px-4 hover:bg-gray-200 cursor-pointer flex items-center gap-4 text-lg"
             >
               <FaPhone />
-              {formData.phone}
+              {displayData.phone}
             </li>
-            <li 
+            <li
               className="py-2 px-4 hover:bg-gray-200 cursor-pointer flex items-center gap-4 text-lg"
             >
               <FaLocationArrow />
-              {formData.address}
+              {displayData.address}
             </li>
           </ul>
         </div>
@@ -161,62 +188,61 @@ const [address, setAddress] = useState("");
             </button>
           </div>
           {activeTab === 'update' && (
-            <form>
+            <form onSubmit={updateProfile}>
               <div className="mb-4">
                 <label className="block text-gray-700">Name</label>
-                <input 
-                onChange={(e) => setUserName(e.target.value)}
-                  type="text" 
+                <input
+                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  type="text"
                   id="username"
-                  defaultValue={formData.username} 
-                  className="w-full px-4 py-2 border rounded" 
-                  placeholder="Name" 
+                  value={formData.username}
+                  className="w-full px-4 py-2 border rounded"
+                  placeholder="Name"
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700">Email address</label>
-                <input 
-                 onChange={(e) => setEmail(e.target.value)}
+                <input
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   id="email"
-                  type="email" 
-                  defaultValue={formData.email} 
-                  className="w-full px-4 py-2 border rounded" 
+                  type="email"
+                  value={formData.email}
+                  className="w-full px-4 py-2 border rounded"
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700">Phone number</label>
-                <input 
-                 onChange={(e) => setPhone(e.target.value)}
-                  type="text" 
+                <input
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  type="text"
                   id="phone"
-                  defaultValue={formData.phone} 
-                  className="w-full px-4 py-2 border rounded" 
+                  value={formData.phone}
+                  className="w-full px-4 py-2 border rounded"
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700">Address</label>
-                <input 
-                onChange={(e) => setAddress(e.target.value)}
+                <input
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                   id="address"
-                  type="text" 
-                  defaultValue={formData.address} 
-                  className="w-full px-4 py-2 border rounded" 
+                  type="text"
+                  value={formData.address}
+                  className="w-full px-4 py-2 border rounded"
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700">Profile Image</label>
-                <input 
-                 accept=".png, .jpg, .jpeg, .gif, image/png, image/jpeg, image/gif"
-                 onChange={(event) => {
-          setImageUpload(event.target.files[0]);
-        }}
-                  type="file" 
-                  className="w-full px-4 py-2 border rounded" 
+                <input
+                  accept=".png, .jpg, .jpeg, .gif, image/png, image/jpeg, image/gif"
+                  onChange={(event) => {
+                    setImageUpload(event.target.files[0]);
+                  }}
+                  type="file"
+                  className="w-full px-4 py-2 border rounded"
                 />
               </div>
-              <button 
-              onClick={updateProfile}
-                type="submit" 
+              <button
+                type="submit"
                 className="px-4 py-2 bg-blue-500 text-white rounded"
               >
                 Submit
