@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import  { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginStart,
+  loginFailure,
+} from "../redux/user/userSlice.js";
+import SendEmail from "../email/SendEmail.jsx";
 
 const Signup = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -12,9 +19,12 @@ const Signup = () => {
     password: "",
     address: "",
     phone: "",
-    userId: ""
+    userId: "",
+    code: ""
   });
 
+  const { loading, error } = useSelector((state) => state.user);
+  useEffect(()=> localStorage.removeItem("persist:root"), []);
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -23,23 +33,39 @@ const Signup = () => {
   };
 
   const userCollectionRef = collection(db, "appUsers");
-
+  function generateRandomNumber(length) {
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      const digit = Math.floor(Math.random() * 10);
+      result += digit.toString();
+    }
+    return parseInt(result, 10);
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    dispatch(loginStart());
+    
     try {
+      let verficationCode = generateRandomNumber(5);
+      formData.code = verficationCode;
+     
       const res = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
 
       if (res?.user) {
         formData.userId = auth?.currentUser?.uid;
         delete formData.password;
         await addDoc(userCollectionRef, formData);
-        navigate("/login");
+        SendEmail(formData.email,  formData.username,  verficationCode);
+        navigate("/verifyemail");
       } else {
-        console.error("An error occurred, please try again");
+        dispatch(loginFailure("An error occurred, please try again"));
+        // console.error(");
       }
     } catch (error) {
-      console.error(error.message);
+      dispatch(loginFailure(error.message));
     }
+    localStorage.removeItem("persist:root")
   };
 
   return (
@@ -85,6 +111,7 @@ const Signup = () => {
                   type="password"
                   name="password"
                   id="password"
+                  minLength={5}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
@@ -116,12 +143,14 @@ const Signup = () => {
               <button
                 type="submit"
                 className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                disabled={loading}
               >
-                Sign up
+                {loading ? "Loading..." : "Sign up"}
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Have an account? <Link to="/login" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Login</Link>
               </p>
+              {error && <p className="text-sm text-red-600">{error}</p>}
             </form>
           </div>
         </div>

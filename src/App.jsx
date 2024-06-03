@@ -14,6 +14,7 @@ import Package from "./pages/Package";
 import RatingsPage from "./pages/RatingsPage";
 import Booking from "./pages/user/Booking";
 import Search from "./pages/Search";
+import EmailVerification from "./pages/EmailVerification";
 
 const App = () => {
   return (
@@ -21,12 +22,14 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/verifyemail" element={<EmailVerification />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/search" element={<Search />} />
         {/* user */}
         <Route path="/profile" element={<PrivateRoute />}>
           <Route path="user" element={<Profile />} />
+         
         </Route>
         {/* admin */}
         <Route path="/profile" element={<AdminRoute />}>

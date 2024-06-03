@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {
@@ -24,7 +24,7 @@ const Login = () => {
       [e.target.id]: e.target.value,
     });
   };
-
+  useEffect(()=> localStorage.removeItem("persist:root"), []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -74,6 +74,7 @@ const Login = () => {
                   name="password"
                   id="password"
                   placeholder="••••••••"
+                  minLength={5}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                   onChange={handleChange}
