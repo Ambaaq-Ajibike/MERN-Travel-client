@@ -6,6 +6,7 @@ import { auth, db } from "../firebase";
 import SendEmail from "../email/SendEmail.jsx";
 
 const Signup = () => {
+const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -35,6 +36,7 @@ const Signup = () => {
     return parseInt(result, 10);
   }
   const handleSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
     try {
       let verficationCode = generateRandomNumber(5);
@@ -47,14 +49,16 @@ const Signup = () => {
         delete formData.password;
         await addDoc(userCollectionRef, formData);
         SendEmail(formData.email,  formData.username,  verficationCode);
+        setLoading(false)
         navigate("/verifyemail");
       } else {
         // console.error(");
       }
     } catch (error) {
+      setLoading(false)
       console.log(error)
     }
-    localStorage.removeItem("persist:root")
+    setLoading(false);
   };
 
   return (
@@ -132,8 +136,9 @@ const Signup = () => {
               <button
                 type="submit"
                 className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                disabled={loading}
               >
-            Sign up
+              {loading ? "Loading..." : "Sign up"}
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Have an account? <Link to="/login" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Login</Link>
