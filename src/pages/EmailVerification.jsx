@@ -6,9 +6,9 @@ import { db} from "../firebase.js";
 
 const EmailVerification = () => {
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.user);
 const [code, setCode] = useState("");
 const [codeError, setCodeError] = useState(null);
+const [loading, setLoading] = useState(false);
 const usersCollectionRef = collection(db, "appUsers");
 
 useEffect(()=> localStorage.removeItem("persist:root"), []);
@@ -20,9 +20,7 @@ const getUser = async () => {
         id: doc.id,
       }));
       console.log(filteredData, "userssss");
-      const userdata = filteredData.filter(item => item.hasOwnProperty('code'));
-const user = userdata.find(x => x.code === code);
-      console.log(user, "user");
+const user = filteredData.find(x => x.code == code);
       if(user){
         return true;
       }
@@ -34,12 +32,15 @@ const user = userdata.find(x => x.code === code);
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
     const userCorrect = await getUser();
     if(userCorrect){
+        setLoading(false)
         navigate('/login')
     }
     e.preventDefault();
+    setLoading(false)
   }
 
   return (

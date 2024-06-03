@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import {
-  loginStart,
-  loginSuccess,
-  loginFailure,
-} from "../redux/user/userSlice.js";
-import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../firebase.js";
 
 const Login = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.user);
+  
+const [codeError, setCodeError] = useState(null);
+const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,16 +23,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(loginStart());
       const res = await signInWithEmailAndPassword(auth, formData.email, formData.password);
       if (res?.user) {
-        dispatch(loginSuccess(res?.user));
         navigate("/");
       } else {
-        dispatch(loginFailure("Invalid credentials"));
+        setLoading("Error, Pls try again")
       }
     } catch (error) {
-      dispatch(loginFailure(error.message));
+      setCodeError(error.message);
     }
   };
 
@@ -103,7 +96,7 @@ const Login = () => {
               >
                 {loading ? "Loading..." : "Sign in"}
               </button>
-              {error && <p className="text-sm text-red-600">{error}</p>}
+              {codeError && <p className="text-sm text-red-600">{codeError}</p>}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet? <Link to="/signup" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Sign up</Link>
               </p>

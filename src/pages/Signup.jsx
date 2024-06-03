@@ -3,15 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  loginStart,
-  loginFailure,
-} from "../redux/user/userSlice.js";
 import SendEmail from "../email/SendEmail.jsx";
 
 const Signup = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -23,7 +17,6 @@ const Signup = () => {
     code: ""
   });
 
-  const { loading, error } = useSelector((state) => state.user);
   useEffect(()=> localStorage.removeItem("persist:root"), []);
   const handleChange = (e) => {
     setFormData({
@@ -43,9 +36,6 @@ const Signup = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    dispatch(loginStart());
-    
     try {
       let verficationCode = generateRandomNumber(5);
       formData.code = verficationCode;
@@ -59,11 +49,10 @@ const Signup = () => {
         SendEmail(formData.email,  formData.username,  verficationCode);
         navigate("/verifyemail");
       } else {
-        dispatch(loginFailure("An error occurred, please try again"));
         // console.error(");
       }
     } catch (error) {
-      dispatch(loginFailure(error.message));
+      console.log(error)
     }
     localStorage.removeItem("persist:root")
   };
@@ -143,14 +132,12 @@ const Signup = () => {
               <button
                 type="submit"
                 className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                disabled={loading}
               >
-                {loading ? "Loading..." : "Sign up"}
+            Sign up
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Have an account? <Link to="/login" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Login</Link>
               </p>
-              {error && <p className="text-sm text-red-600">{error}</p>}
             </form>
           </div>
         </div>
