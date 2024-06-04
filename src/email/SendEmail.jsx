@@ -1,7 +1,7 @@
 let SendEmail = async (clientEmail, clientName, code) => {
   const url = 'https://api.sendinblue.com/v3/smtp/email';
   const apiKey = import.meta.env.VITE_SENDINBLUE_API_KEY; // Use the API key from environment variables
-
+console.log(apiKey, "apiKey");
   const emailData = {
     sender: { email: 'contact@200travels.com', name: '200Travel' },
     to: [{ email: clientEmail, name: clientName }],
