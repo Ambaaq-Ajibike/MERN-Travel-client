@@ -14,7 +14,7 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [allPackages, setAllPackages] = useState([]);
   const [showMoreBtn, setShowMoreBtn] = useState(false);
-  //   console.log(listings);
+  //   //console.log(listings);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -49,7 +49,7 @@ const Search = () => {
        else if(query.toLowerCase() === "residency"){
           data =  visaList;
         }
-        console.log(data, "data")
+        //console.log(data, "data")
         setLoading(false);
         setAllPackages(data);
         if (data.length > 8) {
@@ -58,7 +58,7 @@ const Search = () => {
           setShowMoreBtn(false);
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
     fetchAllPackages();

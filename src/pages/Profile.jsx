@@ -89,7 +89,7 @@ const Profile = () => {
     try {
       const userDoc = doc(db, "appUsers", currentUser.id);
       uploadFile();
-      console.log(imageUrl);
+      //console.log(imageUrl);
       await updateDoc(userDoc, {
         username: formData.username,
         email: formData.email,

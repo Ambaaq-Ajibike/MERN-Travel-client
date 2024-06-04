@@ -88,7 +88,7 @@ const UpdateProfile = () => {
       // alert(data?.message);
       return;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -130,7 +130,7 @@ const UpdateProfile = () => {
       });
       return;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

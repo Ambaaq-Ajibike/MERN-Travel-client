@@ -21,7 +21,7 @@ const MyBookings = () => {
         ...doc.data()
       }));
       filteredData =  filteredData.filter(x => x.buyerId == auth?.currentUser?.uid);
-      console.log(filteredData);
+      //console.log(filteredData);
       if (filteredData) {
         setCurrentBookings(filteredData);
         setLoading(false);
@@ -31,7 +31,7 @@ const MyBookings = () => {
         setError(data?.message);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -58,7 +58,7 @@ const MyBookings = () => {
   //       // alert(data?.message);
   //     }
   //   } catch (error) {
-  //     console.log(error);
+  //     //console.log(error);
   //   }
   // };
 

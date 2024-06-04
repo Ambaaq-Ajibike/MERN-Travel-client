@@ -26,7 +26,7 @@ const AllBookings = () => {
         setError(data?.message);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -53,7 +53,7 @@ const AllBookings = () => {
         // alert(data?.message);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

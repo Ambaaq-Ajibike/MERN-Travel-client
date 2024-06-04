@@ -70,7 +70,7 @@ const Booking = () => {
         setLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -121,7 +121,7 @@ const Booking = () => {
         // alert("Error while booking, Pls try again");
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       setLoading(false);
     }
   };

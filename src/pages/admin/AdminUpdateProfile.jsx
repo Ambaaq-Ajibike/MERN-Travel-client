@@ -85,7 +85,7 @@ const AdminUpdateProfile = () => {
       // alert(data?.message);
       return;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -127,7 +127,7 @@ const AdminUpdateProfile = () => {
       });
       return;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

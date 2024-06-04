@@ -25,7 +25,7 @@ const MyHistory = () => {
         setError(data?.message);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -52,7 +52,7 @@ const MyHistory = () => {
         // alert(data?.message);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

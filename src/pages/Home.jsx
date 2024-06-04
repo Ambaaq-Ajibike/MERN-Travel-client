@@ -26,7 +26,7 @@ const Home = () => {
       setLoading(false);
      
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -34,7 +34,7 @@ const Home = () => {
     try {
       setResidency(ResidencyList);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -42,7 +42,7 @@ const Home = () => {
     try {
       setcitizenship(citizenList);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

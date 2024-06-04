@@ -29,7 +29,7 @@ const AllPackages = () => {
         // alert(data?.message || "Something went wrong!");
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -48,7 +48,7 @@ const AllPackages = () => {
       getPackages();
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

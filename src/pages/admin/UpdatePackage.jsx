@@ -38,7 +38,7 @@ const UpdatePackage = () => {
       const res = await fetch(`/api/package/get-package-data/${params?.id}`);
       const data = await res.json();
       if (data?.success) {
-        // console.log(data);
+        // //console.log(data);
         setFormData({
           packageName: data?.packageData?.packageName,
           packageDescription: data?.packageData?.packageDescription,
@@ -58,7 +58,7 @@ const UpdatePackage = () => {
         // alert(data?.message || "Something went wrong!");
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
   useEffect(() => {
@@ -188,7 +188,7 @@ const UpdatePackage = () => {
       // setImages([]);
       navigate(`/package/${params?.id}`);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 

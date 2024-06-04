@@ -86,7 +86,7 @@ const Package = () => {
         setLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -100,7 +100,7 @@ const Package = () => {
       const data = await res.json();
       setRatingGiven(data?.given);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

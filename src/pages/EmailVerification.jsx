@@ -18,7 +18,7 @@ const getUser = async () => {
         ...doc.data(),
         id: doc.id,
       }));
-      console.log(filteredData, "userssss");
+      //console.log(filteredData, "userssss");
 const user = filteredData.find(x => x.code == code);
       if(user){
         return true;

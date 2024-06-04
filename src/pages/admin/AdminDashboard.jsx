@@ -71,11 +71,11 @@ const AdminDashboard = () => {
           const progress = Math.floor(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
-          //   console.log(progress);
+          //   //console.log(progress);
           setPhotoPercentage(progress);
         },
         (error) => {
-          console.log(error);
+          //console.log(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadUrl) => {
@@ -105,7 +105,7 @@ const AdminDashboard = () => {
         }
       );
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -122,7 +122,7 @@ const AdminDashboard = () => {
       navigate("/login");
       // alert(data?.message);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

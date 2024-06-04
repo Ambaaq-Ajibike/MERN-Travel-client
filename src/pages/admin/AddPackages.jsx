@@ -130,7 +130,7 @@ const AddPackages = () => {
     if (formData.packageOffer === false) {
       setFormData({ ...formData, packageDiscountPrice: 0 });
     }
-    // console.log(formData);
+    // //console.log(formData);
     try {
       setLoading(true);
       setError(false);
@@ -167,7 +167,7 @@ const AddPackages = () => {
       });
       setImages([]);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
