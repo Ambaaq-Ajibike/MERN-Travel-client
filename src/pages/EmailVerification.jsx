@@ -11,7 +11,6 @@ const [codeError, setCodeError] = useState(null);
 const [loading, setLoading] = useState(false);
 const usersCollectionRef = collection(db, "appUsers");
 
-useEffect(()=> localStorage.removeItem("persist:root"), []);
 const getUser = async () => {
     try {
       const data = await getDocs(usersCollectionRef);

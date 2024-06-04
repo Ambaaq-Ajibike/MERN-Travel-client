@@ -16,7 +16,7 @@ import {
 } from "../redux/user/userSlice";
 const Profile = () => {
   const dispatch = useDispatch();
-  
+  const { profileCurrentUser, loading, error } = useSelector((state) => state.user);
   const [currentUser, setCurrentUser] = useState(null);
   const [displayData, setDisplayData] = useState({
     username: '',
@@ -109,6 +109,7 @@ const Profile = () => {
 const navigate = useNavigate();
   const logout = async () => {
     try {
+      localStorage.setItem("isUserLoggedIn", false);
       dispatch(logOutStart());
  await signOut(auth);
       dispatch(logOutSuccess());

@@ -2,10 +2,16 @@ import  { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase.js";
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from "../redux/user/userSlice.js";
 const Login = () => {
+  const { stateLoading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
 const [codeError, setCodeError] = useState(null);
 const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -19,17 +25,23 @@ const [loading, setLoading] = useState(false);
       [e.target.id]: e.target.value,
     });
   };
-  useEffect(()=> localStorage.removeItem("persist:root"), []);
   const handleSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
     try {
+      dispatch(loginStart());
       const res = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      localStorage.setItem("isUserLoggedIn", true);
       if (res?.user) {
-        navigate("/");
+        dispatch(loginSuccess("Login success"));
+        navigate("/profile/user");
       } else {
-        setLoading("Error, Pls try again")
+        dispatch(loginFailure("Message"));
+        setLoading(false)
+        setCodeError("Error, Pls try again")
       }
     } catch (error) {
+      dispatch(loginFailure(error.message));
       setCodeError(error.message);
     }
   };

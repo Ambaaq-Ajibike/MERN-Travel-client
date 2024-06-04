@@ -7,6 +7,8 @@ import SendEmail from "../email/SendEmail.jsx";
 
 const Signup = () => {
 const [loading, setLoading] = useState(false);
+const [passwordError, setPasswordError] = useState(null);  
+const [codeError, setCodeError] = useState(null);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -17,9 +19,32 @@ const [loading, setLoading] = useState(false);
     userId: "",
     code: ""
   });
-
-  useEffect(()=> localStorage.removeItem("persist:root"), []);
+  
+  function validatePassword(password) {
+    const hasUppercase = password.toLowerCase() !== password;
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[@$!%*?&]/.test(password);
+    const hasMinimumLength = password.length >= 5;
+    if(!hasUppercase){
+      return "Password must have upper case";
+    }
+    if(!hasNumber){
+      return "Password must contain at least one digit";
+    }
+    if(!hasSpecialChar){
+      return "Password must contain at least one special character";
+    }
+    if(!hasMinimumLength){
+      return "Password length must not be less than 5";
+    }
+    return '';
+  }
+  
   const handleChange = (e) => {
+    if(e.target.id == "password"){
+     const passwordMessage =  validatePassword(e.target.value);
+      setPasswordError(passwordMessage)
+    }
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
@@ -52,11 +77,11 @@ const [loading, setLoading] = useState(false);
         setLoading(false)
         navigate("/verifyemail");
       } else {
-        // console.error(");
+        setCodeError("Error while logging in");
       }
     } catch (error) {
       setLoading(false)
-      console.log(error)
+      setCodeError(error.message)
     }
     setLoading(false);
   };
@@ -110,6 +135,7 @@ const [loading, setLoading] = useState(false);
                   required
                   onChange={handleChange}
                 />
+                {(passwordError) && <p className="text-sm text-red-600">{passwordError}</p>}
               </div>
               <div>
                 <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
@@ -140,6 +166,7 @@ const [loading, setLoading] = useState(false);
               >
               {loading ? "Loading..." : "Sign up"}
               </button>
+              {codeError && <p className="text-sm text-red-600">{codeError}</p>}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Have an account? <Link to="/login" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Login</Link>
               </p>
