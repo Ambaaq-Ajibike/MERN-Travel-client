@@ -78,6 +78,7 @@ const [codeError, setCodeError] = useState(null);
         navigate("/verifyemail");
       } else {
         setCodeError("Error while logging in");
+        setLoading(false)
       }
     } catch (error) {
       setLoading(false)

@@ -34,6 +34,7 @@ const [loading, setLoading] = useState(false);
       localStorage.setItem("isUserLoggedIn", true);
       if (res?.user) {
         dispatch(loginSuccess("Login success"));
+        setLoading(false)
         navigate("/profile/user");
       } else {
         dispatch(loginFailure("Message"));
@@ -41,6 +42,7 @@ const [loading, setLoading] = useState(false);
         setCodeError("Error, Pls try again")
       }
     } catch (error) {
+      setLoading(false)
       dispatch(loginFailure(error.message));
       setCodeError(error.message);
     }
