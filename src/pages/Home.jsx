@@ -9,6 +9,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {citizenList, visaList, ResidencyList} from './data'
 import PackageCard from "./PackageCard";
 import { useNavigate } from "react-router";
+import WhatsAppButton from "./components/WhatsApp";
 // import {Carousel} from "../pages/components/Carousel";
 
 const Home = () => {
@@ -76,10 +77,10 @@ const Home = () => {
       </Carousel>
 
       <div className="top-part w-full gap-2 flex flex-col items-center text-center p-4 absolute top-0 left-0 right-0">
-        <h1 className="text-white text-3xl md:text-6xl font-bold mb-2">
+        <h1 className="w-full text-white text-3xl md:text-6xl font-bold mb-2 ">
           Find Next Place To Visit
         </h1>
-        <h2 className="text-white text-sm md:text-lg font-semibold">
+        <h2 className="w-full text-white text-sm md:text-lg font-semibold ">
           Discover amazing places at exclusive deals
         </h2>
         <div className="w-full flex flex-wrap justify-center items-center gap-4 mt-8 p-4 bg-opacity-40 bg-white rounded-lg">
@@ -171,6 +172,7 @@ const Home = () => {
   
   <Footer />
 
+  <WhatsAppButton  phoneNumber=""  />
     </>
     
   );

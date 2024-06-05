@@ -6,8 +6,8 @@ import { auth, db } from "../firebase";
 import SendEmail from "../email/SendEmail.jsx";
 
 const Signup = () => {
-const [loading, setLoading] = useState(false);
-const [passwordError, setPasswordError] = useState(null);  
+  const [passwordError, setPasswordError] = useState(null);  
+  const [loading, setLoading] = useState(false);
 const [codeError, setCodeError] = useState(null);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

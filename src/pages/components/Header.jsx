@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import defaultProfileImg from "../../assets/images/profile.png";
 import { visaList, ResidencyList, citizenList } from "../data";
 import { useNavigate } from "react-router";
-
+import "../styles/Header.css"
+import { FaUser } from 'react-icons/fa';
 const Header = () => {
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
@@ -108,9 +109,9 @@ const Header = () => {
       )}
 
       <nav className="hidden md:flex flex-row items-center gap-4">
-        <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none">
+        <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none nav-font">
           <li className="dropdown">
-            <Link to="#">VISAS</Link>
+            <Link to="#">Visas</Link>
             <div className="dropdown-content">
               {visaList.map(item => (
                 <a key={item.id} onClick={() => handlePackageClick(item.id)}>
@@ -120,7 +121,7 @@ const Header = () => {
             </div>
           </li>
           <li className="dropdown">
-            <Link to="#">RESIDENCY</Link>
+            <Link to="#">Residency</Link>
             <div className="dropdown-content">
               {ResidencyList.map(item => (
                 <a key={item.id} onClick={() => handlePackageClick(item.id)}>
@@ -130,7 +131,7 @@ const Header = () => {
             </div>
           </li>
           <li className="dropdown">
-            <Link to="#">CITIZENSHIP</Link>
+            <Link to="#">Citizenship</Link>
             <div className="dropdown-content">
               {citizenList.map(item => (
                 <a key={item.id} onClick={() => handlePackageClick(item.id)}>
@@ -140,10 +141,10 @@ const Header = () => {
             </div>
           </li>
           <li className="hover:underline hover:scale-105 transition-all duration-150">
-            <Link to={`/about`}>PROOF OF FUNDS</Link>
+            <Link to={`/about`}>Proof Of Funds</Link>
           </li>
           <li className="hover:underline hover:scale-105 transition-all duration-150">
-            <Link to={`/about`}>OTHERS SERVICE</Link>
+            <Link to={`/about`}>Others Services</Link>
           </li>
         </ul>
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none">
@@ -159,8 +160,8 @@ const Header = () => {
             </li>
             
             ) : (
-              <li className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-              <Link to={`/login`}>Sign In / Register</Link>
+              <li className="hover:underline hover:scale-105 transition-all duration-150">
+              <Link className="user-login" to={`/login`}><FaUser/> Log In </Link>
             </li>
             
             )}

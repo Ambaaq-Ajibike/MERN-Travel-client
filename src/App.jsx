@@ -15,7 +15,6 @@ import RatingsPage from "./pages/RatingsPage";
 import Booking from "./pages/user/Booking";
 import Search from "./pages/Search";
 import EmailVerification from "./pages/EmailVerification";
-
 const App = () => {
   return (
     <BrowserRouter>

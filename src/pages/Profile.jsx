@@ -15,6 +15,8 @@ import {
   logOutFailure
 } from "../redux/user/userSlice";
 const Profile = () => {
+  const [submitLoading, setSubmitLoading] = useState(false);
+const [codeError, setCodeError] = useState(null);
   const dispatch = useDispatch();
   const { profileCurrentUser, loading, error } = useSelector((state) => state.user);
   const [currentUser, setCurrentUser] = useState(null);
@@ -33,7 +35,7 @@ const Profile = () => {
     image: ''
   });
 
-  const [activeTab, setActiveTab] = useState('update');
+  const [activeTab, setActiveTab] = useState('bookings');
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
@@ -75,33 +77,52 @@ const Profile = () => {
   }, [currentUser]);
 
   const uploadFile = () => {
-    if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/${imageUpload.name + Math.random()}`);
-    uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        setImageUrl(url);
-      });
+    return new Promise((resolve, reject) => {
+      if (!imageUpload) {
+        resolve(null);
+        return;
+      }
+  
+      const imageRef = ref(storage, `images/${imageUpload.name + Math.random()}`);
+      uploadBytes(imageRef, imageUpload)
+        .then((snapshot) => {
+          getDownloadURL(snapshot.ref)
+            .then((url) => {
+              console.log(url);
+              resolve(url);
+            })
+            .catch((error) => {
+              reject(error);
+            });
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   };
 
   const updateProfile = async (e) => {
     e.preventDefault();
+    setSubmitLoading(true);
     try {
+     const url =await uploadFile();     
+     setImageUrl(url);
       const userDoc = doc(db, "appUsers", currentUser.id);
-      uploadFile();
-      //console.log(imageUrl);
       await updateDoc(userDoc, {
         username: formData.username,
         email: formData.email,
         phone: formData.phone,
         address: formData.address,
-        image: imageUrl || formData.image,
+        image: url || formData.image,
       });
+      setSubmitLoading(false);
       setDisplayData(formData);
       if (imageUrl) {
         setDisplayData({ ...formData, image: imageUrl });
       }
     } catch (error) {
+      setSubmitLoading(false);
+      setCodeError(error.message);
       console.error('Error updating document:', error);
     }
    
@@ -152,19 +173,20 @@ const navigate = useNavigate();
               className="py-2 px-4 hover:bg-gray-200 cursor-pointer flex items-center gap-4 text-lg"
             >
               <FaInbox />
-              {displayData.email}
+              
+             <p className="break-words" style={{width: "80%"}}>{displayData.email}</p> 
             </li>
             <li
               className="py-2 px-4 hover:bg-gray-200 cursor-pointer flex items-center gap-4 text-lg"
             >
               <FaPhone />
-              {displayData.phone}
+              <p className="break-words" style={{width: "80%"}}>{displayData.phone}</p> 
             </li>
             <li
               className="py-2 px-4 hover:bg-gray-200 cursor-pointer flex items-center gap-4 text-lg"
             >
               <FaLocationArrow />
-              {displayData.address}
+              <p className="break-words" style={{width: "80%"}}>{displayData.address}</p> 
             </li>
           </ul>
         </div>
@@ -175,18 +197,19 @@ const navigate = useNavigate();
         <div className="bg-white p-6 shadow-md rounded">
           <h2 className="text-2xl font-semibold mb-4">Your Info</h2>
           <div className="flex space-x-4 mb-4">
-            <button
-              onClick={() => setActiveTab('update')}
-              className={`px-4 py-2 rounded ${activeTab === 'update' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            >
-              Update
-            </button>
-            <button
+          <button
               onClick={() => setActiveTab('bookings')}
               className={`px-4 py-2 rounded ${activeTab === 'bookings' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
             >
               Bookings
             </button>
+            <button
+              onClick={() => setActiveTab('update')}
+              className={`px-4 py-2 rounded ${activeTab === 'update' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+            >
+              Update Profile
+            </button>
+           
           </div>
           {activeTab === 'update' && (
             <form onSubmit={updateProfile}>
@@ -246,8 +269,9 @@ const navigate = useNavigate();
                 type="submit"
                 className="px-4 py-2 bg-blue-500 text-white rounded"
               >
-                Submit
+               {submitLoading ? "Loading..." : "Submit"} 
               </button>
+              {codeError && <p className="text-sm text-red-600">{codeError}</p>}
             </form>
           )}
           {activeTab === 'bookings' && <MyBookings />}

@@ -1,0 +1,9 @@
+.nav-font{
+    font-size: 14px;
+}
+.user-login{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 20px;
+}
