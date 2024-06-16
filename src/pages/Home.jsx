@@ -6,7 +6,7 @@ import "./styles/Home.css";
 import Footer from "./components/Footer";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {citizenList, visaList, ResidencyList} from './data'
+import {countryCitizenList, countryVisaList, countryResidencyList} from './data'
 import PackageCard from "./PackageCard";
 import { useNavigate } from "react-router";
 import WhatsAppButton from "./components/WhatsApp";
@@ -23,7 +23,7 @@ const Home = () => {
   const getvisa = async () => {
     try {
       
-      setvisa(visaList);
+      setvisa(countryVisaList);
       setLoading(false);
      
     } catch (error) {
@@ -33,7 +33,7 @@ const Home = () => {
 
   const getResidency = async () => {
     try {
-      setResidency(ResidencyList);
+      setResidency(countryResidencyList);
     } catch (error) {
       //console.log(error);
     }
@@ -41,7 +41,7 @@ const Home = () => {
 
   const getcitizenship = async () => {
     try {
-      setcitizenship(citizenList);
+      setcitizenship(countryCitizenList);
     } catch (error) {
       //console.log(error);
     }

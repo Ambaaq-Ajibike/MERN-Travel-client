@@ -47,7 +47,7 @@ const Search = () => {
           data =  visaList;
         }
        else if(query.toLowerCase() === "residency"){
-          data =  visaList;
+          data =  ResidencyList;
         }
         //console.log(data, "data")
         setLoading(false);

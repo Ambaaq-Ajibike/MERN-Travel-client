@@ -7,6 +7,7 @@ export const citizenList = [
     packageTotalRatings: 5,
     packageRating: 4,
     category: 'citizen',
+    country: 'us',
     packagePrice: 3000
   },
   {
@@ -174,3 +175,131 @@ export const visaList = [
       packagePrice: 99000
     },
   ];
+
+
+export const countryCitizenList = [
+  {
+    id: 21,
+    packageImage: '/images/saint_kits_and_nevis.jpg',
+    packageName: 'United State of America',
+    packageDescription: 'For short-term leisure and sightseeing visits',
+    packageTotalRatings: 5,
+    packageRating: 4,
+    category: 'citizen'
+    
+  },
+  {
+    id: 22,
+    packageImage: '/images/antigua_and_barbuda.jpg',
+    packageName: 'United Kingdom',
+    packageDescription: 'For short-term leisure and sightseeing visits',
+    packageTotalRatings: 5,
+    packageRating: 5,
+    category: 'citizen'
+  },
+  {
+    id: 23,
+    packageImage: '/images/saint_lucia.jpg',
+    packageName: 'China',
+    packageDescription: 'For short-term leisure and sightseeing visits',
+    packageTotalRatings: 5,
+    packageRating: 5,
+    category: 'citizen'
+  },
+  {
+    id: 24,
+    packageImage: '/images/us_citizenship.jpg',
+    packageName: 'Zimbabwe',
+    packageDescription: 'For short-term leisure and sightseeing visits',
+    packageTotalRatings: 5,
+    packageRating: 5,
+    category: 'citizen'
+  },
+  {
+    id: 24,
+    packageImage: '/images/canada-citizenship.jpg',
+    packageName: 'United Arab Emirate ',
+    packageDescription: 'For short-term leisure and sightseeing visits',
+    packageTotalRatings: 5,
+    packageRating: 5,
+    category: 'citizen'
+  }
+];
+export const countryVisaList = [
+    {
+      id: 1,
+      packageImage: '/images/digital-nomad.jpg',
+      packageName: 'United Arab Emirate',
+      packageDescription: 'For short-term leisure and sightseeing visits',
+      packageTotalRatings: 5,
+      packageRating: 4,
+      category: 'visa',
+    },
+    {
+      id: 2,
+      packageImage: '/images/tourist.jpg',
+      packageName: 'United State of America',
+      packageDescription: 'For short-term leisure and sightseeing visits',
+      packageTotalRatings: 5,
+      packageRating: 5,
+      category: 'visa'
+    },
+    {
+      id: 3,
+      packageImage: '/images/study.jpg',
+      packageName: 'United Kingdom',
+      packageDescription: 'For short-term leisure and sightseeing visits',
+      packageTotalRatings: 5,
+      packageRating: 5,
+      category: 'visa',
+    },
+    {
+      id: 4,
+      packageImage: '/images/study.jpg',
+      packageName: 'Ghana',
+      packageDescription: 'For short-term leisure and sightseeing visits',
+      packageTotalRatings: 5,
+      packageRating: 5,
+      category: 'visa'
+    },
+  ];
+  export const countryResidencyList = [
+    {
+      id: 6,
+      packageImage: '/images/skilled-work.jpg',
+      packageName: 'United Kingdom',
+      packageDescription: 'For short-term leisure and sightseeing visits',
+      packageTotalRatings: 5,
+      packageRating: 4,
+      category: 'Residency',
+    },
+    {
+      id: 9,
+      packageImage: '/images/study.jpg',
+      packageName: 'Canada',
+      packageDescription: 'For short-term leisure and sightseeing visits',
+      packageTotalRatings: 5,
+      packageRating: 5,
+      category: 'Residency'
+    },
+    {
+      id: 10,
+      packageImage: '/images/business.jpg',
+      packageName: 'Dubai',
+      packageDescription: 'For short-term leisure and sightseeing visits',
+      packageTotalRatings: 5,
+      packageRating: 5,
+      category: 'Residency'
+    },
+    {
+      id: 11,
+      packageImage: '/images/malta.jpg',
+      packageName: 'Malta',
+      packageDescription: 'For short-term leisure and sightseeing visits',
+      packageTotalRatings: 5,
+      packageRating: 5,
+      category: 'Residency',
+    },
+  ];
+
+  

@@ -36,7 +36,8 @@ const PackageCard = ({ packageData }) => {
       )}
     </div>
     <p className="font-medium text-green-700 text-lg mt-2">
-      ${packageData.packagePrice}
+    {packageData.packagePrice &&  `$${packageData.packagePrice}`}
+     
     </p>
   </div>
 </div>
