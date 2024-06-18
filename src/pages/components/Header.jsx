@@ -132,7 +132,7 @@ const Header = () => {
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none">
         {currentUser ? (
           <li className="bg-transparent  text-blue-700 font-semibold hover:text-white py-2 px-4  hover:border-transparent rounded">
-          <Link to={`/profile/${currentUser.user_role === 1 ? "admin" : "user"}`}>
+          <Link to={`/profile/${localStorage.getItem("userRole") === "agent" ? "agent" : "user"}`}>
                 <img
                   src={currentUser.avatar || defaultProfileImg}
                   alt={currentUser.username}

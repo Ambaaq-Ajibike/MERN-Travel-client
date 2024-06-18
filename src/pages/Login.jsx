@@ -67,9 +67,11 @@ const [loading, setLoading] = useState(false);
         dispatch(loginSuccess("Login success"));
         setLoading(false)
         if(await getAgent() !== undefined){
+          localStorage.setItem("userRole", "agent");
           navigate("/profile/agent");
           return;
         }
+        localStorage.setItem("userRole", "user");
         navigate("/profile/user");
       } else {
         dispatch(loginFailure("Message"));
