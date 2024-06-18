@@ -26,7 +26,9 @@ const Home = () => {
     const countrySnapshot = await getDocs(countryCollection);
         const countryList = countrySnapshot.docs.map(x => ({ ...x.data(),
             id: x.id,
-          image: `country%2F${x.data().Name}`}));
+          image: `country%2F${x.data().Name}`,
+        url: `/search?country=${x.id}`
+        }));
         setvisa(countryList);
     } catch (error) {
       //console.log(error);

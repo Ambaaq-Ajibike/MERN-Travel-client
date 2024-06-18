@@ -1,7 +1,8 @@
 import  { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase.js";
+import { auth, db } from "../firebase.js";
+import { getDocs, query, where, collection, updateDoc, doc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loginStart,
@@ -9,6 +10,9 @@ import {
   loginFailure,
 } from "../redux/user/userSlice.js";
 const Login = () => {
+  
+const usersCollectionRef = collection(db, "appUsers");
+const agentsCollectionRef = collection(db, "appAgent");
   const { stateLoading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,7 +22,34 @@ const [loading, setLoading] = useState(false);
     email: "",
     password: "",
   });
+ let getUser = async () =>{
+  const q = query(usersCollectionRef, where("userId", "==", auth?.currentUser?.uid));
 
+      const querySnapshot = await getDocs(q);
+      const filteredData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+  
+      // Since we expect only one document, find the user (or handle if not found)
+      const user = filteredData[0];
+      return user;
+ }
+
+
+ let getAgent = async () =>{
+  const q = query(agentsCollectionRef, where("userId", "==", auth?.currentUser?.uid));
+
+      const querySnapshot = await getDocs(q);
+      const filteredData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+  
+      // Since we expect only one document, find the user (or handle if not found)
+      const user = filteredData[0];
+      return user;
+ }
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -35,6 +66,10 @@ const [loading, setLoading] = useState(false);
       if (res?.user) {
         dispatch(loginSuccess("Login success"));
         setLoading(false)
+        if(await getAgent() !== undefined){
+          navigate("/profile/agent");
+          return;
+        }
         navigate("/profile/user");
       } else {
         dispatch(loginFailure("Message"));

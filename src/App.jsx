@@ -15,6 +15,7 @@ import RatingsPage from "./pages/RatingsPage";
 import Booking from "./pages/user/Booking";
 import Search from "./pages/Search";
 import EmailVerification from "./pages/EmailVerification";
+import AgentProfile from "./pages/AgentProfile";
 const App = () => {
   return (
     <BrowserRouter>
@@ -28,6 +29,7 @@ const App = () => {
         {/* user */}
         <Route path="/profile" element={<PrivateRoute />}>
           <Route path="user" element={<Profile />} />
+          <Route path="agent" element={<AgentProfile />} />
          
         </Route>
         {/* admin */}

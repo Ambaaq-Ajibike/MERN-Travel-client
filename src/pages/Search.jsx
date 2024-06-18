@@ -51,7 +51,9 @@ const Search = () => {
             setCountry(snapshot.data().Name);
             data = snapshot.data().visas .map(x => ({ Name: x,
                 //id: x.id,
-              image: `visas%2F${x}`}));
+              image: `visas%2F${x}`, 
+            url: `/${x.id}?country=${query}`
+            }));
               console.log("stop", "data")
               console.log(data, "data")
           } else {

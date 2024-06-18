@@ -7,14 +7,14 @@ import { FaInbox, FaLocationArrow, FaPhone } from "react-icons/fa";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router";
-const usersCollectionRef = collection(db, "appUsers");
+const usersCollectionRef = collection(db, "appAgent");
 import { useDispatch, useSelector } from "react-redux";
 import {
   logOutStart,
   logOutSuccess,
   logOutFailure
 } from "../redux/user/userSlice";
-const Profile = () => {
+const AgentProfile = () => {
   const [submitLoading, setSubmitLoading] = useState(false);
 const [codeError, setCodeError] = useState(null);
   const dispatch = useDispatch();
@@ -23,16 +23,18 @@ const [codeError, setCodeError] = useState(null);
   const [displayData, setDisplayData] = useState({
     username: '',
     email: '',
-    address: '',
     phone: '',
-    image: ''
+    image: '',
+    agencyName: '',
+    agencyAddress: ''
   });
   const [formData, setFormData] = useState({
     username: '',
     email: '',
-    address: '',
     phone: '',
-    image: ''
+    image: '',
+    agencyName: '',
+    agencyAddress: ''
   });
 
   const [activeTab, setActiveTab] = useState('bookings');
@@ -67,16 +69,18 @@ const [codeError, setCodeError] = useState(null);
       setDisplayData({
         username: currentUser.username,
         email: currentUser.email,
-        address: currentUser.address,
         phone: currentUser.phone,
-        image: currentUser.image
+        image: currentUser.image,
+        agencyName: currentUser.agencyName,
+    agencyAddress:  currentUser.agencyAddress
       });
       setFormData({
         username: currentUser.username,
         email: currentUser.email,
-        address: currentUser.address,
         phone: currentUser.phone,
-        image: currentUser.image
+        image: currentUser.image,
+        agencyName: currentUser.agencyName,
+    agencyAddress:  currentUser.agencyAddress
       });
     }
   }, [currentUser]);
@@ -106,18 +110,20 @@ const [codeError, setCodeError] = useState(null);
     });
   };
 
-  const updateProfile = async (e) => {
+  const updateProfile = async (e) => {    
+    setCodeError('');
     e.preventDefault();
     setSubmitLoading(true);
     try {
      const url =await uploadFile();     
      setImageUrl(url);
-      const userDoc = doc(db, "appUsers", currentUser.id);
+      const userDoc = doc(db, "appAgent", currentUser.id);
       await updateDoc(userDoc, {
         username: formData.username,
         email: formData.email,
         phone: formData.phone,
-        address: formData.address,
+        agencyAddress: formData.agencyAddress,
+        agencyName: formData.agencyName,
         image: url || formData.image,
       });
       setSubmitLoading(false);
@@ -191,7 +197,7 @@ const navigate = useNavigate();
               className="py-2 px-4 hover:bg-gray-200 cursor-pointer flex items-center gap-4 text-lg"
             >
               <FaLocationArrow />
-              <p className="break-words" style={{width: "80%"}}>{displayData.address}</p> 
+              <p className="break-words" style={{width: "80%"}}>{displayData.agencyAddress}</p> 
             </li>
           </ul>
         </div>
@@ -250,12 +256,22 @@ const navigate = useNavigate();
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Address</label>
+                <label className="block text-gray-700">Agency Name</label>
                 <input
-                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, agencyName: e.target.value })}
                   id="address"
                   type="text"
-                  value={formData.address}
+                  value={formData.agencyName}
+                  className="w-full px-4 py-2 border rounded"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Agency Address</label>
+                <input
+                  onChange={(e) => setFormData({ ...formData, agencyAddress: e.target.value })}
+                  id="address"
+                  type="text"
+                  value={formData.agencyAddress}
                   className="w-full px-4 py-2 border rounded"
                 />
               </div>
@@ -286,4 +302,4 @@ const navigate = useNavigate();
   );
 };
 
-export default Profile;
+export default AgentProfile;
