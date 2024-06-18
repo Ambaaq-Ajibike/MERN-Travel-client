@@ -1,18 +1,19 @@
 import  { useEffect, useState } from "react";
 import "./styles/Home.css";
-// import { FaCalendar, FaStar } from "react-icons/fa";
-// import { FaRankingStar } from "react-icons/fa6";
-// import { LuBadgePercent } from "react-icons/lu";
+
+import {  collection, getDocs, } from 'firebase/firestore'; 
 import Footer from "./components/Footer";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {countryCitizenList, countryVisaList, countryResidencyList} from './data'
+import {countryCitizenList, countryResidencyList} from './data'
 import PackageCard from "./PackageCard";
 import { useNavigate } from "react-router";
 import WhatsAppButton from "./components/WhatsApp";
+import { db } from "../firebase";
 // import {Carousel} from "../pages/components/Carousel";
 
 const Home = () => {
+  const countryCollection = collection(db, 'country');
   const navigate = useNavigate();
   const [visa, setvisa] = useState([]);
   const [Residency, setResidency] = useState([]);
@@ -22,10 +23,11 @@ const Home = () => {
 
   const getvisa = async () => {
     try {
-      
-      setvisa(countryVisaList);
-      setLoading(false);
-     
+    const countrySnapshot = await getDocs(countryCollection);
+        const countryList = countrySnapshot.docs.map(x => ({ ...x.data(),
+            id: x.id,
+          image: `country%2F${x.data().Name}`}));
+        setvisa(countryList);
     } catch (error) {
       //console.log(error);
     }

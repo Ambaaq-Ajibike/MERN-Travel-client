@@ -4,26 +4,27 @@ import { FaClock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const PackageCard = ({ packageData }) => {
+  console.log(packageData);
   return (
-    <Link to={`/package/${packageData.id}`} className="w-max">
+    <Link to={`/search?country=${packageData.id}`} className="w-max">
      <div className="bg-white border flex flex-col rounded-lg shadow-md overflow-hidden" style={{    width: "90%"}}>
   <img
   style={{width: "22pc"}}
     className="w-full h-[190px] object-cover rounded-t-lg"
-    src={packageData.packageImage}
+    src={`https://firebasestorage.googleapis.com/v0/b/gooutfilter.appspot.com/o/${packageData.image}.jpg?alt=media&token=bfa49e65-3d50-4117-8f74-1965c38854b8`}
     alt="Package Image"
   />
   <div className="w-full flex flex-col mt-4 px-2">
     <p className="font-semibold text-xl capitalize">
-      {packageData.packageName}
+      {packageData.Name}
     </p>
     <div className="flex items-center mt-1 text-sm text-gray-500">
-      {packageData.packageTotalRatings > 0 && (
+      {5 > 0 && (
         <>
           <span className="flex items-center text-yellow-500">
             {/* Assuming Rating is a component that displays stars */}
             <Rating
-              value={packageData.packageRating}
+              value={5}
               size="small"
               readOnly
               precision={0.1}

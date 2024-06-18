@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PackageCard from "./PackageCard";
-import {visaList, citizenList, ResidencyList} from "./data";
-
+import {visaList, ResidencyList} from "./data";
+import { db } from "../firebase";
+import {  doc, getDoc, } from 'firebase/firestore'; 
 const Search = () => {
   const navigate = useNavigate();
   const [sideBarSearchData, setSideBarSearchData] = useState({
@@ -12,6 +13,7 @@ const Search = () => {
     order: "desc",
   });
   const [loading, setLoading] = useState(false);
+  const [country, setCountry] = useState("");
   const [allPackages, setAllPackages] = useState([]);
   const [showMoreBtn, setShowMoreBtn] = useState(false);
   //   //console.log(listings);
@@ -39,9 +41,23 @@ const Search = () => {
         const searchQuery = urlParams.toString();
         
         const query = searchQuery.split('=')[1];
+        const queryType = searchQuery.split('=')[0];
         let data = [];
-        if(query.toLowerCase() === "citizenship"){
-          data =  citizenList;
+        if(queryType === "country"){
+
+          const docRef = doc(db, 'country', query);
+          const snapshot = await getDoc(docRef);
+          if (snapshot.exists()) {
+            setCountry(snapshot.data().Name);
+            data = snapshot.data().visas .map(x => ({ Name: x,
+                //id: x.id,
+              image: `visas%2F${x}`}));
+              console.log("stop", "data")
+              console.log(data, "data")
+          } else {
+              console.log("No such document!");
+          }
+
         }
        else if(query.toLowerCase() === "visa"){
           data =  visaList;
@@ -116,7 +132,7 @@ const Search = () => {
   return (
     <div className="flex flex-col md:flex-row">
       <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
-        <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+        {/* <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
           <div className="flex items-center gap-2">
             <label className="whitespace-nowrap font-semibold">Search:</label>
             <input
@@ -160,12 +176,12 @@ const Search = () => {
           <button className="bg-slate-700 rounded-lg text-white p-3 uppercase hover:opacity-95">
             Search
           </button>
-        </form>
+        </form> */}
       </div>
       {/* ------------------------------------------------------------------------------- */}
       <div className="flex-1">
         <h1 className="text-xl font-semibold border-b p-3 text-slate-700 mt-5">
-          Package Results:
+          Package Results: {country}
         </h1>
         <div className="w-full p-5 flex flex-wrap gap-2">
           {!loading && allPackages.length === 0 && (

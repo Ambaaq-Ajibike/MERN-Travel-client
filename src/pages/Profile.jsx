@@ -25,14 +25,18 @@ const [codeError, setCodeError] = useState(null);
     email: '',
     address: '',
     phone: '',
-    image: ''
+    image: '',
+    agencyName: '',
+    agencyAddress: ''
   });
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     address: '',
     phone: '',
-    image: ''
+    image: '',
+    agencyName: '',
+    agencyAddress: ''
   });
 
   const [activeTab, setActiveTab] = useState('bookings');
@@ -64,14 +68,18 @@ const [codeError, setCodeError] = useState(null);
         email: currentUser.email,
         address: currentUser.address,
         phone: currentUser.phone,
-        image: currentUser.image
+        image: currentUser.image,
+        agencyName: currentUser.agencyName,
+    agencyAddress:  currentUser.agencyName
       });
       setFormData({
         username: currentUser.username,
         email: currentUser.email,
         address: currentUser.address,
         phone: currentUser.phone,
-        image: currentUser.image
+        image: currentUser.image,
+        agencyName: currentUser.agencyName,
+    agencyAddress:  currentUser.agencyName
       });
     }
   }, [currentUser]);

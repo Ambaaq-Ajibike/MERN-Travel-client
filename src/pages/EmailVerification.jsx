@@ -10,6 +10,7 @@ const [code, setCode] = useState("");
 const [codeError, setCodeError] = useState(null);
 const [loading, setLoading] = useState(false);
 const usersCollectionRef = collection(db, "appUsers");
+const agentsCollectionRef = collection(db, "appAgent");
 
 const getUser = async () => {
     try {
@@ -20,7 +21,13 @@ const getUser = async () => {
       }));
       //console.log(filteredData, "userssss");
 const user = filteredData.find(x => x.code == code);
-      if(user){
+const agents = await getDocs(agentsCollectionRef);
+const mappedAgents = agents.docs.map((doc) => ({
+  ...doc.data(),
+  id: doc.id,
+}));
+const agent = mappedAgents.find(x => x.code == code);
+      if(user || agent){
         return true;
       }
       setCodeError("Invalid code");
