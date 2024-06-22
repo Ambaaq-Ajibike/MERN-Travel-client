@@ -5,7 +5,6 @@ import {  collection, getDocs, } from 'firebase/firestore';
 import Footer from "./components/Footer";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {countryCitizenList, countryResidencyList} from './data'
 import PackageCard from "./PackageCard";
 import { useNavigate } from "react-router";
 import WhatsAppButton from "./components/WhatsApp";
@@ -14,10 +13,10 @@ import { db } from "../firebase";
 
 const Home = () => {
   const countryCollection = collection(db, 'country');
+  const citizenshipCollection = collection(db, 'citizenships');
   const navigate = useNavigate();
   const [visa, setvisa] = useState([]);
-  const [Residency, setResidency] = useState([]);
-  const [citizenship, setcitizenship] = useState([]);
+  const [citizenship, setCitizenship] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -35,25 +34,24 @@ const Home = () => {
     }
   };
 
-  const getResidency = async () => {
-    try {
-      setResidency(countryResidencyList);
-    } catch (error) {
-      //console.log(error);
-    }
-  };
 
   const getcitizenship = async () => {
     try {
-      setcitizenship(countryCitizenList);
-    } catch (error) {
-      //console.log(error);
-    }
+      const countrySnapshot = await getDocs(citizenshipCollection);
+          const citizenList = countrySnapshot.docs.map(x => ({ ...x.data(),
+              id: x.id,
+              Name: x.data().name,
+            image: `citizenship%2F${x.data().name}`,
+          url: `/package/citizenship/${x.id}`
+          }));
+          setCitizenship(citizenList);
+      } catch (error) {
+        //console.log(error);
+      }
   };
 
   useEffect(() => {
     getvisa();
-    getResidency();
     getcitizenship();
   }, []);
   
@@ -136,7 +134,7 @@ const Home = () => {
 
       <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center">
   {loading && <h1 className="text-center text-xl sm:text-2xl">Loading...</h1>}
-  {!loading && visa.length === 0 && Residency.length === 0 && citizenship.length === 0 && (
+  {!loading && visa.length === 0 && citizenship.length === 0 && (
     <h1 className="text-center text-xl sm:text-2xl">No Packages Yet!</h1>
   )}
   {!loading && visa.length > 0 && (
@@ -144,16 +142,6 @@ const Home = () => {
       <h1 className="text-xl sm:text-2xl font-semibold self-start">Visa</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4  xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
         {visa.map((packageData, i) => (
-          <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
-        ))}
-      </div>
-    </>
-  )}
-  {!loading && Residency.length > 0 && (
-    <>
-      <h1 className="text-xl sm:text-2xl font-semibold self-start">Residency</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4  xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
-        {Residency.map((packageData, i) => (
           <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
         ))}
       </div>

@@ -4,7 +4,6 @@ import { FaClock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const PackageCard = ({ packageData }) => {
-  console.log(packageData);
   return (
     <Link to={packageData.url} className="w-max">
      <div className="bg-white border flex flex-col rounded-lg shadow-md overflow-hidden" style={{    width: "90%"}}>

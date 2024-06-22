@@ -16,6 +16,7 @@ import Booking from "./pages/user/Booking";
 import Search from "./pages/Search";
 import EmailVerification from "./pages/EmailVerification";
 import AgentProfile from "./pages/AgentProfile";
+import CitizenshipPackage from "./pages/CitizenshipPackage";
 const App = () => {
   return (
     <BrowserRouter>
@@ -39,6 +40,7 @@ const App = () => {
         </Route>
         <Route path="/about" element={<About />} />
         <Route path="/package/:id" element={<Package />} />
+        <Route path="/package/citizenship/:id" element={<CitizenshipPackage />} />
         <Route path="/package/ratings/:id" element={<RatingsPage />} />
         {/* checking user auth before booking */}
         <Route path="/booking" element={<PrivateRoute />}>

@@ -54,8 +54,6 @@ const Search = () => {
               image: `visas%2F${x}`, 
             url: `/${x.id}?country=${query}`
             }));
-              console.log("stop", "data")
-              console.log(data, "data")
           } else {
               console.log("No such document!");
           }
