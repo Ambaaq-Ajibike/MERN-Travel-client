@@ -1,6 +1,7 @@
 import { useState } from "react";
 import UserSignup from "./components/UserSignUp";
 import AgentSignup from "./components/AgentSignup";
+import { blue } from "@mui/material/colors";
 
 const Signup = () => {
   const [activeTab, setActiveTab] = useState("user");
@@ -14,26 +15,22 @@ const Signup = () => {
           
           
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <div className="flex justify-start items-center mb-6">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mr-6">
-              Register as
-            </h1>
-            <div className="flex items-center space-x-2">
+          <div className="flex mt-6 justify-between">
               <button 
-                className={`px-4 py-2 ${activeTab === "user" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-600"}`}
+                className="inline-block align-baseline font-bold text-xl hover:text-[white]-800 cursor-pointer"
                 onClick={() => setActiveTab("user")}
+             style={{"color": "blue"}}
               >
-                User
+                Register as User
               </button>
-              <span className="text-gray-600 dark:text-gray-400">/</span>
               <button 
-                className={`px-4 py-2 ${activeTab === "agent" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-600"}`}
+                className="inline-block align-baseline font-bold text-xl hover:text-[white]-800 cursor-pointer"
                 onClick={() => setActiveTab("agent")}
+                style={{"color": "blue"}}
               >
-                Agent
+                Register as Agent
               </button>
             </div>
-          </div>
          
             {activeTab === "user" ? <UserSignup /> : <AgentSignup />}
           </div>
