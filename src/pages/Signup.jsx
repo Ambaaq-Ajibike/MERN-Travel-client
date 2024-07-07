@@ -1,7 +1,6 @@
 import { useState } from "react";
 import UserSignup from "./components/UserSignUp";
 import AgentSignup from "./components/AgentSignup";
-import { blue } from "@mui/material/colors";
 
 const Signup = () => {
   const [activeTab, setActiveTab] = useState("user");
