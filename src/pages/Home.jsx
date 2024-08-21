@@ -21,6 +21,7 @@ const Home = () => {
   const [search, setSearch] = useState("");
 
   const fetchData = useCallback(async () => {
+    setLoading(true);
     try {
       const [countrySnapshot, citizenSnapshot] = await Promise.all([
         getDocs(countryCollection),
@@ -52,7 +53,6 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    setLoading(true);
     fetchData();
   }, [fetchData]);
 
