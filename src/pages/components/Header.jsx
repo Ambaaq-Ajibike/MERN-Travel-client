@@ -83,10 +83,10 @@ const Header = () => {
                 </div>
               </li>
               <li className="hover:underline hover:scale-105 transition-all duration-150">
-                <Link to={`/about`}>PROOF OF FUNDS</Link>
+                <Link to={`/`}>PROOF OF FUNDS</Link>
               </li>
               <li className="hover:underline hover:scale-105 transition-all duration-150">
-                <Link to={`/about`}>OTHERS SERVICE</Link>
+                <Link to={`/`}>OTHERS SERVICE</Link>
               </li>
             </ul>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
