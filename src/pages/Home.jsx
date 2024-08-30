@@ -10,7 +10,7 @@ import WhatsAppButton from "./components/WhatsApp";
 import { db } from "../firebase";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-
+import { visas } from "../data/visas";
 const Home = () => {
   const countryCollection = collection(db, 'country');
   const citizenshipCollection = collection(db, 'citizenships');
@@ -27,14 +27,24 @@ const Home = () => {
         getDocs(countryCollection),
         getDocs(citizenshipCollection)
       ]);
-
+ 
       const countryList = countrySnapshot.docs.map(x => ({
         ...x.data(),
         id: x.id,
         image: `country%2F${x.data().Name}`,
         url: `/search?country=${x.id}`
       }));
-
+      const visaList = visas.map((x, index) => {
+        return {
+          id: index,
+          name: x.name,
+        url: `/search?visa=${index}`,
+        image: `country%2F${x.name}`,
+        packageTotalRatings: 5,
+        packagePrice: 100000,
+        moreContent:  `${x.types.length} Visa Types`
+      };
+      });
       const citizenList = citizenSnapshot.docs.map(x => ({
         ...x.data(),
         id: x.id,
@@ -43,7 +53,7 @@ const Home = () => {
         url: `/package/citizenship/${x.id}`
       }));
 
-      setVisa(countryList);
+      setVisa(visaList);
       setCitizenship(citizenList);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -151,14 +161,14 @@ const Home = () => {
             {!loading && visa.length > 0 && (
               <>
                 <h1 className="text-xl sm:text-2xl font-semibold self-start">Visa</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4  xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
+                <section id="visas" className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4  xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
                   {visa.map((packageData, i) => (
                     <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
                   ))}
-                </div>
+                </section>
               </>
             )}
-            {!loading && citizenship.length > 0 && (
+            {/* {!loading && citizenship.length > 0 && (
               <>
                 <h1 className="text-xl sm:text-2xl font-semibold self-start">Citizenship</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4  xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
@@ -167,7 +177,7 @@ const Home = () => {
                   ))}
                 </div>
               </>
-            )}
+            )} */}
           </div>
         </div>
       </div>

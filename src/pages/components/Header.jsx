@@ -53,14 +53,8 @@ const Header = () => {
             </button>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
               <li className="dropdown">
-                <Link to="#">VISAS</Link>
-                <div className="dropdown-content">
-                  {visaList.map(item => (
-                    <a key={item.id} onClick={() => handlePackageClick(item.id)}>
-                      {item.packageName}
-                    </a>
-                  ))}
-                </div>
+                <Link to="#visas">VISAS</Link>
+                
               </li>
               <li className="dropdown">
                 <Link to="#">RESIDENCY</Link>

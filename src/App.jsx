@@ -36,7 +36,7 @@ const App = () => {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/update-package/:id" element={<UpdatePackage />} />
         </Route>
-        <Route path="/package/:id" element={<Package />} />
+        <Route path="/package" element={<Package />} />
         <Route path="/package/citizenship/:id" element={<CitizenshipPackage />} />
         <Route path="/package/ratings/:id" element={<RatingsPage />} />
         {/* checking user auth before booking */}

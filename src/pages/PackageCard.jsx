@@ -15,7 +15,7 @@ const PackageCard = ({ packageData }) => {
   />
   <div className="w-full flex flex-col mt-4 px-2">
     <p className="font-semibold text-xl capitalize">
-      {packageData.Name}
+      {packageData.name}
     </p>
     <div className="flex items-center mt-1 text-sm text-gray-500">
       {5 > 0 && (
@@ -36,7 +36,7 @@ const PackageCard = ({ packageData }) => {
       )}
     </div>
     <p className="font-medium text-green-700 text-lg mt-2">
-    {packageData.packagePrice &&  `$${packageData.packagePrice}`}
+    {packageData.moreContent }
      
     </p>
   </div>
