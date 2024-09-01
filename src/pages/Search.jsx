@@ -16,7 +16,7 @@ const Search = () => {
         return {
           id: index,
           name: type.name,
-        url: `/package?visa=${query}?id=${index}`,
+        url: `/visa/${query}/${index}`,
         image: `visas%2F${type.name}`,
         packageTotalRatings: 5,
         moreContent:  `Processing Duration: ${type.processingDuration}`

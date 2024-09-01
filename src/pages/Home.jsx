@@ -1,69 +1,58 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import "./styles/Home.css";
-import { collection, getDocs } from 'firebase/firestore'; 
 import Footer from "./components/Footer";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import PackageCard from "./PackageCard";
 import { useNavigate } from "react-router";
 import WhatsAppButton from "./components/WhatsApp";
-import { db } from "../firebase";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { visas } from "../data/visas";
+import { residencies } from "../data/residency";
+
 const Home = () => {
-  const countryCollection = collection(db, 'country');
-  const citizenshipCollection = collection(db, 'citizenships');
   const navigate = useNavigate();
   const [visa, setVisa] = useState([]);
-  const [citizenship, setCitizenship] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [residency, setResidency] = useState([]);
   const [search, setSearch] = useState("");
 
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const [countrySnapshot, citizenSnapshot] = await Promise.all([
-        getDocs(countryCollection),
-        getDocs(citizenshipCollection)
-      ]);
- 
-      const countryList = countrySnapshot.docs.map(x => ({
-        ...x.data(),
-        id: x.id,
-        image: `country%2F${x.data().Name}`,
-        url: `/search?country=${x.id}`
-      }));
-      const visaList = visas.map((x, index) => {
-        return {
-          id: index,
-          name: x.name,
+  // Use useRef to keep a reference to the fetched data
+  const dataFetchedRef = useRef(false);
+
+  const fetchData = useCallback(() => {
+    const visaList = visas.map((x, index) => {
+      return {
+        id: index,
+        name: x.name,
         url: `/search?visa=${index}`,
         image: `country%2F${x.name}`,
         packageTotalRatings: 5,
         packagePrice: 100000,
         moreContent:  `${x.types.length} Visa Types`
       };
-      });
-      const citizenList = citizenSnapshot.docs.map(x => ({
-        ...x.data(),
-        id: x.id,
-        Name: x.data().name,
-        image: `citizenship%2F${x.data().name}`,
-        url: `/package/citizenship/${x.id}`
-      }));
-
-      setVisa(visaList);
-      setCitizenship(citizenList);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
-    }
+    });
+    const residencyList = residencies.map((x, index) => {
+      return {
+        id: index,
+        name: x.name,
+        url: `/residency/${index + 1}`,
+        image: `country%2F${x.image}`,
+        packageTotalRatings: 5,
+        packagePrice: 100000,
+        moreContent:  ``
+      };
+    });
+    setVisa(visaList);
+    setResidency(residencyList);
   }, []);
 
   useEffect(() => {
-    fetchData();
+    // Only fetch data if it hasn't been fetched before
+    if (!dataFetchedRef.current) {
+      fetchData();
+      dataFetchedRef.current = true;
+    }
   }, [fetchData]);
 
   const slides = [
@@ -100,10 +89,10 @@ const Home = () => {
           </Carousel>
 
           <div className="top-part w-full gap-2 flex flex-col items-center text-center p-4 absolute top-0 left-0 right-0">
-            <h1 className="w-full text-white text-3xl md:text-6xl font-bold mb-2 ">
+            <h1 className="w-full text-white text-3xl md:text-6xl font-bold mb-2">
               Find Next Place To Visit
             </h1>
-            <h2 className="w-full text-white text-sm md:text-lg font-semibold ">
+            <h2 className="w-full text-white text-sm md:text-lg font-semibold">
               Discover amazing places at exclusive deals
             </h2>
             <div className="w-full flex flex-wrap justify-center items-center gap-4 mt-8 p-4 bg-opacity-40 bg-white rounded-lg">
@@ -154,30 +143,29 @@ const Home = () => {
           </div>
 
           <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center">
-            {loading && <h1 className="text-center text-xl sm:text-2xl">Loading...</h1>}
-            {!loading && visa.length === 0 && citizenship.length === 0 && (
+            {visa.length === 0 && residency.length === 0 && (
               <h1 className="text-center text-xl sm:text-2xl">No Packages Yet!</h1>
             )}
-            {!loading && visa.length > 0 && (
+            {visa.length > 0 && (
               <>
                 <h1 className="text-xl sm:text-2xl font-semibold self-start">Visa</h1>
-                <section id="visas" className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4  xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
+                <div id="visas" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
                   {visa.map((packageData, i) => (
-                    <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
-                  ))}
-                </section>
-              </>
-            )}
-            {/* {!loading && citizenship.length > 0 && (
-              <>
-                <h1 className="text-xl sm:text-2xl font-semibold self-start">Citizenship</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4  xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
-                  {citizenship.map((packageData, i) => (
                     <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
                   ))}
                 </div>
               </>
-            )} */}
+            )}
+            {residency.length > 0 && (
+              <>
+                <h1 className="text-xl sm:text-2xl font-semibold self-start">Residencies</h1>
+                <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
+                  {residency.map((packageData, i) => (
+                    <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

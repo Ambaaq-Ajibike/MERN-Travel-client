@@ -8,13 +8,14 @@ import PrivateRoute from "./pages/Routes/PrivateRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminRoute from "./pages/Routes/AdminRoute";
 import UpdatePackage from "./pages/admin/UpdatePackage";
-import Package from "./pages/Package";
+import Visa from "./pages/Visa";
 import RatingsPage from "./pages/RatingsPage";
 import Booking from "./pages/user/Booking";
 import Search from "./pages/Search";
 import EmailVerification from "./pages/EmailVerification";
 import AgentProfile from "./pages/AgentProfile";
 import CitizenshipPackage from "./pages/CitizenshipPackage";
+import Residency from "./pages/Residency";
 const App = () => {
   return (
     <BrowserRouter>
@@ -36,7 +37,8 @@ const App = () => {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/update-package/:id" element={<UpdatePackage />} />
         </Route>
-        <Route path="/package" element={<Package />} />
+        <Route path="/visa/:visaId/:typeId" element={<Visa />} />
+        <Route path="/residency/:id" element={<Residency />} />
         <Route path="/package/citizenship/:id" element={<CitizenshipPackage />} />
         <Route path="/package/ratings/:id" element={<RatingsPage />} />
         {/* checking user auth before booking */}
