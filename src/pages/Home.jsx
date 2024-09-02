@@ -143,28 +143,26 @@ const Home = () => {
           </div>
 
           <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center">
-            {visa.length === 0 && residency.length === 0 && (
-              <h1 className="text-center text-xl sm:text-2xl">No Packages Yet!</h1>
-            )}
+          
             {visa.length > 0 && (
-              <>
+              <section id="visa">
                 <h1 className="text-xl sm:text-2xl font-semibold self-start">Visa</h1>
                 <div id="visas" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
                   {visa.map((packageData, i) => (
                     <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
                   ))}
                 </div>
-              </>
+              </section>
             )}
             {residency.length > 0 && (
-              <>
+              <section id="residency">
                 <h1 className="text-xl sm:text-2xl font-semibold self-start">Residencies</h1>
                 <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
                   {residency.map((packageData, i) => (
                     <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
                   ))}
                 </div>
-              </>
+              </section>
             )}
           </div>
         </div>

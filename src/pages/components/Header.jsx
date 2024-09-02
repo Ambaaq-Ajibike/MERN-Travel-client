@@ -52,21 +52,13 @@ const Header = () => {
               ✖
             </button>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
-              <li className="dropdown">
-                <Link to="#visas">VISAS</Link>
-                
+              <li>
+                <Link to="/#visas">VISAS</Link>                
               </li>
-              <li className="dropdown">
-                <Link to="#">RESIDENCY</Link>
-                <div className="dropdown-content">
-                  {ResidencyList.map(item => (
-                    <a key={item.id} onClick={() => handlePackageClick(item.id)}>
-                      {item.packageName}
-                    </a>
-                  ))}
-                </div>
+              <li>
+                <Link to="/#residency">RESIDENCY</Link>
               </li>
-              <li className="dropdown">
+              <li>
                 <Link to="#">CITIZENSHIP</Link>
                 <div className="dropdown-content">
                   {citizenList.map(item => (
@@ -104,17 +96,15 @@ const Header = () => {
 
       <nav className="hidden md:flex flex-row items-center gap-4">
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none nav-font">
-          <li className="dropdown">
-            <Link to="/search?searchTerm=visa">Visas</Link>
+          <li>
+            <Link to="/#visa">Visas</Link>
           
           </li>
-          <li className="dropdown">
-            <Link to="/search?searchTerm=residency">Residency</Link>
-            
+          <li>
+            <Link to="/#residency">Residency</Link>
           </li>
-          <li className="dropdown">
-            <Link to="/search?searchTerm=citizenship">Citizenship</Link>
-            
+          <li>
+            <Link to="/#citizenship">Citizenship</Link>
           </li>
           <li className="hover:underline hover:scale-105 transition-all duration-150">
             <Link to={`/about`}>Proof Of Funds</Link>
