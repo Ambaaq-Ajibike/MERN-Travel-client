@@ -16,6 +16,7 @@ import EmailVerification from "./pages/EmailVerification";
 import AgentProfile from "./pages/AgentProfile";
 import CitizenshipPackage from "./pages/CitizenshipPackage";
 import Residency from "./pages/Residency";
+import Citizenship from "./pages/Citizenship";
 const App = () => {
   return (
     <BrowserRouter>
@@ -39,6 +40,7 @@ const App = () => {
         </Route>
         <Route path="/visa/:visaId/:typeId" element={<Visa />} />
         <Route path="/residency/:id" element={<Residency />} />
+        <Route path="/citizenship/:id" element={<Citizenship />} />
         <Route path="/package/citizenship/:id" element={<CitizenshipPackage />} />
         <Route path="/package/ratings/:id" element={<RatingsPage />} />
         {/* checking user auth before booking */}

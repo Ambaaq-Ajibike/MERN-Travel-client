@@ -10,11 +10,13 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { visas } from "../data/visas";
 import { residencies } from "../data/residency";
+import { citizenships } from "../data/citizenship";
 
 const Home = () => {
   const navigate = useNavigate();
   const [visa, setVisa] = useState([]);
   const [residency, setResidency] = useState([]);
+  const [citizenship, setCitizenship] = useState([]);
   const [search, setSearch] = useState("");
 
   // Use useRef to keep a reference to the fetched data
@@ -43,8 +45,21 @@ const Home = () => {
         moreContent:  ``
       };
     });
+    const citizenshipList = citizenships.map((x, index) => {
+      return {
+        id: index,
+        name: x.title,
+        url: `/citizenship/${index + 1}`,
+        image: `country%2F${x.image}`,
+        packageTotalRatings: 5,
+        packagePrice: 100000,
+        moreContent:  ``
+      };
+    });
+
     setVisa(visaList);
     setResidency(residencyList);
+    setCitizenship(citizenshipList);
   }, []);
 
   useEffect(() => {
@@ -159,6 +174,16 @@ const Home = () => {
                 <h1 className="text-xl sm:text-2xl font-semibold self-start">Residencies</h1>
                 <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
                   {residency.map((packageData, i) => (
+                    <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
+                  ))}
+                </div>
+              </section>
+            )}
+            {citizenship.length > 0 && (
+              <section id="citizenship">
+                <h1 className="text-xl sm:text-2xl font-semibold self-start">Citizenship</h1>
+                <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
+                  {citizenship.map((packageData, i) => (
                     <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
                   ))}
                 </div>
