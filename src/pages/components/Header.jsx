@@ -1,20 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import {Link} from 'react-scroll'
 import { useSelector } from "react-redux";
 import defaultProfileImg from "../../assets/images/profile.png";
-import { visaList, ResidencyList, citizenList } from "../data";
-import { useNavigate } from "react-router";
 import "../styles/Header.css"
 import { FaUser } from 'react-icons/fa';
 const Header = () => {
-  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const handlePackageClick = (id) => {
-    navigate(`/package/${id}`);
-  };
-
   return (
     <header className="bg-white p-4 flex flex-col md:flex-row justify-between items-center relative">
       <div className="flex justify-between items-center w-full md:w-auto">
@@ -53,20 +45,13 @@ const Header = () => {
             </button>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
               <li>
-                <Link to="/#visas">VISAS</Link>                
+                <Link to="visa" spy={true} smooth={true} className="cursor-pointer">VISAS</Link>                
               </li>
               <li>
-                <Link to="/#residency">RESIDENCY</Link>
+                <Link to="residency" spy={true} smooth={true} className="cursor-pointer">RESIDENCY</Link>
               </li>
               <li>
-                <Link to="#">CITIZENSHIP</Link>
-                <div className="dropdown-content">
-                  {citizenList.map(item => (
-                    <a key={item.id} onClick={() => handlePackageClick(item.id)}>
-                      {item.packageName}
-                    </a>
-                  ))}
-                </div>
+                <Link to="citizenship" spy={true} smooth={true} className="cursor-pointer">CITIZENSHIP</Link>
               </li>
               <li className="hover:underline hover:scale-105 transition-all duration-150">
                 <Link to={`/`}>PROOF OF FUNDS</Link>
@@ -97,14 +82,14 @@ const Header = () => {
       <nav className="hidden md:flex flex-row items-center gap-4">
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none nav-font">
           <li>
-            <Link to="/#visa">Visas</Link>
+            <Link to="visa" spy={true} smooth={true} className="cursor-pointer">Visas</Link>
           
           </li>
           <li>
-            <Link to="/#residency">Residency</Link>
+            <Link to="residency" spy={true} smooth={true} className="cursor-pointer">Residency</Link>
           </li>
           <li>
-            <Link to="/#citizenship">Citizenship</Link>
+            <Link to="citizenship" spy={true} smooth={true} className="cursor-pointer">Citizenship</Link>
           </li>
           <li className="hover:underline hover:scale-105 transition-all duration-150">
             <Link to={`/about`}>Proof Of Funds</Link>
