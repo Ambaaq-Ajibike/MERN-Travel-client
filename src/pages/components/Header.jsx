@@ -1,5 +1,6 @@
 import { useState } from "react";
-import {Link} from 'react-scroll'
+import {Link, scroller } from 'react-scroll'
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import defaultProfileImg from "../../assets/images/profile.png";
 import "../styles/Header.css"
@@ -7,10 +8,34 @@ import { FaUser } from 'react-icons/fa';
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleScrollToSection = (section) => {
+    setMenuOpen(false);
+    if (location.pathname === '/') {
+      // Already on the landing page, just scroll to the section
+      scroller.scrollTo(section, {
+        smooth: true,
+        duration: 500,
+        offset: -70, // Adjust for your header height if needed
+      });
+    } else {
+      // Navigate to the landing page first, then scroll to the section
+      navigate('/');
+      setTimeout(() => {
+        scroller.scrollTo(section, {
+          smooth: true,
+          duration: 500,
+          offset: -70,
+        });
+      }, 100); // Give time for navigation to complete before scrolling
+    }
+  };
   return (
     <header className="bg-white p-4 flex flex-col md:flex-row justify-between items-center relative">
       <div className="flex justify-between items-center w-full md:w-auto">
-        <Link to="/">
+        <RouterLink to="/">
           <h1
             className="text-2xl md:text-4xl font-bold relative"
             style={{
@@ -29,7 +54,7 @@ const Header = () => {
               Dream Tours
             </span>
           </h1>
-        </Link>
+        </RouterLink>
 
         <button className="md:hidden block text-black" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? '✖' : '☰'}
@@ -44,21 +69,12 @@ const Header = () => {
               ✖
             </button>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
-              <li>
-                <Link to="visa" spy={true} smooth={true} className="cursor-pointer">VISAS</Link>                
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("visa")}>VISAS</li>
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("residency")}>RESIDENCY
               </li>
-              <li>
-                <Link to="residency" spy={true} smooth={true} className="cursor-pointer">RESIDENCY</Link>
-              </li>
-              <li>
-                <Link to="citizenship" spy={true} smooth={true} className="cursor-pointer">CITIZENSHIP</Link>
-              </li>
-              <li className="hover:underline hover:scale-105 transition-all duration-150">
-                <Link to={`/`}>PROOF OF FUNDS</Link>
-              </li>
-              <li className="hover:underline hover:scale-105 transition-all duration-150">
-                <Link to={`/`}>OTHERS SERVICE</Link>
-              </li>
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("citizenship")}>CITIZENSHIP</li>
+              <li  className="cursor-pointer" onClick={() => handleScrollToSection("/")}>PROOF OF FUNDS</li>
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("/")}>OTHERS SERVICE </li>
             </ul>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
               <li className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
@@ -81,22 +97,12 @@ const Header = () => {
 
       <nav className="hidden md:flex flex-row items-center gap-4">
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none nav-font">
-          <li>
-            <Link to="visa" spy={true} smooth={true} className="cursor-pointer">Visas</Link>
-          
-          </li>
-          <li>
-            <Link to="residency" spy={true} smooth={true} className="cursor-pointer">Residency</Link>
-          </li>
-          <li>
-            <Link to="citizenship" spy={true} smooth={true} className="cursor-pointer">Citizenship</Link>
-          </li>
-          <li className="hover:underline hover:scale-105 transition-all duration-150">
-            <Link to={`/about`}>Proof Of Funds</Link>
-          </li>
-          <li className="hover:underline hover:scale-105 transition-all duration-150">
-            <Link to={`/about`}>Others Services</Link>
-          </li>
+        <li className="cursor-pointer" onClick={() => handleScrollToSection("visa")}>VISAS</li>
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("residency")}>RESIDENCY
+              </li>
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("citizenship")}>CITIZENSHIP</li>
+              <li  className="cursor-pointer" onClick={() => handleScrollToSection("/")}>PROOF OF FUNDS</li>
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("/")}>OTHERS SERVICE </li>
         </ul>
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none">
         {currentUser ? (

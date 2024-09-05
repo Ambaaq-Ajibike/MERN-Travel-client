@@ -99,7 +99,7 @@ const Citizenship = () => {
             {renderSection('Notable Citizens', citizenship.notableCitizens)}
             {renderSection('Visa Free Travel', citizenship.visaFreeTravel)}
             {renderSection('Investment Impact', citizenship.investmentImpact)}
-            {renderSection('Historical Context', citizenship.historicalContext)}
+            {/* {renderSection('Historical Context', citizenship.historicalContext)} */}
             {renderSection('Why Choose', citizenship.whyChoose)}
             {renderSection('Fees', citizenship.fees)}
             {renderSection('Passport Overview', citizenship.passportOverview)}
