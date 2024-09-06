@@ -1,6 +1,6 @@
 export const citizenships = [
   {
-      "title": "St. Kitts & Nevis Citizenship by Investment",
+      "title": "St. Kitts & Nevis Citizenship",
       image: "USA",
       "description": "The Citizenship by Investment Program (CIP) of St. Kitts and Nevis was established by the Caribbean nation to support its economic development. By inviting global investors, the program allows St. Kitts & Nevis to generate funds for crucial areas such as healthcare, education, and infrastructure. This mutually beneficial initiative has been operational for several decades.",
       "keyFacts": {
@@ -260,7 +260,7 @@ export const citizenships = [
       "passportStrength": null
   },
   {
-      "title": "Dominica Citizenship by Investment",
+      "title": "Dominica Citizenship",
       image: "Saudi Arabia",
       "description": "The Citizenship by Investment Program in Dominica was established in 1993. The funds generated from this program are utilized to finance healthcare initiatives, critical infrastructure, and to enhance the country\u2019s tourism sector. This initiative plays a crucial role in supporting Dominica\u2019s economic growth and sustainability.",
       "keyFacts": {
@@ -518,7 +518,7 @@ export const citizenships = [
       "passportStrength": null
   },
   {
-      "title": "Antigua and Barbuda Citizenship by Investment Program",
+      "title": "Antigua and Barbuda Citizenship",
       image: "China",
       "description": null,
       "keyFacts": null,
@@ -601,7 +601,7 @@ export const citizenships = [
       "passportStrength": null
   },
   {
-      "title": "St. Lucia Citizenship by Investment & Passport Guide for 2024",
+      "title": "St. Lucia Citizenship",
       image: "Luxemburg",
       "description": null,
       "keyFacts": null,
@@ -721,7 +721,7 @@ export const citizenships = [
       "passportStrength": null
   },
   {
-      "title": "St. Lucia Citizenship by Investment & Passport Guide for 2024",
+      "title": "St. Lucia Citizenship",
       image: "Dubai",
       "description": null,
       "keyFacts": null,
@@ -841,7 +841,7 @@ export const citizenships = [
       "passportStrength": null
   },
   {
-      "title": "Turkey Citizenship by Investment and Passport Guide",
+      "title": "Turkey Citizenship",
       image: "Sweden",
       "description": null,
       "keyFacts": null,
@@ -893,7 +893,7 @@ export const citizenships = [
       "passportStrength": null
   },
   {
-      "title": "Grenada Citizenship by Investment Program",
+      "title": "Grenada Citizenship",
       image: "Australia",
       "description": null,
       "keyFacts": {
@@ -939,7 +939,7 @@ export const citizenships = [
       "passportStrength": null
   },
   {
-      "title": "Malta Citizenship by Investment & Passport Guide",
+      "title": "Malta Citizenship",
       image: "Canada",
       "description": null,
       "keyFacts": null,
@@ -1004,7 +1004,7 @@ export const citizenships = [
       "passportStrength": null
   },
   {
-      "title": "Vanuatu Citizenship by Investment",
+      "title": "Vanuatu Citizenship",
       image: "Germany",
       "description": null,
       "keyFacts": null,

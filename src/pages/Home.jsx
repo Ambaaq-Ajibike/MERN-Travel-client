@@ -161,7 +161,7 @@ const Home = () => {
           
             {visa.length > 0 && (
               <section id="visa">
-                <h1 className="text-xl sm:text-2xl font-semibold self-start">Visa</h1>
+                <h1 className="text-3xl font-semibold self-start mb-4 ">Visa</h1>
                 <div id="visas" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
                   {visa.map((packageData, i) => (
                     <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
@@ -171,7 +171,7 @@ const Home = () => {
             )}
             {residency.length > 0 && (
               <section id="residency">
-                <h1 className="text-xl sm:text-2xl font-semibold self-start">Residencies</h1>
+                <h1 className="text-3xl font-semibold self-start mb-4">Residencies</h1>
                 <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
                   {residency.map((packageData, i) => (
                     <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
@@ -181,7 +181,7 @@ const Home = () => {
             )}
             {citizenship.length > 0 && (
               <section id="citizenship">
-                <h1 className="text-xl sm:text-2xl font-semibold self-start">Citizenship</h1>
+                <h1 className="text-3xl font-semibold self-start mb-4">Citizenship</h1>
                 <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
                   {citizenship.map((packageData, i) => (
                     <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
