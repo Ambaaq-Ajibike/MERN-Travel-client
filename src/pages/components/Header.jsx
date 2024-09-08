@@ -73,7 +73,7 @@ const Header = () => {
               <li className="cursor-pointer" onClick={() => handleScrollToSection("residency")}>RESIDENCY
               </li>
               <li className="cursor-pointer" onClick={() => handleScrollToSection("citizenship")}>CITIZENSHIP</li>
-              <li  className="cursor-pointer" onClick={() => handleScrollToSection("/")}>PROOF OF FUNDS</li>
+              <li  className="cursor-pointer" onClick={() => handleScrollToSection("/proofoffund")}>PROOF OF FUNDS</li>
               <li className="cursor-pointer" onClick={() => handleScrollToSection("/")}>OTHERS SERVICE </li>
             </ul>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
@@ -101,7 +101,11 @@ const Header = () => {
               <li className="cursor-pointer" onClick={() => handleScrollToSection("residency")}>RESIDENCY
               </li>
               <li className="cursor-pointer" onClick={() => handleScrollToSection("citizenship")}>CITIZENSHIP</li>
-              <li  className="cursor-pointer" onClick={() => handleScrollToSection("/")}>PROOF OF FUNDS</li>
+              <li  className="cursor-pointer">
+             <RouterLink to={"/proofoffund"}>
+             PROOF OF FUNDS
+             </RouterLink>
+              </li>
               <li className="cursor-pointer" onClick={() => handleScrollToSection("/")}>OTHERS SERVICE </li>
         </ul>
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none">
