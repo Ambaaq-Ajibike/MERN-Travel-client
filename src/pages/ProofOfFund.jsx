@@ -1,3 +1,4 @@
+import {Link } from 'react-scroll'
 const ProofOfFund = () => {
     const bgImg = "images/bg_jmg1.jpg";
   return (
@@ -15,7 +16,9 @@ const ProofOfFund = () => {
               with more than 50 million Naira to both new and existing accounts.
             </p>
             <button className="mt-6 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700">
-              How It Works
+            <Link to="works" smooth={true} duration={500}>
+        How It Works
+    </Link> 
             </button>
           </div>
 
@@ -105,7 +108,7 @@ const ProofOfFund = () => {
       </div>
 
       {/* Second Section */}
-      <div className="container mx-auto px-6 py-12">
+      <section id="works" className="container mx-auto px-6 py-12">
         <h2 className="text-3xl font-bold text-center mb-2">
           How The Proof Of Funds Works
         </h2>
@@ -147,7 +150,7 @@ const ProofOfFund = () => {
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </div>
   );
 };
