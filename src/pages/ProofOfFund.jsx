@@ -5,7 +5,7 @@ const ProofOfFund = () => {
     <div className="bg-gray-100 pb-10">
       {/* First Section */}
       <div className="relative bg-cover bg-center bg-no-repeat" style={{background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bgImg})`}}>
-        <div className="container mx-auto py-20 px-6 flex justify-between">
+        <div className="container mx-auto py-20 px-6 flex justify-between flex-col md:flex-row gap-5">
           <div className="max-w-xl">
             <h1 className="text-4xl font-bold text-white">
               GET PROOF OF FUNDS IN NIGERIA
@@ -112,13 +112,11 @@ const ProofOfFund = () => {
         <h2 className="text-3xl font-bold text-center mb-2">
           How The Proof Of Funds Works
         </h2>
-        <p className="text-2xl text-gray-400 text-center mb-0">
-          The proof of fund service works seemlessly in four  in four (4) simple steps
-        </p>
         <p className="text-2xl text-gray-400 text-center mb-8">
-        that you can ever imagine.
+          The proof of fund service works seemlessly in four  in four (4) simple steps that you can ever imagine.
         </p>
-        <div className="flex justify-around">
+       
+        <div className="flex justify-around items-center flex-col md:flex-row">
           {[
             {
               title: 'Easy Application',
