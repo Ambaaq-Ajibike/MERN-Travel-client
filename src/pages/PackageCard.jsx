@@ -11,7 +11,7 @@ const PackageCard = memo(({ packageData }) => {
   return (
     <Link to={packageData.url} className="w-max">
      <div className="bg-white border flex flex-col rounded-lg shadow-md overflow-hidden" 
-     style={{ width: "19pc", height: "20pc"}}>
+     style={{ width: "19pc"}}>
        {!imageLoaded && (
          <div className="flex justify-center items-center h-[190px]">
            <ThreeDots color="#00BFFF" height={20} width={80} />  {/* Use the specific loader component */}
@@ -39,7 +39,7 @@ const PackageCard = memo(({ packageData }) => {
              {packageData.packageTotalRatings} Reviews
            </span>
          </div>
-         <p className="font-medium text-green-700 text-lg mt-2">
+         <p className="font-medium text-green-700 text-lg my-2">
            {packageData.moreContent}
          </p>
        </div>
