@@ -19,43 +19,44 @@ const Home = () => {
   const [citizenship, setCitizenship] = useState([]);
   const [search, setSearch] = useState("");
 
-  // Use useRef to keep a reference to the fetched data
+  const [visaIndex, setVisaIndex] = useState(0);
+  const [residencyIndex, setResidencyIndex] = useState(0);
+  const [citizenshipIndex, setCitizenshipIndex] = useState(0);
+
+  const itemsPerPage = 4;
+
   const dataFetchedRef = useRef(false);
 
   const fetchData = useCallback(() => {
-    const visaList = visas.map((x, index) => {
-      return {
-        id: index,
-        name: x.name,
-        url: `/search?visa=${index}`,
-        image: `country%2F${x.name}`,
-        packageTotalRatings: 5,
-        packagePrice: 100000,
-        moreContent:  `${x.types.length} Visa Types`
-      };
-    });
-    const residencyList = residencies.map((x, index) => {
-      return {
-        id: index,
-        name: x.name,
-        url: `/residency/${index + 1}`,
-        image: `country%2F${x.image}`,
-        packageTotalRatings: 5,
-        packagePrice: 100000,
-        moreContent:  ``
-      };
-    });
-    const citizenshipList = citizenships.map((x, index) => {
-      return {
-        id: index,
-        name: x.title,
-        url: `/citizenship/${index + 1}`,
-        image: `country%2F${x.image}`,
-        packageTotalRatings: 5,
-        packagePrice: 100000,
-        moreContent:  ``
-      };
-    });
+    const visaList = visas.map((x, index) => ({
+      id: index,
+      name: x.name,
+      url: `/search?visa=${index}`,
+      image: `/images/country/${x.image}`,  // Update the path to image correctly
+      packageTotalRatings: 5,
+      packagePrice: 100000,
+      moreContent: `${x.types.length} Visa Types`
+    }));
+
+    const residencyList = residencies.map((x, index) => ({
+      id: index,
+      name: x.name,
+      url: `/residency/${index + 1}`,
+      image: `/images/country/${x.image}`,  // Update the path to image correctly
+      packageTotalRatings: 5,
+      packagePrice: 100000,
+      moreContent: ``
+    }));
+
+    const citizenshipList = citizenships.map((x, index) => ({
+      id: index,
+      name: x.title,
+      url: `/citizenship/${index + 1}`,
+      image: `/images/country/${x.image}`,  // Update the path to image correctly
+      packageTotalRatings: 5,
+      packagePrice: 100000,
+      moreContent: ``
+    }));
 
     setVisa(visaList);
     setResidency(residencyList);
@@ -63,33 +64,43 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    // Only fetch data if it hasn't been fetched before
     if (!dataFetchedRef.current) {
       fetchData();
       dataFetchedRef.current = true;
     }
   }, [fetchData]);
 
-  const slides = [
-    "/images/hero-1.jpg",
-    "/images/hero-2.png",
-    "/images/hero-3.jpg"
-  ];
-
   const handleSearchChange = useCallback((e) => {
     setSearch(e.target.value);
   }, []);
 
+  const handlePrevious = (index, setIndex) => {
+    if (index > 0) {
+      setIndex(index - 1);
+    }
+  };
+
+  const handleNext = (index, setIndex, list) => {
+    if (index + itemsPerPage < list.length + 1) {
+      setIndex(index + 1);
+    }
+  };
+  const slides = [
+    "/images/hero-1.jpg",
+    "/images/hero-2.jpg",
+    "/images/hero-3.jpg"
+  ];
   return (
     <>
       <div className="main w-full relative">
         <div className="w-full flex flex-col">
-          <Carousel
+        <Carousel
             className="w-full"
             showArrows={true}
             showThumbs={false}
             autoPlay
             infiniteLoop
+            transitionTime={1000}
           >
             {slides.map((slide, index) => (
               <div key={index} className="background_image" style={{ backgroundImage: `url(${slide})` }}>
@@ -102,7 +113,6 @@ const Home = () => {
               </div>
             ))}
           </Carousel>
-
           <div className="top-part w-full gap-2 flex flex-col items-center text-center p-4 absolute top-0 left-0 right-0">
             <h1 className="w-full text-white text-3xl md:text-6xl font-bold mb-2">
               Find Next Place To Visit
@@ -129,17 +139,6 @@ const Home = () => {
                   <option>Indian</option>
                 </select>
               </div>
-
-              <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
-                <select className="outline-none w-full bg-transparent select-styles">
-                  <option>Select Living</option>
-                  <option>New York</option>
-                  <option>London</option>
-                  <option>Toronto</option>
-                  <option>Mumbai</option>
-                </select>
-              </div>
-
               <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
                 <input
                   type="date"
@@ -158,33 +157,106 @@ const Home = () => {
           </div>
 
           <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center">
-          
             {visa.length > 0 && (
-              <section id="visa">
-                <h1 className="text-3xl font-semibold self-start mb-4 ">Visa</h1>
-                <div id="visas" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
-                  {visa.map((packageData, i) => (
-                    <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
+              <section id="visa" className="my-8">
+                <div className="flex justify-between items-center mb-4">
+                  <h1 className="text-3xl font-semibold self-start">Visa</h1>
+                  <div className="flex space-x-4">
+                    <button
+                      onClick={() => handlePrevious(visaIndex, setVisaIndex)}
+                      disabled={visaIndex === 0}
+                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+
+                    <button
+                      onClick={() => handleNext(visaIndex, setVisaIndex, visa)}
+                      disabled={visaIndex + itemsPerPage >= visa.length}
+                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex space-x-4 overflow-x-auto hide-scrollbar">
+                  {visa.slice(visaIndex, visaIndex + itemsPerPage).map((packageData, i) => (
+                    <PackageCard key={i} packageData={packageData} />
                   ))}
                 </div>
               </section>
             )}
+
             {residency.length > 0 && (
-              <section id="residency">
-                <h1 className="text-3xl font-semibold self-start mb-4">Residencies</h1>
-                <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
-                  {residency.map((packageData, i) => (
-                    <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
+              <section id="residency" className="my-8">
+                <div className="flex justify-between items-center mb-4">
+                  <h1 className="text-3xl font-semibold self-start">Residency</h1>
+                  <div className="flex space-x-4">
+                    <button
+                      onClick={() => handlePrevious(residencyIndex, setResidencyIndex)}
+                      disabled={residencyIndex === 0}
+                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+
+                    <button
+                      onClick={() => handleNext(residencyIndex, setResidencyIndex, residency)}
+                      disabled={residencyIndex + itemsPerPage >= residency.length}
+                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex space-x-4 overflow-x-auto hide-scrollbar">
+                  {residency.slice(residencyIndex, residencyIndex + itemsPerPage).map((packageData, i) => (
+                    <PackageCard key={i} packageData={packageData} />
                   ))}
                 </div>
               </section>
             )}
+            {/* Citizenship Section */}
             {citizenship.length > 0 && (
-              <section id="citizenship">
-                <h1 className="text-3xl font-semibold self-start mb-4">Citizenship</h1>
-                <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
-                  {citizenship.map((packageData, i) => (
-                    <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
+              <section id="citizenship" className="my-8">
+                <div className="flex justify-between items-center mb-4">
+                  <h1 className="text-3xl font-semibold self-start">Citizenship</h1>
+                  <div className="flex space-x-4">
+                    <button
+                      onClick={() => handlePrevious(citizenshipIndex, setCitizenshipIndex)}
+                      disabled={citizenshipIndex === 0}
+                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+
+                    <button
+                      onClick={() => handleNext(citizenshipIndex, setCitizenshipIndex, citizenship)}
+                      disabled={citizenshipIndex + itemsPerPage >= citizenship.length}
+                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex space-x-4 overflow-x-auto hide-scrollbar">
+                  {citizenship.slice(citizenshipIndex, citizenshipIndex + itemsPerPage).map((packageData, i) => (
+                    <PackageCard key={i} packageData={packageData} />
                   ))}
                 </div>
               </section>
@@ -192,9 +264,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      
+
       <Footer />
-      <WhatsAppButton phoneNumber="" />
+      <WhatsAppButton />
     </>
   );
 };

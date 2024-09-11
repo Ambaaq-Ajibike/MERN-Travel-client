@@ -1,58 +1,45 @@
-import React from 'react';
-import { FaFacebook, FaXing, FaLinkedin, FaInstagram, FaYoutube } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
-    <footer className="bg-gray-50 py-12">
-      <div className="container mx-auto text-center">
-        <div className="mb-8">
-        <Link to="/">  <h1
-          className="text-2xl md:text-4xl font-bold relative"
-          style={{
-            display: 'inline-block',
-            color: "transparent",
-            WebkitTextStroke: "0.7px",
-            WebkitTextStrokeColor: "#000",
-          }}
-        >
-          Come
-          <span
-            className="shadow-xl rounded-lg text-slate-700 text-lg md:text-2xl absolute left-1 top-[-10px] text-center"
-            style={{
-              WebkitTextStroke: "0",
-            }}
-          >
-            Dream Tours
-          </span>
-        </h1></Link>
-          <ul className="flex justify-center space-x-6 text-gray-600 mt-4">
-            <li><a href="#about">About us</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-            <li><a href="#privacy">Privacy Policy</a></li>
-            <li><a href="#terms">Terms & Conditions</a></li>
-          </ul>
-        </div>
-        <div className="mb-8">
-          <ul className="flex justify-center space-x-4 text-orange-500">
-            <li><a href="https://facebook.com"><FaFacebook size={24} /></a></li>
-            <li><a href="https://xing.com"><FaXing size={24} /></a></li>
-            <li><a href="https://linkedin.com"><FaLinkedin size={24} /></a></li>
-            <li><a href="https://instagram.com"><FaInstagram size={24} /></a></li>
-            <li><a href="https://youtube.com"><FaYoutube size={24} /></a></li>
-          </ul>
-        </div>
-        <div className="text-gray-600">
-          <p>© 2024Dream Come Tours</p>
-          {/* <p>
-            Designed and Developed By{' '}
-            <a href="https://technoheaven.com" className="text-orange-500">
-              Technoheaven Consultancy Pvt. Ltd.
-            </a>
-          </p> */}
-        </div>
+    <div className='bg-cover bg-center bg-no-repeat bg-gray-50 md:h-[70vh] w-full text-black py-20 text-center md:text-left'>
+  <div className='container mx-auto px-6 md:px-20'>
+    <div className='flex flex-col gap-8 md:flex-row md:gap-16'>
+      <div className='md:w-1/3'>
+        <h1 className='text-4xl font-extrabold mb-6 border-b-2 border-gray-200 pb-4'>200 Travel</h1>
+        <p className='text-lg leading-relaxed mb-6'>
+          We are only satisfied when you are satisfied. If there is any cause for criticism, please do not hesitate to contact us. Regardless of whether you send us an email or a letter, we promise you that we will take your concern very seriously and search for a satisfactory solution.
+        </p>
+        <button className='font-bold rounded-full p-4 px-8 bg-primary text-white mt-4 hover:bg-primary-dark transition duration-300'>
+          Contact Us
+        </button>
       </div>
-    </footer>
+      <div className='flex flex-col gap-4 md:w-1/3'>
+        <p className='text-lg'>support@matrixmomentum.com</p>
+        <p className='text-lg'>
+          35 Upper Richmond Road, London, United Kingdom, SW15 2RD.
+        </p>
+      </div>
+      <div className='flex flex-col gap-4 md:w-1/3'>
+        <h2 className='text-xl font-semibold border-b-2 border-gray-200 pb-2'>Information</h2>
+        <p className='hover:underline cursor-pointer'>About us</p>
+        <p className='hover:underline cursor-pointer'>Rules</p>
+        <p className='hover:underline cursor-pointer'>FAQ</p>
+      </div>
+      <div className='flex flex-col gap-4 md:w-1/3'>
+        <h2 className='text-xl font-semibold border-b-2 border-gray-200 pb-2'>Help</h2>
+        <p className='hover:underline cursor-pointer'>Contact Us</p>
+        <p className='hover:underline cursor-pointer'>Terms of Use</p>
+      </div>
+    </div>
+    <div className='text-center text-yellow-700 mt-12 text-sm'>
+      {currentYear} 200 Travel. All Rights Reserved
+    </div>
+  </div>
+</div>
+
+  
   );
 };
 
