@@ -32,7 +32,7 @@ const Home = () => {
       id: index,
       name: x.name,
       url: `/search?visa=${index}`,
-      image: `/images/country/${x.image}`,  // Update the path to image correctly
+        image: `country%2F${x.name}`, // Update the path to image correctly
       packageTotalRatings: 5,
       packagePrice: 100000,
       moreContent: `${x.types.length} Visa Types`
@@ -42,7 +42,7 @@ const Home = () => {
       id: index,
       name: x.name,
       url: `/residency/${index + 1}`,
-      image: `/images/country/${x.image}`,  // Update the path to image correctly
+        image: `country%2F${x.image}`,
       packageTotalRatings: 5,
       packagePrice: 100000,
       moreContent: ``
@@ -52,7 +52,7 @@ const Home = () => {
       id: index,
       name: x.title,
       url: `/citizenship/${index + 1}`,
-      image: `/images/country/${x.image}`,  // Update the path to image correctly
+      image: `country%2F${x.image}`,
       packageTotalRatings: 5,
       packagePrice: 100000,
       moreContent: ``

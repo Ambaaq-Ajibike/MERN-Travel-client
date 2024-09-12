@@ -9,7 +9,7 @@ const Footer = () => {
       <div className='md:w-1/3'>
         <h1 className='text-4xl font-extrabold mb-6 border-b-2 border-gray-200 pb-4'>200 Travel</h1>
         <p className='text-lg leading-relaxed mb-6'>
-          We are only satisfied when you are satisfied. If there is any cause for criticism, please do not hesitate to contact us. Regardless of whether you send us an email or a letter, we promise you that we will take your concern very seriously and search for a satisfactory solution.
+        We are dedicated to providing comprehensive support for all your travel needs. Whether you're applying for residency, citizenship, or a visa, we ensure a smooth and hassle-free experience. Our team takes your concerns seriously and works diligently to provide you with the most satisfactory solution, making your journey as seamless as possible.
         </p>
         <button className='font-bold rounded-full p-4 px-8 bg-primary text-white mt-4 hover:bg-primary-dark transition duration-300'>
           Contact Us

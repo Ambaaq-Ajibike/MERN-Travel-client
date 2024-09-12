@@ -52,4 +52,53 @@
       background-size: cover;
     }
   }
-  
+  /* Global layout adjustments */
+.grid-container {
+  display: grid;
+  grid-gap: 16px;
+  width: 100%;
+}
+
+/* For small screens, show 1 item per row */
+@media (max-width: 640px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* 1 item per row */
+  }
+}
+
+/* For medium screens, show 2 items per row */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+  }
+}
+
+/* For large screens, show 3 items per row */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  }
+}
+
+/* For very large screens, show 4 items per row */
+@media (min-width: 1281px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  }
+}
+
+/* Hide scrollbars on smaller screens */
+.hide-scrollbar {
+  overflow-x: auto;
+  -ms-overflow-style: none;  /* IE */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+/* Make sure package cards have a reasonable width */
+/* .package-card {
+  min-width: 250px;
+} */
