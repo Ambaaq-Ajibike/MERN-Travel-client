@@ -36,24 +36,10 @@ const Header = () => {
     <header className="bg-white p-4 flex flex-col md:flex-row justify-between items-center relative">
       <div className="flex justify-between items-center w-full md:w-auto">
         <RouterLink to="/">
-          <h1
-            className="text-2xl md:text-4xl font-bold relative"
-            style={{
-              color: "transparent",
-              WebkitTextStroke: "0.7px",
-              WebkitTextStrokeColor: "#000",
-            }}
-          >
-            Come
-            <span
-              className="shadow-xl rounded-lg text-slate-700 text-lg md:text-2xl absolute left-1 top-[-10px] text-center"
-              style={{
-                WebkitTextStroke: "0",
-              }}
-            >
-              Dream Tours
-            </span>
-          </h1>
+        <img 
+          src="/images/logo.png"
+          className="w-32"
+         />
         </RouterLink>
 
         <button className="md:hidden block text-black" onClick={() => setMenuOpen(!menuOpen)}>
@@ -73,9 +59,22 @@ const Header = () => {
               <li className="cursor-pointer" onClick={() => handleScrollToSection("residency")}>RESIDENCY
               </li>
               <li className="cursor-pointer" onClick={() => handleScrollToSection("citizenship")}>CITIZENSHIP</li>
-              <li  className="cursor-pointer" onClick={() => handleScrollToSection("/proofoffund")}>PROOF OF FUNDS</li>
-              <li className="cursor-pointer" onClick={() => handleScrollToSection("/")}>OTHERS SERVICE </li>
+              <li  className="cursor-pointer">
+             <RouterLink to={"/proofoffund"}>
+             PROOF OF FUNDS
+             </RouterLink>
+              </li>
+              <li  className="cursor-pointer">
+             <RouterLink to={"/services"}>
+             OTHER SERVICES
+             </RouterLink>
+              </li>
             </ul>
+            <li  className="cursor-pointer">
+             <RouterLink to={"/contact"}>
+            Contact Us
+             </RouterLink>
+              </li>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
               <li className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                 {currentUser ? (
@@ -106,7 +105,16 @@ const Header = () => {
              PROOF OF FUNDS
              </RouterLink>
               </li>
-              <li className="cursor-pointer" onClick={() => handleScrollToSection("/")}>OTHERS SERVICE </li>
+              <li  className="cursor-pointer">
+             <RouterLink to={"/services"}>
+             OTHER SERVICES
+             </RouterLink>
+              </li>
+              <li  className="cursor-pointer">
+             <RouterLink to={"/contact"}>
+            Contact Us
+             </RouterLink>
+              </li>
         </ul>
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none">
         {currentUser ? (

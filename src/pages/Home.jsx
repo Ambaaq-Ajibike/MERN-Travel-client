@@ -74,17 +74,7 @@ const Home = () => {
     setSearch(e.target.value);
   }, []);
 
-  const handlePrevious = (index, setIndex) => {
-    if (index > 0) {
-      setIndex(index - 1);
-    }
-  };
 
-  const handleNext = (index, setIndex, list) => {
-    if (index + itemsPerPage < list.length + 1) {
-      setIndex(index + 1);
-    }
-  };
   const slides = [
     "/images/hero-1.jpg",
     "/images/hero-2.jpg",
@@ -157,111 +147,38 @@ const Home = () => {
           </div>
 
           <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center">
-            {visa.length > 0 && (
-              <section id="visa" className="my-8">
-                <div className="flex justify-between items-center mb-4">
-                  <h1 className="text-3xl font-semibold self-start">Visa</h1>
-                  <div className="flex space-x-4">
-                    <button
-                      onClick={() => handlePrevious(visaIndex, setVisaIndex)}
-                      disabled={visaIndex === 0}
-                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-
-                    <button
-                      onClick={() => handleNext(visaIndex, setVisaIndex, visa)}
-                      disabled={visaIndex + itemsPerPage >= visa.length}
-                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex space-x-4 overflow-x-auto hide-scrollbar">
-                  {visa.slice(visaIndex, visaIndex + itemsPerPage).map((packageData, i) => (
-                    <PackageCard key={i} packageData={packageData} />
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {residency.length > 0 && (
-              <section id="residency" className="my-8">
-                <div className="flex justify-between items-center mb-4">
-                  <h1 className="text-3xl font-semibold self-start">Residency</h1>
-                  <div className="flex space-x-4">
-                    <button
-                      onClick={() => handlePrevious(residencyIndex, setResidencyIndex)}
-                      disabled={residencyIndex === 0}
-                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-
-                    <button
-                      onClick={() => handleNext(residencyIndex, setResidencyIndex, residency)}
-                      disabled={residencyIndex + itemsPerPage >= residency.length}
-                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex space-x-4 overflow-x-auto hide-scrollbar">
-                  {residency.slice(residencyIndex, residencyIndex + itemsPerPage).map((packageData, i) => (
-                    <PackageCard key={i} packageData={packageData} />
-                  ))}
-                </div>
-              </section>
-            )}
-            {/* Citizenship Section */}
-            {citizenship.length > 0 && (
-              <section id="citizenship" className="my-8">
-                <div className="flex justify-between items-center mb-4">
-                  <h1 className="text-3xl font-semibold self-start">Citizenship</h1>
-                  <div className="flex space-x-4">
-                    <button
-                      onClick={() => handlePrevious(citizenshipIndex, setCitizenshipIndex)}
-                      disabled={citizenshipIndex === 0}
-                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-
-                    <button
-                      onClick={() => handleNext(citizenshipIndex, setCitizenshipIndex, citizenship)}
-                      disabled={citizenshipIndex + itemsPerPage >= citizenship.length}
-                      className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex space-x-4 overflow-x-auto hide-scrollbar">
-                  {citizenship.slice(citizenshipIndex, citizenshipIndex + itemsPerPage).map((packageData, i) => (
-                    <PackageCard key={i} packageData={packageData} />
-                  ))}
-                </div>
-              </section>
-            )}
-          </div>
+          
+          {visa.length > 0 && (
+            <section id="visa">
+              <h1 className="text-3xl font-semibold self-start mb-4 ">Visa</h1>
+              <div id="visas" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
+                {visa.map((packageData, i) => (
+                  <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
+                ))}
+              </div>
+            </section>
+          )}
+          {residency.length > 0 && (
+            <section id="residency">
+              <h1 className="text-3xl font-semibold self-start mb-4">Residencies</h1>
+              <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
+                {residency.map((packageData, i) => (
+                  <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
+                ))}
+              </div>
+            </section>
+          )}
+          {citizenship.length > 0 && (
+            <section id="citizenship">
+              <h1 className="text-3xl font-semibold self-start mb-4">Citizenship</h1>
+              <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
+                {citizenship.map((packageData, i) => (
+                  <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
         </div>
       </div>
 

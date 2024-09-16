@@ -1,8 +1,10 @@
 import {Link } from 'react-scroll'
+import Footer from './components/Footer';
 const ProofOfFund = () => {
     const bgImg = "images/bg_jmg1.jpg";
   return (
-    <div className="bg-gray-100 pb-10">
+    <div>
+            <div className="bg-gray-100 pb-10">
       {/* First Section */}
       <div className="relative bg-cover bg-center bg-no-repeat" style={{background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bgImg})`}}>
         <div className="container mx-auto py-20 px-6 flex justify-between flex-col md:flex-row gap-5">
@@ -150,6 +152,9 @@ const ProofOfFund = () => {
         </div>
       </section>
     </div>
+    <Footer />
+    </div>
+    
   );
 };
 

@@ -18,6 +18,8 @@ import CitizenshipPackage from "./pages/CitizenshipPackage";
 import Residency from "./pages/Residency";
 import Citizenship from "./pages/Citizenship";
 import ProofOfFund  from "./pages/ProofOfFund";
+import ContactForm from "./pages/Contact";
+import OtherServices from "./pages/OtherServices";
 const App = () => {
   return (
     <BrowserRouter>
@@ -28,6 +30,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/contact" element={<ContactForm />} />
+        <Route path="/services" element={<OtherServices />} />
         {/* user */}
         <Route path="/profile" element={<PrivateRoute />}>
           <Route path="user" element={<Profile />} />
