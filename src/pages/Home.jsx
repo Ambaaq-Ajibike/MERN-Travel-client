@@ -11,7 +11,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { visas } from "../data/visas";
 import { residencies } from "../data/residency";
 import { citizenships } from "../data/citizenship";
-import VisaCarousel from "./components/VisaCarousel";
+import AppCarousel from "./components/AppCarousel";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -20,11 +20,6 @@ const Home = () => {
   const [citizenship, setCitizenship] = useState([]);
   const [search, setSearch] = useState("");
 
-  const [visaIndex, setVisaIndex] = useState(0);
-  const [residencyIndex, setResidencyIndex] = useState(0);
-  const [citizenshipIndex, setCitizenshipIndex] = useState(0);
-
-  const itemsPerPage = 4;
 
   const dataFetchedRef = useRef(false);
 
@@ -150,33 +145,31 @@ const Home = () => {
           <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center mt-16">
           
           {visa.length > 0 && (
-            <section id="visa">
+            <section id="visa" className="my-8">
               <h1 className="text-3xl font-semibold self-start mb-4 ">Visa</h1>
-              <div id="visas" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
-               <VisaCarousel visa={visa}/>
+              <div id="visas">
+               <AppCarousel visa={visa}/>
               </div>
             </section>
           )}
           {residency.length > 0 && (
-            <section id="residency">
-              <h1 className="text-3xl font-semibold self-start mb-4">Residencies</h1>
-              <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
-                {residency.map((packageData, i) => (
-                  <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
-                ))}
+            <section id="residency" className="my-8">
+              <h1 className="text-3xl font-semibold self-start mb-4 ">Residency</h1>
+              <div>
+               <AppCarousel visa={residency}/>
               </div>
             </section>
           )}
+          
           {citizenship.length > 0 && (
-            <section id="citizenship">
-              <h1 className="text-3xl font-semibold self-start mb-4">Citizenship</h1>
-              <div id="residencies" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
-                {citizenship.map((packageData, i) => (
-                  <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
-                ))}
+            <section id="citizenship" className="my-8">
+              <h1 className="text-3xl font-semibold self-start mb-4 ">Citizenship</h1>
+              <div>
+               <AppCarousel visa={citizenship}/>
               </div>
             </section>
           )}
+          
         </div>
         </div>
       </div>

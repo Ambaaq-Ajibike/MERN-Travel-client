@@ -14,7 +14,7 @@ const PackageCard = memo(({ packageData }) => {
      style={{ width: "19pc", height: (packageData.moreContent !== '') ? "20pc" : "19pc"}}>
        {!imageLoaded && (
          <div className="flex justify-center items-center h-[190px]">
-           <ThreeDots color="#00BFFF" height={20} width={80} />  {/* Use the specific loader component */}
+           <ThreeDots color="#00BFFF" height={120} width={80} />  {/* Use the specific loader component */}
          </div>
        )}
        <LazyLoadImage
