@@ -110,7 +110,7 @@ const ProofOfFund = () => {
       </div>
 
       {/* Second Section */}
-      <section id="works" className="container mx-auto px-6 py-12">
+      <section id="works" className="container mx-auto px-6 py-12 my-12">
         <h2 className="text-3xl font-bold text-center mb-2">
           How The Proof Of Funds Works
         </h2>
@@ -118,7 +118,7 @@ const ProofOfFund = () => {
           The proof of fund service works seemlessly in four  in four (4) simple steps that you can ever imagine.
         </p>
        
-        <div className="flex justify-around items-center flex-col md:flex-row">
+        <div className="flex justify-around gap-6 items-center flex-col md:flex-row">
           {[
             {
               title: 'Easy Application',

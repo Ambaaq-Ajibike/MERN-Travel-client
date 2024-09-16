@@ -1,9 +1,19 @@
 import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css'; 
+import 'slick-carousel/slick/slick-theme.css';
 import PackageCard from '../PackageCard';
-
+const PrevArrow = ({ onClick }) => (
+    <button className="slick-prev" onClick={onClick}>
+      <i className="fas fa-chevron-left"></i>
+    </button>
+  );
+  
+  const NextArrow = ({ onClick }) => (
+    <button className="slick-next" onClick={onClick}>
+      <i className="fas fa-chevron-right"></i>
+    </button>
+  );
 const VisaCarousel = ({ visa }) => {
     const settings = {
         dots: true, // Enable pagination dots
@@ -23,15 +33,18 @@ const VisaCarousel = ({ visa }) => {
                     slidesToShow: 4,
                 }
             }
-        ]
+        ],
+        arrows: true,
+  prevArrow: <PrevArrow />,
+  nextArrow: <NextArrow />,
     };
 
     return (
         <Slider {...settings}>
         {visa.map((packageData, i) => (
-            <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
+          <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
         ))}
-    </Slider>
+      </Slider>
     );
 };
 

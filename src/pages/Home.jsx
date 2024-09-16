@@ -11,6 +11,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { visas } from "../data/visas";
 import { residencies } from "../data/residency";
 import { citizenships } from "../data/citizenship";
+import VisaCarousel from "./components/VisaCarousel";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -152,9 +153,7 @@ const Home = () => {
             <section id="visa">
               <h1 className="text-3xl font-semibold self-start mb-4 ">Visa</h1>
               <div id="visas" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 custom-md:grid-cols-3 gap-4">
-                {visa.map((packageData, i) => (
-                  <PackageCard className="bg-blue-500 p-4" key={i} packageData={packageData} />
-                ))}
+               <VisaCarousel visa={visa}/>
               </div>
             </section>
           )}
