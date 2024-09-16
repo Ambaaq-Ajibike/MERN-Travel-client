@@ -33,7 +33,7 @@ const Header = () => {
     }
   };
   return (
-    <header className="bg-white p-4 flex flex-col md:flex-row justify-between items-center relative">
+    <header className="bg-white p-4 flex flex-col md:flex-row justify-between items-center relative shadow-lg">
       <div className="flex justify-between items-center w-full md:w-auto">
         <RouterLink to="/">
         <img 
@@ -55,18 +55,18 @@ const Header = () => {
               ✖
             </button>
             <ul className="flex flex-col items-center gap-4 text-black font-semibold list-none">
-              <li className="cursor-pointer" onClick={() => handleScrollToSection("visa")}>VISAS</li>
-              <li className="cursor-pointer" onClick={() => handleScrollToSection("residency")}>RESIDENCY
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("visa")}>Visas</li>
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("residency")}>Residency
               </li>
-              <li className="cursor-pointer" onClick={() => handleScrollToSection("citizenship")}>CITIZENSHIP</li>
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("citizenship")}>Citizenship</li>
               <li  className="cursor-pointer">
              <RouterLink to={"/proofoffund"}>
-             PROOF OF FUNDS
+             Proof Of Funds
              </RouterLink>
               </li>
               <li  className="cursor-pointer">
              <RouterLink to={"/services"}>
-             OTHER SERVICES
+             Other Services
              </RouterLink>
               </li>
             </ul>
@@ -96,18 +96,18 @@ const Header = () => {
 
       <nav className="hidden md:flex flex-row items-center gap-4">
         <ul className="flex flex-row items-center gap-4 text-black font-semibold list-none nav-font">
-        <li className="cursor-pointer" onClick={() => handleScrollToSection("visa")}>VISAS</li>
-              <li className="cursor-pointer" onClick={() => handleScrollToSection("residency")}>RESIDENCY
+        <li className="cursor-pointer" onClick={() => handleScrollToSection("visa")}>Visas</li>
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("residency")}>Residency
               </li>
-              <li className="cursor-pointer" onClick={() => handleScrollToSection("citizenship")}>CITIZENSHIP</li>
+              <li className="cursor-pointer" onClick={() => handleScrollToSection("citizenship")}>Citizenship</li>
               <li  className="cursor-pointer">
              <RouterLink to={"/proofoffund"}>
-             PROOF OF FUNDS
+             Proof Of Funds
              </RouterLink>
               </li>
               <li  className="cursor-pointer">
              <RouterLink to={"/services"}>
-             OTHER SERVICES
+             Other Services
              </RouterLink>
               </li>
               <li  className="cursor-pointer">

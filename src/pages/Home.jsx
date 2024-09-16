@@ -82,7 +82,7 @@ const Home = () => {
   ];
   return (
     <>
-      <div className="main w-full relative">
+      <div className="main w-full relative mb-24">
         <div className="w-full flex flex-col">
         <Carousel
             className="w-full"
@@ -146,7 +146,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center">
+          <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center mt-16">
           
           {visa.length > 0 && (
             <section id="visa">

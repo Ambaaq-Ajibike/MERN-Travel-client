@@ -6,14 +6,17 @@ const Footer = () => {
       <div className="container mx-auto px-6 md:px-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* Company Info */}
         <div>
-          <h2 className="text-white text-lg font-bold">200 Travel</h2>
+        <img 
+          src="/images/no-bg.png"
+          className="w-32"
+         />
           <p className="mt-4">
           We are dedicated to providing comprehensive support for all your travel needs. Whether you're applying for residency, citizenship, or a visa, we ensure a smooth and hassle-free experience.
           </p>
           <ul className="mt-4 space-y-2">
             <li>
-              <a href="mailto:associationminieredumali@zohomail.com" className="hover:text-white">
-                associationminieredumali@zohomail.com
+              <a href="mailto:contact@200travels.com" className="hover:text-white">
+              contact@200travels.com
               </a>
             </li>
             <li>
@@ -27,7 +30,7 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-yellow-400 text-lg font-semibold">Quick Links</h3>
+          <h3 className="text-white text-lg font-semibold">Quick Links</h3>
           <ul className="mt-4 space-y-2">
             <li><a href="#" className="hover:text-white">Home</a></li>
             <li><a href="/proofoffund" className="hover:text-white">Proof of Fund</a></li>
@@ -38,7 +41,7 @@ const Footer = () => {
 
         {/* Our Products */}
         <div>
-          <h3 className="text-yellow-400 text-lg font-semibold">Our Services</h3>
+          <h3 className="text-white text-lg font-semibold">Our Services</h3>
           <ul className="mt-4 space-y-2">
             <li><a href="#" className="hover:text-white">Document services </a></li>
             <li><a href="#" className="hover:text-white">Job search assistance </a></li>
@@ -49,7 +52,7 @@ const Footer = () => {
 
         {/* Opening Hours */}
         <div>
-          <h3 className="text-yellow-400 text-lg font-semibold">Opening Hours</h3>
+          <h3 className="text-white text-lg font-semibold">Opening Hours</h3>
           <ul className="mt-4 space-y-2">
             <li>Monday: 9:00 am - 05:00 pm</li>
             <li>Tuesday: 9:00 am - 05:00 pm</li>
@@ -69,7 +72,7 @@ const Footer = () => {
         <p className="text-sm text-gray-500">
           © All rights reserved
         </p>
-        {/* <button className="bg-yellow-400 text-gray-900 px-4 py-2 rounded-full mt-4">
+        {/* <button className="bg-white text-gray-900 px-4 py-2 rounded-full mt-4">
           2
         </button> */}
       </div>
