@@ -47,19 +47,19 @@ const AppCarousel = ({ visa }) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3, // 3 cards on medium devices
+          slidesToShow: 2, // 3 cards on medium devices
         }
       },
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 4, // 4 cards on large screens
+          slidesToShow: 3, // 4 cards on large screens
         }
       },
       {
         breakpoint: 1536,
         settings: {
-          slidesToShow: 5, // 5 cards on extra-large screens
+          slidesToShow: 4, // 5 cards on extra-large screens
         }
       }
     ],
