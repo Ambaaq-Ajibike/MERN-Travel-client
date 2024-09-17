@@ -148,7 +148,7 @@ const Home = () => {
           <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center mt-16">
           
           {visa.length > 0 && (
-            <section id="visa" className="my-8">
+            <section id="visa" className="my-12">
               <h1 className="text-3xl font-semibold self-start mb-4 ">Visa</h1>
               <div id="visas">
                <AppCarousel visa={visa}/>
@@ -156,7 +156,7 @@ const Home = () => {
             </section>
           )}
           {residency.length > 0 && (
-            <section id="residency" className="my-8">
+            <section id="residency" className="my-12">
               <h1 className="text-3xl font-semibold self-start mb-4 ">Residency</h1>
               <div>
                <AppCarousel visa={residency}/>
@@ -165,7 +165,7 @@ const Home = () => {
           )}
           
           {citizenship.length > 0 && (
-            <section id="citizenship" className="my-8">
+            <section id="citizenship" className="my-12">
               <h1 className="text-3xl font-semibold self-start mb-4 ">Citizenship</h1>
               <div>
                <AppCarousel visa={citizenship}/>

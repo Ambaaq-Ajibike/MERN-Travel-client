@@ -5,25 +5,23 @@ import 'slick-carousel/slick/slick-theme.css';
 import PackageCard from '../PackageCard';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
-// Styled Previous Arrow Button using Tailwind
 const PrevArrow = ({ onClick }) => (
   <button
-    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10"
+    className="absolute right-24 top-[-4pc] text-black border-2 border-black border-solid p-1 rounded-full z-20"
     onClick={onClick}
   >
     <MdKeyboardArrowLeft className="text-3xl" />
   </button>
 );
-
-// Styled Next Arrow Button using Tailwind
 const NextArrow = ({ onClick }) => (
   <button
-    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10"
+    className="absolute right-10 top-[-4pc] text-black border-2 border-black border-solid p-1 rounded-full z-20"
     onClick={onClick}
   >
     <MdKeyboardArrowRight className="text-3xl" />
   </button>
 );
+
 
 const AppCarousel = ({ visa }) => {
   const settings = {
@@ -35,31 +33,31 @@ const AppCarousel = ({ visa }) => {
       {
         breakpoint: 640,
         settings: {
-          slidesToShow: 1, // 1 card on small devices
+          slidesToShow: 1,
         }
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2, // 2 cards on tablets
+          slidesToShow: 2, 
         }
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2, // 3 cards on medium devices
+          slidesToShow: 2,
         }
       },
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 3, // 4 cards on large screens
+          slidesToShow: 3, 
         }
       },
       {
         breakpoint: 1536,
         settings: {
-          slidesToShow: 4, // 5 cards on extra-large screens
+          slidesToShow: 4, 
         }
       }
     ],
