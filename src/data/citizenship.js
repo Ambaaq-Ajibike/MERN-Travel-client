@@ -1,6 +1,7 @@
 export const citizenships = [
   {
       "title": "St. Kitts & Nevis Citizenship",
+      "discountedPrice": "USD 120.00",
       image: "USA",
       "description": "The Citizenship by Investment Program (CIP) of St. Kitts and Nevis was established by the Caribbean nation to support its economic development. By inviting global investors, the program allows St. Kitts & Nevis to generate funds for crucial areas such as healthcare, education, and infrastructure. This mutually beneficial initiative has been operational for several decades.",
       "keyFacts": {
@@ -261,6 +262,7 @@ export const citizenships = [
   },
   {
       "title": "Dominica Citizenship",
+      "discountedPrice": "USD 136.00",
       image: "Saudi Arabia",
       "description": "The Citizenship by Investment Program in Dominica was established in 1993. The funds generated from this program are utilized to finance healthcare initiatives, critical infrastructure, and to enhance the country\u2019s tourism sector. This initiative plays a crucial role in supporting Dominica\u2019s economic growth and sustainability.",
       "keyFacts": {
@@ -519,6 +521,7 @@ export const citizenships = [
   },
   {
       "title": "Antigua and Barbuda Citizenship",
+      "discountedPrice": "USD 147.00",
       image: "China",
       "description": null,
       "keyFacts": null,
@@ -602,6 +605,7 @@ export const citizenships = [
   },
   {
       "title": "St. Lucia Citizenship",
+      "discountedPrice": "USD 78.00",
       image: "Luxemburg",
       "description": null,
       "keyFacts": null,
@@ -722,6 +726,7 @@ export const citizenships = [
   },
   {
       "title": "St. Lucia Citizenship",
+      "discountedPrice": "USD 200.00",
       image: "Dubai",
       "description": null,
       "keyFacts": null,
@@ -842,6 +847,7 @@ export const citizenships = [
   },
   {
       "title": "Turkey Citizenship",
+      "discountedPrice": "USD 500.00",
       image: "Sweden",
       "description": null,
       "keyFacts": null,
@@ -894,6 +900,7 @@ export const citizenships = [
   },
   {
       "title": "Grenada Citizenship",
+      "discountedPrice": "USD 120.00",
       image: "Australia",
       "description": null,
       "keyFacts": {
@@ -940,6 +947,7 @@ export const citizenships = [
   },
   {
       "title": "Malta Citizenship",
+      "discountedPrice": "USD 125.00",
       image: "Canada",
       "description": null,
       "keyFacts": null,
@@ -1005,6 +1013,7 @@ export const citizenships = [
   },
   {
       "title": "Vanuatu Citizenship",
+      "discountedPrice": "USD 130.00",
       image: "Germany",
       "description": null,
       "keyFacts": null,

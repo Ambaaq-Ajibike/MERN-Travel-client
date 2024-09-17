@@ -2,6 +2,7 @@ export const residencies = [
     {
         "name": "Italian Residency",
         image: "Italy",
+        discountedPrice: "USD 340.00",
         "description": "The Italy Golden Visa program offers non-EU investors a pathway to residency through significant financial investments in Italy. It provides an opportunity to live, work, and study in Italy and the EU, while also contributing to Italy's economic growth. Here’s a detailed summary of the key aspects of the program.",
         "keyTakeAways": [
             {
@@ -111,6 +112,7 @@ export const residencies = [
     {
         "name": "Portugal Residency",
         image: "Portugal",
+        discountedPrice: "USD 300.00",
         "description": "The Portugal Golden Visa provides non-EU investors a clear path to residency and eventually citizenship, focusing on investment funds and scientific research as qualifying routes. The 2024 updates streamline the process, making it more efficient and transparent while ensuring the program continues to benefit both Portugal and the investors.",
         "keyTakeAways": [
             {
@@ -220,6 +222,7 @@ export const residencies = [
     {
         "name": "Hungary Residency",
         image: "Hungary",
+        discountedPrice: "USD 310.00",
         "description": "The Hungary Golden Visa, known as the Residency Bond Program, offers non-EU investors a streamlined path to residency through financial investments in Hungary, focusing on government bonds and other financial instruments.",
         "keyTakeAways": [
             {
@@ -321,6 +324,7 @@ export const residencies = [
     {
         "name": "Spain Golden Visa",
         image: "Spain",
+        discountedPrice: "USD 540.00",
         "description": "The Spain Golden Visa program allows non-EU investors to obtain residency through significant investments, primarily in real estate. It provides residency benefits and visa-free travel within the Schengen Area, with potential pathways to permanent residency and citizenship.",
         "keyTakeAways": [
             {
@@ -414,6 +418,7 @@ export const residencies = [
     {
         "name": "Cyprus Golden Visa",
         image: "Cyprus",
+        discountedPrice: "USD 100.00",
         "description": "The Cyprus Golden Visa offers non-EU investors immediate permanent residency through a qualifying investment, with the potential for citizenship after five years. It provides access to the EU and favorable tax regimes.",
         "keyTakeAways": [
             {
@@ -511,6 +516,7 @@ export const residencies = [
     {
         "name": "Greece Golden Visa",
         image: "Greece",
+        discountedPrice: "USD 490.00",
         "description": "The Greece Golden Visa program offers residency to non-EU nationals through various investment options. Significant regulatory changes are expected in 2024, including updated investment thresholds and restrictions on short-term rentals.",
         "keyTakeAways": [
             {
@@ -616,6 +622,7 @@ export const residencies = [
     {
         "name": "Malaysia MM2H",
         image: "Malaysia",
+        discountedPrice: "USD 176.00",
         "description": "The Malaysia My Second Home (MM2H) program offers long-term residency to foreigners through various financial criteria. It is ideal for retirees and expatriates seeking a long-term stay in Malaysia.",
         "keyTakeAways": [
             {
@@ -717,6 +724,7 @@ export const residencies = [
     {
         "name": "Philippines SRRV and SIRV",
         image: "Philippines",
+        discountedPrice: "USD 190.00",
         "description": "The Philippines offers residency through the Special Resident Retiree’s Visa (SRRV) and Special Investor Residence Visa (SIRV) for retirees and investors. These programs provide long-term residency options with different deposit and investment requirements.",
         "keyTakeAways": [
             {
@@ -818,6 +826,7 @@ export const residencies = [
     {
         "name": "Montenegro Residency",
         image: "Montenegro",
+        discountedPrice: "USD 290.00",
         "description": "Montenegro offers a pathway to residency through significant financial investments, designed to attract foreign investors while boosting the country's economic development.",
         "keyTakeAways": [
             {
@@ -923,6 +932,7 @@ export const residencies = [
     {
         "name": "Ireland Residency",
         image: "Ireland",
+        discountedPrice: "USD 440.00",
         "description": "Ireland offers a residency pathway through its Immigrant Investor Program (IIP), designed to attract foreign investors by providing residency benefits while supporting economic growth.",
         "keyTakeAways": [
             {

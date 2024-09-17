@@ -1,6 +1,7 @@
 export const visas = [
     {
         name: "Australia",
+        discountedPrice: "USD 120.00",
         description: "Australia, with its captivating mix of vibrant urban centers, coastal paradises, pristine wilderness, incredible wildlife, and ecological diversity, is undeniably one of the world's top destinations for travelers seeking memorable experiences. At 200 Travels, we specialize in providing efficient visa services for those intending to visit Australia. Whether your purpose is leisure, education, employment, or business, our team of seasoned visa professionals will navigate you through the intricate visa procedures.",
         types: [
             {
@@ -43,6 +44,7 @@ export const visas = [
     },
     {
         name: "Germany",
+        discountedPrice: "USD 160.00",
         description: "Germany is renowned for its excellent education system, high-quality healthcare, and vibrant cities. Whether you're coming for studies, work, business, or as a digital nomad, we can help guide you through the visa process.",
         types: [
             {
@@ -85,6 +87,7 @@ export const visas = [
     },
     {
         name: "China",
+        discountedPrice: "USD 100.00",
         description: "China, with its deep history, stunning landscapes, and rapidly growing economy, is an attractive destination for students, professionals, and entrepreneurs.",
         types: [
             {
@@ -125,6 +128,7 @@ export const visas = [
     },
     {
         name: "Ireland",
+        discountedPrice: "USD 190.00",
         description: "Ireland is a popular destination for students, professionals, and digital nomads due to its friendly policies and vibrant culture.",
         types: [
             {
@@ -167,6 +171,7 @@ export const visas = [
     },
     {
         name: "Russia",
+        discountedPrice: "USD 160.00",
         description: "Russia, with its rich cultural heritage, renowned academic institutions, and growing business opportunities, is an excellent destination for students, professionals, and entrepreneurs.",
         types: [
             {
