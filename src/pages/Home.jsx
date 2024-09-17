@@ -31,6 +31,7 @@ const Home = () => {
         image: `country%2F${x.name}`, // Update the path to image correctly
       packageTotalRatings: 5,
       packagePrice: 100000,
+      discountedPrice: `USD 100000`,
       moreContent: `${x.types.length} Visa Types`
     }));
 
@@ -41,6 +42,7 @@ const Home = () => {
         image: `country%2F${x.image}`,
       packageTotalRatings: 5,
       packagePrice: 100000,
+      discountedPrice: `USD 100000`,
       moreContent: ``
     }));
 
@@ -51,6 +53,7 @@ const Home = () => {
       image: `country%2F${x.image}`,
       packageTotalRatings: 5,
       packagePrice: 100000,
+      discountedPrice: `USD 100000`,
       moreContent: ``
     }));
 
