@@ -75,9 +75,12 @@ const Home = () => {
 
 
   const slides = [
-    "/images/hero-1.jpg",
-    "/images/hero-2.jpg",
-    "/images/hero-3.jpg"
+    "/images/1.png",
+    "/images/2.png",
+    "/images/3.png",
+    "/images/4.png",
+    "/images/5.png",
+    "/images/6.png"
   ];
   return (
     <>
@@ -103,13 +106,13 @@ const Home = () => {
             ))}
           </Carousel>
           <div className="top-part w-full gap-2 flex flex-col items-center text-center p-4 absolute top-0 left-0 right-0">
-            <h1 className="w-full text-white text-3xl md:text-6xl font-bold mb-2">
+            {/* <h1 className="w-full text-white text-3xl md:text-6xl font-bold mb-2">bg-white rounded-lg
               Find Next Place To Visit
-            </h1>
+            </h1> */}
             <h2 className="w-full text-white text-sm md:text-lg font-semibold">
               Discover amazing places at exclusive deals
             </h2>
-            <div className="w-full flex flex-wrap justify-center items-center gap-4 mt-8 p-4 bg-opacity-40 bg-white rounded-lg">
+            <div className="w-full flex flex-wrap justify-center items-center gap-4 mt-8 p-4 bg-opacity-40 ">
               <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
                 <select onChange={handleSearchChange} className="outline-none w-full bg-transparent select-styles">
                   <option>Select</option>
