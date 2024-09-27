@@ -25,33 +25,6 @@
   .select-styles {
     width: 100%;
   }
-  
-  @media (min-width: 550px) {
-
-    .background_image {
-      background-size: cover;
-    }
-    .select-styles {
-      width: auto;
-    }
-  }
-  @media screen and (max-width: 800px) {
-    .top-part, .background_image {
-      height: 80vh;
-    }
-  }
-  @media (min-width: 800px) {
-
-    .background_image {
-      background-size: cover;
-    }
-  }
-  
-  @media (min-width: 1080px) {
-    .background_image {
-      background-size: cover;
-    }
-  }
   /* Global layout adjustments */
 .grid-container {
   display: grid;

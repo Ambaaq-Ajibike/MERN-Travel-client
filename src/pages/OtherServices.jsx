@@ -10,7 +10,7 @@ const OtherServices = () => {
     <div>
           <div className="flex flex-col justify-start items-center bg-white px-4 pb-0 mb-24">
           <div className="flex flex-col justify-center items-center md:w-2/5 m-10 mt-20">
-          <h2 className="text-5xl font-bold mb-4 text-gray-900">Other Services</h2>
+          <h2 className="text-5xl font-bold mb-4 text-gray-900 text-center">Other Services</h2>
                 <p className="text-gray-600 text-center">
                 At 200 Travel, we provide a wide array of services designed to assist you throughout your travel and relocation process. Our dedicated team ensures that you are fully prepared and supported, whether you're navigating through important procedures or planning the next steps of your journey.
                 </p>

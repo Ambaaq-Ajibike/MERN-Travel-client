@@ -95,13 +95,7 @@ const Home = () => {
             transitionTime={1000}
           >
             {slides.map((slide, index) => (
-              <div key={index} className="background_image" style={{ backgroundImage: `url(${slide})` }}>
-                <LazyLoadImage
-                  src={slide}
-                  alt={`Slide ${index + 1}`}
-                  effect="blur"
-                  className="carousel-image"
-                />
+              <div key={index} className="background_image bg-cover bg-center bg-no-repeat w-full" style={{ backgroundImage: `url(${slide})` }}>
               </div>
             ))}
           </Carousel>
@@ -140,7 +134,7 @@ const Home = () => {
               </div>
 
               <button
-                onClick={() => navigate(`/search?searchTerm=${search}`)}
+                // onClick={() => navigate(`/search?searchTerm=${search}`)}
                 className="bg-orange-500 w-12 h-12 flex justify-center items-center text-white text-xl font-semibold rounded-full hover:scale-95"
               >
                 Go
