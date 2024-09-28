@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { visas } from "../data/visas";
 import { useParams } from "react-router";
+import GoldExpertSection from "./components/GoldExpertSection";
 const Visa = () => {
   const params = useParams();
   console.log(params);
@@ -39,7 +40,7 @@ const Visa = () => {
       
       </div>
     </div>
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="bg-white rounded-lg shadow-lg   mb-8  overflow-hidden">
       <div className="p-6">
         <p className="mb-2">
           <span className="font-semibold">Validity: </span>
@@ -59,6 +60,7 @@ const Visa = () => {
       </div>
         
       </div>
+      <GoldExpertSection />
     </div>
 
 

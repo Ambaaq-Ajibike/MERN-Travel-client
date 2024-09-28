@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import { residencies } from "../data/residency";
+import GoldExpertSection from "./components/GoldExpertSection";
 
 const Residency = () => {
     const params = useParams();
@@ -39,7 +40,7 @@ const Residency = () => {
 
       </div>
     </div>
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="bg-white rounded-lg shadow-lg mb-8 overflow-hidden">
         
 
         <div className="p-6">
@@ -116,6 +117,7 @@ const Residency = () => {
           </ul>
         </div>
       </div>
+      <GoldExpertSection />
     </div>
   );
 };

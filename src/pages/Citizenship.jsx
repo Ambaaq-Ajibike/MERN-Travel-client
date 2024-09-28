@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { citizenships } from '../data/citizenship';
+import GoldExpertSection from './components/GoldExpertSection';
 
 const Citizenship = () => {
   const { id } = useParams();
@@ -118,6 +119,7 @@ const Citizenship = () => {
           </div>
         </div>
       </div>
+      <GoldExpertSection />
     </div>
   );
 };
