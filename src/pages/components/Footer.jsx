@@ -16,14 +16,14 @@ const Footer = () => {
           <ul className="mt-4 space-y-2">
             <li>
               <a href="mailto:contact@200travels.com" className="hover:text-white">
-              contact@200travels.com
+              service@200travels.com
               </a>
             </li>
             <li>
-              <span>+223 661 55100</span>
+              <span>+234 9127 051 235</span>
             </li>
             <li>
-              <span>123 Gold Street, New York, NY 10001</span>
+              <span>B33, Primal Tek plaza, Iju rd, Lagos. </span>
             </li>
           </ul>
         </div>

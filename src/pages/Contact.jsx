@@ -38,7 +38,7 @@ const ContactForm = () => {
               </div>
               <div>
                 <p className="text-gray-700 font-semibold">Give us a call</p>
-                <p className="text-gray-500">+2349127051235 </p>
+                <p className="text-gray-500">+234 9127 051 235 </p>
               </div>
             </div>
             
