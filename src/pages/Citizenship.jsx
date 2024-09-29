@@ -1,71 +1,27 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { citizenships } from '../data/citizenship';
-import GoldExpertSection from './components/GoldExpertSection';
+import { useState } from "react";
+import { useParams } from "react-router";
+import GoldExpertSection from "./components/GoldExpertSection";
+import { citizenships } from "../data/citizenship";
+
+// Sample data structure based on your provided object
+
 
 const Citizenship = () => {
-  const { id } = useParams();
-  console.log(id, "iiiiiiiiid")
-  const citizenship = citizenships[id - 1];
-
-  // Helper function to recursively render nested objects or arrays
-  const renderValue = (value) => {
-    if (typeof value === 'object' && !Array.isArray(value)) {
-      return (
-        <ul className="list-disc list-inside ml-6">
-          {Object.entries(value).map(([nestedKey, nestedValue], index) => (
-            <li key={index}>
-              <strong className="capitalize">{nestedKey.replace(/([A-Z])/g, ' $1').trim()}:</strong> {renderValue(nestedValue)}
-            </li>
-          ))}
-        </ul>
-      );
-    } else if (Array.isArray(value)) {
-      return (
-        <ul className="list-disc list-inside ml-6">
-          {value.map((item, index) => (
-            <li key={index}>{renderValue(item)}</li>
-          ))}
-        </ul>
-      );
-    } else {
-      return <span>{value}</span>;
-    }
-  };
-
-  const renderSection = (title, data) => {
-    if (!data) return null;
-    
-    return (
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-4">{title}</h2>
-        <ul className="list-disc list-inside">
-          {Object.entries(data).map(([key, value], index) => {
-            if (value === null) return null;
-            return (
-              <li key={index}>
-                <strong className="capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}:</strong> {renderValue(value)}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-  };
-
+  const params= useParams();
+  const program = citizenships[params.id - 1];
+  console.log(program)
   return (
     <div className="container mx-auto p-4">
-      <div className="bg-white shadow-md rounded-md overflow-hidden mb-8 relative">
-      <div className="bg-white shadow-md rounded-md overflow-hidden mb-8 relative">
+         <div className="bg-white shadow-md rounded-md overflow-hidden mb-8 relative">
     <img
-           src={`https://firebasestorage.googleapis.com/v0/b/gooutfilter.appspot.com/o/country%2F${citizenship.image}.jpg?alt=media&token=bfa49e65-3d50-4117-8f74-1965c38854b8`}
-            alt={citizenship.title}
+            src={`https://firebasestorage.googleapis.com/v0/b/gooutfilter.appspot.com/o/country%2F${program.image}.jpg?alt=media&token=bfa49e65-3d50-4117-8f74-1965c38854b8`}
+            alt={program.title}
             className="w-full h-64 object-cover"
           />
       <div className="p-4">
       <div className="flex md:block justify-between">
         <div>
-              <h2 className="text-xl font-semibold">{citizenship.title}</h2>
+              <h2 className="text-xl font-semibold">{program.title}</h2>
               <div className="flex items-center mt-2">
                 <div className="text-yellow-500 flex">
                   {/* Replace with your star icon logic or use an icon library */}
@@ -85,40 +41,61 @@ const Citizenship = () => {
         
       </div>
       
+        <p className="text-gray-700 mb-4">{program.description}</p>
+
       </div>
     </div>
-        <div className="p-4">         
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden p-6">
-            {renderSection('Key Facts', citizenship.keyFacts)}
-            {renderSection('Benefits', citizenship.benefits)}
-            {renderSection('Application Procedure', citizenship.applicationProcedure)}
-            {renderSection('Investment Options', citizenship.investmentOptions)}
-            {renderSection('Eligibility Criteria', citizenship.eligibilityCriteria)}
-            {renderSection('Living Conditions', citizenship.livingConditions)}
-            {renderSection('Legal Information', citizenship.legalInformation)}
-            {renderSection('Comparison', citizenship.comparison)}
-            {renderSection('Notable Citizens', citizenship.notableCitizens)}
-            {renderSection('Visa Free Travel', citizenship.visaFreeTravel)}
-            {renderSection('Investment Impact', citizenship.investmentImpact)}
-            {/* {renderSection('Historical Context', citizenship.historicalContext)} */}
-            {renderSection('Why Choose', citizenship.whyChoose)}
-            {renderSection('Fees', citizenship.fees)}
-            {renderSection('Passport Overview', citizenship.passportOverview)}
-            {renderSection('Seeking Expert Guidance', citizenship.seekingExpertGuidance)}
-            {renderSection('Proof of Ownership', citizenship.proofOfOwnership)}
-            {renderSection('Application Review', citizenship.applicationReview)}
-            {renderSection('Initial Phase', citizenship.initialPhase)}
-            {renderSection('Finalization', citizenship.finalization)}
-            {renderSection('Investment Analysis', citizenship.investmentAnalysis)}
-            {renderSection('Future Program', citizenship.futureProgram)}
-            {renderSection('Due Diligence', citizenship.dueDiligence)}
-            {renderSection('Global Benefits', citizenship.globalBenefits)}
-            {renderSection('Program Overview', citizenship.programOverview)}
-            {renderSection('Eligibility Requirements', citizenship.eligibilityRequirements)}
-            {renderSection('Passport Strength', citizenship.passportStrength)}
-          </div>
+
+      <div className="bg-white rounded-lg shadow-lg mb-8 overflow-hidden">
+        <div className="p-6">
+          <h4 className="text-lg font-semibold mb-2">Key Facts:</h4>
+          <ul className="list-disc pl-5">
+            <li><span className="font-semibold">Capital: </span>{program.keyFacts.capital}</li>
+            <li><span className="font-semibold">Continent: </span>{program.keyFacts.continent}</li>
+            <li><span className="font-semibold">Sea: </span>{program.keyFacts.sea}</li>
+            <li><span className="font-semibold">Total Area: </span>{program.keyFacts.totalArea}</li>
+            <li><span className="font-semibold">Currency: </span>{program.keyFacts.currency.join(", ")}</li>
+            <li><span className="font-semibold">Visa-Free Countries: </span>{program.keyFacts.visaFreeCountries}</li>
+            <li><span className="font-semibold">Population: </span>{program.keyFacts.population}</li>
+            <li><span className="font-semibold">Language: </span>{program.keyFacts.language}</li>
+          </ul>
+
+          <h4 className="text-lg font-semibold mt-4 mb-2">Benefits:</h4>
+          <ul className="list-disc pl-5">
+            <li>
+              <span className="font-semibold">Ease of Travel: </span>
+              {program.benefits.easeOfTravel.description}
+            </li>
+            <li>
+              <span className="font-semibold">Tax Benefits: </span>
+              {program.benefits.taxBenefits}
+            </li>
+            <li>
+              <span className="font-semibold">Business Opportunities: </span>
+              {program.benefits.businessOpportunities}
+            </li>
+            <li>
+              <span className="font-semibold">Family Focused: </span>
+              {program.benefits.familyFocused}
+            </li>
+          </ul>
+
+          <h4 className="text-lg font-semibold mt-4 mb-2">Investment Options:</h4>
+          <p><span className="font-semibold">Sustainable Growth Fund: </span> {program.investmentOptions.singleInvestor}</p>
+          <p><span className="font-semibold">Real Estate Purchase: </span> {program.investmentOptions.realEstatePurchase.minimumInvestment}</p>
+
+          <h4 className="text-lg font-semibold mt-4 mb-2">Application Procedure:</h4>
+          <ol className="list-decimal pl-5">
+            {Object.values(program.applicationProcedure).map((step, index) => (
+              <li key={index}>{step}</li>
+            ))}
+          </ol>
+
+          <h4 className="text-lg font-semibold mt-4 mb-2">Agent Recommendation:</h4>
+          <p>{program.agentRecommendation}</p>
         </div>
       </div>
+
       <GoldExpertSection />
     </div>
   );
