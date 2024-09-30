@@ -9,6 +9,7 @@ import { residencies } from "../data/residency";
 import { citizenships } from "../data/citizenship";
 import AppCarousel from "./components/AppCarousel";
 import { useNavigate } from "react-router";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -73,19 +74,16 @@ const Home = () => {
   }, []);
 
   const slides = [
-    "/images/1.png",
-    "/images/2.png",
-    "/images/3.png",
-    "/images/4.png",
-    "/images/5.png",
-    "/images/6.png",
+    "/images/hero-1.jpg",
+    "/images/hero-2.jpg",
+    "/images/hero-3.jpg"
   ];
 
   return (
     <>
       <div className="main w-full relative mb-24">
         <div className="w-full flex flex-col">
-          <Carousel
+        <Carousel
             className="w-full"
             showArrows={true}
             showThumbs={false}
@@ -94,11 +92,14 @@ const Home = () => {
             transitionTime={1000}
           >
             {slides.map((slide, index) => (
-              <div
-                key={index}
-                className="background_image bg-cover bg-center bg-no-repeat w-full"
-                style={{ backgroundImage: `url(${slide})` }}
-              ></div>
+              <div key={index} className="background_image" style={{ backgroundImage: `url(${slide})` }}>
+                <LazyLoadImage
+                  src={slide}
+                  alt={`Slide ${index + 1}`}
+                  effect="blur"
+                  className="carousel-image"
+                />
+              </div>
             ))}
           </Carousel>
           <div className="top-part w-full gap-2 flex flex-col items-center text-center p-4 absolute top-0 left-0 right-0">
@@ -172,7 +173,7 @@ const Home = () => {
       </div>
 
       <Footer />
-      <WhatsAppButton />
+      <WhatsAppButton  phoneNumber={`+2349127051235`}/>
     </>
   );
 };
