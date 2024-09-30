@@ -37,7 +37,7 @@ const ContactForm = () => {
 
               </div>
               <div>
-                <p className="text-gray-700 font-semibold">Give us a call</p>
+                <p className="text-gray-700 font-semibold">Give us a call </p>
                 <p className="text-gray-500">+234 9127 051 235 </p>
               </div>
             </div>
@@ -55,7 +55,7 @@ const ContactForm = () => {
         </div>
 
         {/* Right Side: Contact Form */}
-        <div className="lg:w-1/2">
+        <div className="w-full">
     <form className="space-y-4">
       <div className="flex flex-col md:flex-row md:space-x-4">
         <input
