@@ -68,7 +68,10 @@ const Home = () => {
     <>
       <div className="main w-full relative mb-24">
         <div className="w-full flex flex-col">
-          <Carousel
+          
+          {/* Slider for desktop view */}
+          <div className="hidden md:block w-full">
+            <Carousel
               className="w-full"
               showArrows={true}
               showThumbs={false}
@@ -77,49 +80,63 @@ const Home = () => {
               transitionTime={1000}
             >
               {slides.map((slide, index) => (
-                <div key={index} className="background_image" style={{ backgroundImage: `url(${slide})` }}>
+                <div
+                  key={index}
+                  className="background_image"
+                  style={{
+                    backgroundImage: `url(${slide})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    width: '100%',
+                    height: '400px',
+                  }}
+                >
                   <LazyLoadImage
                     src={slide}
                     alt={`Slide ${index + 1}`}
                     effect="blur"
-                    className="carousel-image"
+                    className="carousel-image object-cover w-full h-full"
                   />
                 </div>
               ))}
             </Carousel>
+          </div>
 
-            <div className="top-part w-full gap-2 flex flex-col items-center text-center p-4 absolute top-0 left-0 right-0">
-            <h2 className="w-full text-white text-sm md:text-lg font-semibold">
-              Discover amazing places at exclusive deals
-            </h2>
-            <div className="w-full flex flex-wrap justify-center items-center gap-4 mt-8 p-4 bg-opacity-40 ">
-              <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
-                <select onChange={handleSearchChange} className="outline-none w-full bg-transparent select-styles">
-                  <option>Select</option>
-                  <option>Visa</option>
-                  <option>CITIZENSHIP</option>
-                  <option>RESIDENCY</option>
-                </select>
+          {/* Static image for mobile view */}
+          <div className="block md:hidden w-full h-96 relative" style={{ backgroundImage: `url('/images/mobile-bg.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            {/* Overlay with the forms and Go button */}
+            <div className="absolute inset-0 flex flex-col justify-center items-center p-4 bg-opacity-50 bg-black">
+              <h2 className="text-white text-center text-lg font-semibold mb-4">Discover amazing places at exclusive deals</h2>
+              <div className="w-full flex flex-wrap justify-center items-center gap-4 mt-8 p-4">
+                <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
+                  <select onChange={handleSearchChange} className="outline-none w-full bg-transparent select-styles">
+                    <option>Select</option>
+                    <option>Visa</option>
+                    <option>CITIZENSHIP</option>
+                    <option>RESIDENCY</option>
+                  </select>
+                </div>
+                <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
+                  <select className="outline-none w-full bg-transparent select-styles">
+                    <option>Select Nationality</option>
+                    <option>American</option>
+                    <option>British</option>
+                    <option>Canadian</option>
+                    <option>Indian</option>
+                  </select>
+                </div>
+                <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
+                  <input
+                    type="date"
+                    className="outline-none w-full bg-transparent select-styles"
+                    defaultValue="2024-05-30"
+                  />
+                </div>
+                <button className="bg-orange-500 w-12 h-12 flex justify-center items-center text-white text-xl font-semibold rounded-full hover:scale-95" onClick={() => navigate(`/search?query=${search}`)}>
+                  Go
+                </button>
               </div>
-              <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
-                <select className="outline-none w-full bg-transparent select-styles">
-                  <option>Select Nationality</option>
-                  <option>American</option>
-                  <option>British</option>
-                  <option>Canadian</option>
-                  <option>Indian</option>
-                </select>
-              </div>
-              <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
-                <input
-                  type="date"
-                  className="outline-none w-full bg-transparent select-styles"
-                  defaultValue="2024-05-30"
-                />
-              </div>
-              <button className="bg-orange-500 w-12 h-12 flex justify-center items-center text-white text-xl font-semibold rounded-full hover:scale-95" onClick={() => navigate(`/search?query=${search}`)}>
-                Go
-              </button>
             </div>
           </div>
 

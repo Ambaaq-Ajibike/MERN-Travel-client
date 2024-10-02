@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import defaultProfileImg from "../../assets/images/profile.png";
 import "../styles/Header.css"
 import { FaUser } from 'react-icons/fa';
+import log from './logo-2.svg'
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,7 +38,7 @@ const Header = () => {
       <div className="flex justify-between items-center w-full md:w-auto">
         <RouterLink to="/">
         <img 
-          src="/images/logo.png"
+          src={log}
           className="w-32"
          />
         </RouterLink>
