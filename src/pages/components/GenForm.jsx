@@ -1,8 +1,9 @@
 export const GenForm = () => {
+  // action="https://formspree.io/f/mqazrrdw"
+  // method="POST" 
   return (
     <div>
-      <form  action="https://formspree.io/f/mqazrrdw"
-  method="POST" className="md:w-[40pc] space-y-4">
+      <form  className="md:w-[40pc] space-y-4">
         <div className="flex flex-col md:flex-row md:space-x-4">
           <input
             type="text"
