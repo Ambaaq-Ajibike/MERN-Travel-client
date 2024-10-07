@@ -99,41 +99,6 @@ const Home = () => {
               ))}
             </Carousel>
 
-            <div className="top-part w-full gap-2 flex flex-col items-center text-center p-4 absolute top-0 left-0 right-0">
-            <h2 className="w-full text-white text-sm md:text-lg font-semibold">
-              Discover amazing places at exclusive deals
-            </h2>
-            <div className="w-full flex flex-wrap justify-center items-center gap-4 mt-8 p-4 bg-opacity-40 ">
-              <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
-                <select onChange={handleSearchChange} className="outline-none w-full bg-transparent select-styles">
-                  <option>Select</option>
-                  <option>Visa</option>
-                  <option>CITIZENSHIP</option>
-                  <option>RESIDENCY</option>
-                </select>
-              </div>
-              <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
-                <select className="outline-none w-full bg-transparent select-styles">
-                  <option>Select Nationality</option>
-                  <option>American</option>
-                  <option>British</option>
-                  <option>Canadian</option>
-                  <option>Indian</option>
-                </select>
-              </div>
-              <div className="flex items-center bg-white rounded-lg border w-full md:w-auto px-4 py-2">
-                <input
-                  type="date"
-                  className="outline-none w-full bg-transparent select-styles"
-                  defaultValue="2024-05-30"
-                />
-              </div>
-              <button className="bg-orange-500 w-12 h-12 flex justify-center items-center text-white text-xl font-semibold rounded-full hover:scale-95" onClick={() => navigate(`/search?query=${search}`)}>
-                Go
-              </button>
-            </div>
-          </div>
-
           <div className="main-content p-4 sm:p-6 flex flex-col gap-5 justify-center items-center mt-16">
             <section id="visa" className="my-12">
               <h1 className="text-3xl font-semibold self-start mb-4">

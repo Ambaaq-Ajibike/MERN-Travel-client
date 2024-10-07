@@ -33,7 +33,7 @@ const ProofOfFund = () => {
                     htmlFor="amount"
                     className="block text-white font-bold mb-2"
                   >
-                    Amount
+                    Amount in USD
                   </label>
                   <input
                     type="text"

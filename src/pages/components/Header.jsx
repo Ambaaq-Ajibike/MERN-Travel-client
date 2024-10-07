@@ -39,7 +39,7 @@ const Header = () => {
         <RouterLink to="/">
         <img 
           src={log}
-          className="w-32"
+          className="w-52"
          />
         </RouterLink>
 

@@ -8,7 +8,7 @@ const Footer = () => {
         <div>
         <img 
           src="/images/no-bg.png"
-          className="w-32"
+          className="w-52"
          />
           <p className="mt-4">
           We are dedicated to providing comprehensive support for all your travel needs. Whether you're applying for residency, citizenship, or a visa, we ensure a smooth and hassle-free experience.
@@ -59,8 +59,6 @@ const Footer = () => {
             <li>Wednesday: 9:00 am - 05:00 pm</li>
             <li>Thursday: 9:00 am - 05:00 pm</li>
             <li>Friday: 9:00 am - 05:00 pm</li>
-            <li>Saturday: <span className="text-red-500">CLOSED</span></li>
-            <li>Sunday: <span className="text-red-500">CLOSED</span></li>
           </ul>
         </div>
       </div>
