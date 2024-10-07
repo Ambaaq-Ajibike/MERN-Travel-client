@@ -2,7 +2,7 @@ import { FaMoneyBillWave, FaHome, FaPassport, FaPlane } from 'react-icons/fa';
 
 const GoldExpertSection = () => {
   return (
-    <div className="bg-gray-800 text-white py-12 px-4 md:px-16 flex justify-between items-center">
+    <div className="bg-gray-800 text-white py-12 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center flex-wrap">
       {/* Containers Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full md:w-2/3 mb-6">
         {/* Donation */}
@@ -35,7 +35,7 @@ const GoldExpertSection = () => {
       </div>
 
       {/* Request a Consultation Button */}
-      <button className="bg-yellow-500 text-white text-lg font-bold py-3 px-6 rounded-md hover:bg-yellow-600">
+      <button className="bg-yellow-500 text-white text-lg font-bold py-3 px-6 rounded-md hover:bg-yellow-600 w-full md:w-auto text-center">
         Request a Consultation
       </button>
     </div>
