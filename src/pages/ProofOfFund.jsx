@@ -17,6 +17,9 @@ const ProofOfFund = () => {
               reliable, and require less documentation. We can fund accounts
               with more than 50 million Naira to both new and existing accounts.
             </p>
+            <p className="mt-2 text-2xl font-bold text-white rounded-md">
+            EXCHANGE RATE: 1$ = &#8358;1500
+            </p>
             <button className="mt-6 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700">
             <Link to="works" smooth={true} duration={500}>
         How It Works

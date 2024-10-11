@@ -79,15 +79,17 @@ const Home = () => {
               {slides.map((slide, index) => (
                 <div
                   key={index}
-                  className="background_image"
-                  style={{
-                    backgroundImage: `url(${slide})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    width: '100%',
-                    height: '400px',
-                  }}
+                  className="bg-cover bg-center bg-no-repeat background_image"
+                  style={{backgroundImage: `url(${slide})`}}
+                  // className=""
+                  // style={{
+                  //   backgroundImage: `url(${slide})`,
+                  //   backgroundSize: 'cover',
+                  //   backgroundPosition: 'center',
+                  //   backgroundRepeat: 'no-repeat',
+                  //   width: '100%',
+                  //   height: '400px',
+                  // }}
                 >
                   {/* <LazyLoadImage
                     src={slide}
