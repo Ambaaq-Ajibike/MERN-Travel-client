@@ -81,22 +81,7 @@ const Home = () => {
                   key={index}
                   className="bg-cover bg-center bg-no-repeat background_image"
                   style={{backgroundImage: `url(${slide})`}}
-                  // className=""
-                  // style={{
-                  //   backgroundImage: `url(${slide})`,
-                  //   backgroundSize: 'cover',
-                  //   backgroundPosition: 'center',
-                  //   backgroundRepeat: 'no-repeat',
-                  //   width: '100%',
-                  //   height: '400px',
-                  // }}
                 >
-                  {/* <LazyLoadImage
-                    src={slide}
-                    alt={`Slide ${index + 1}`}
-                    effect="blur"
-                    className="carousel-image"
-                  /> */}
                 </div>
               ))}
             </Carousel>
